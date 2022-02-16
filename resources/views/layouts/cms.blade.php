@@ -12,8 +12,6 @@
     @yield('content')
 
 
-
-    @include('components.layouts.footer')
 </body>
 
 </html>
