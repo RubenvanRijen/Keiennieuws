@@ -1,2 +1,9 @@
-@import "components/header";
+//colors
+@import "colors";
+//layout
+@import "components/layouts/header";
+//homepage
+@import "components/homepage/sectionOne";
+//bootstrap
 @import "~bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons.css";

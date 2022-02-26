@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <header>
+    <header class="custom-header">
         @include('components.layouts.header')
     </header>
     @yield('content')

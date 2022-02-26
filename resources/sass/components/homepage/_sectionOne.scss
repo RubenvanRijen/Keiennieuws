@@ -1,0 +1,29 @@
+.section-one .cs-title img {
+    width: 12rem;
+    height: auto;
+}
+
+.section-one button {
+    background-color: $grayCustom;
+    width: 13rem;
+    font-size: 1.4rem;
+    padding: 0;
+}
+
+@media screen and (max-width: 1400px) {
+    .section-one button {
+        // width: 10rem;
+    }
+}
+
+@media only screen and (max-width: 1400px) and (min-width: 1200px) {
+    .section-one .cs-title {
+        margin-right: 1rem;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .section-one .cs-title {
+        width: -webkit-fill-available;
+    }
+}
