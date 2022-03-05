@@ -1,3 +1,7 @@
+.section-one {
+    margin-bottom: 5rem;
+}
+
 .section-one .cs-title img {
     width: 12rem;
     height: auto;
@@ -10,6 +14,22 @@
     padding: 0;
 }
 
+//normal queries
+@media screen and (max-width: 576px) {
+    .section-one {
+        margin-bottom: 2.5rem;
+    }
+}
+
+@media screen and (max-width: 768px) {}
+
+@media screen and (max-width: 992px) {}
+
+@media screen and (max-width: 1200px) {}
+
+@media screen and (max-width: 1400px) {}
+
+//special media queries
 @media only screen and (max-width: 1400px) and (min-width: 1200px) {
     .section-one .cs-title {
         margin-right: 1rem;

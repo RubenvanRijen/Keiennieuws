@@ -4,6 +4,17 @@
 @import "components/layouts/header";
 //homepage
 @import "components/homepage/sectionOne";
+@import "components/homepage/sectionTwo";
 //bootstrap
 @import "~bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons.css";
+//standart queries to use
+@media screen and (max-width: 576px) {}
+
+@media screen and (max-width: 768px) {}
+
+@media screen and (max-width: 992px) {}
+
+@media screen and (max-width: 1200px) {}
+
+@media screen and (max-width: 1400px) {}

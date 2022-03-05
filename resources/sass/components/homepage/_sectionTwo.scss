@@ -1,0 +1,26 @@
+.section-two .bg-image {
+    -webkit-text-size-adjust: 100%;
+    font-size: 16px;
+    font-family: Roboto, Arial;
+    box-sizing: border-box;
+    background-size: cover;
+    background-position: 50%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: #131e29;
+    color: #fff;
+    background-image: url('/images/homepageOne.JPG');
+}
+
+//standart queries to use
+@media screen and (max-width: 576px) {}
+
+@media screen and (max-width: 768px) {}
+
+@media screen and (max-width: 992px) {}
+
+@media screen and (max-width: 1200px) {}
+
+@media screen and (max-width: 1400px) {}
