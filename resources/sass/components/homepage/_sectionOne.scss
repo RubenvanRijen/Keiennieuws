@@ -12,6 +12,17 @@
     width: 13rem;
     font-size: 1.4rem;
     padding: 0;
+    color: white;
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+.section-one button:hover {
+    background-color: white;
+    color: $grayCustom;
+    border-color: $grayCustom;
 }
 
 //normal queries
@@ -21,13 +32,11 @@
     }
 }
 
-@media screen and (max-width: 768px) {}
-
-@media screen and (max-width: 992px) {}
-
-@media screen and (max-width: 1200px) {}
-
-@media screen and (max-width: 1400px) {}
+@media screen and (min-width: 1400px) {
+    .section-one .cs-title {
+        margin-right: 2.5rem;
+    }
+}
 
 //special media queries
 @media only screen and (max-width: 1400px) and (min-width: 1200px) {
