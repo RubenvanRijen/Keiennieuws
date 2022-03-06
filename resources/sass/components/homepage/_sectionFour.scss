@@ -1,0 +1,48 @@
+.section-four {
+    margin-bottom: 6rem;
+}
+
+.section-four .card {
+    background-color: #FFE395;
+    margin-top: 1.4rem;
+    border-radius: 0px;
+    text-align: center;
+    height: 20rem;
+    .middle-text {
+        text-align: center;
+    }
+    .card-title {
+        font-size: 1.3rem;
+        margin: 1.5rem;
+        font-weight: bolder;
+    }
+    .card-text {
+        margin-top: 1rem;
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 0.8rem;
+        font-weight: 700;
+    }
+}
+
+.section-four .carousel {
+    display: none;
+}
+
+//standart queries to use
+@media screen and (max-width: 576px) {}
+
+@media screen and (max-width: 768px) {
+    .section-four .row {
+        display: none;
+    }
+    .section-four .carousel {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 992px) {}
+
+@media screen and (max-width: 1200px) {}
+
+@media screen and (max-width: 1400px) {}

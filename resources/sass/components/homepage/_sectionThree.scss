@@ -1,0 +1,107 @@
+.section-three {}
+
+.section-three .card {
+    margin-top: 1.3rem;
+    border-radius: 0px;
+    border-color: black;
+    border-width: 0.3rem;
+    text-align: center;
+    height: 30rem;
+    .middle-text {
+        text-align: center;
+        line-height: 15rem;
+    }
+    .card-title {
+        font-size: 2rem;
+        margin: 1.5rem;
+        font-weight: bolder;
+    }
+    .card-text {
+        line-height: 1.5;
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 1.1rem;
+    }
+    button {
+        bottom: 0;
+        color: black;
+        border-color: black;
+        width: 16rem;
+        font-size: 1.1rem;
+        padding: 0;
+        font-weight: 600;
+        border-width: 0.15rem;
+        margin: 1.5rem;
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+    button:hover {
+        background-color: black;
+        color: white;
+        border-color: black;
+    }
+}
+
+.section-three .bottom-button {
+    position: absolute;
+    bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.section-three .carousel {
+    display: none;
+}
+
+//standart queries to use
+@media screen and (max-width: 360px) {
+    .section-three .card {
+        .card-title {
+            font-size: 1.8rem;
+            margin: 1.5rem;
+            font-weight: bolder;
+        }
+        .card-text {
+            line-height: 1.5;
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 1rem;
+        }
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .section-three .card {
+        .card-title {
+            font-size: 1.4rem;
+        }
+        .card-text {
+            font-size: 0.9rem;
+        }
+        button {
+            width: 10rem;
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {}
+
+@media screen and (max-width: 768px) {
+    .section-three .row {
+        display: none;
+    }
+    .section-three .carousel {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 992px) {}
+
+@media screen and (max-width: 1200px) {}
+
+@media screen and (max-width: 1400px) {}

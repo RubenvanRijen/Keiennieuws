@@ -1,0 +1,139 @@
+.section-two {
+    margin-bottom: 6rem;
+}
+
+.section-two .bg-image {
+    box-sizing: border-box;
+    background-size: cover;
+    background-position: 50%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-image: url('/images/homepageOne.JPG');
+    padding: 3.8rem;
+}
+
+.section-two button:hover {
+    background-color: $greenCustom;
+    color: white;
+    border-color: $greenCustom;
+}
+
+.section-two button {
+    color: $greenCustom;
+    border-color: $greenCustom;
+    width: 16rem;
+    font-size: 1.3rem;
+    padding: 0;
+    font-weight: 600;
+    border-width: 0.15rem;
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+.section-two .card {
+    border-radius: 40px;
+    padding: 2rem;
+    max-width: 50rem;
+    text-align: center;
+    .card-title {
+        font-weight: 700;
+        font-size: 4rem;
+        margin-bottom: 2rem;
+    }
+    .card-text {
+        font-size: 1.4rem;
+        font-weight: 600;
+        line-height: 2rem;
+        margin-bottom: 2rem;
+    }
+    .number-days {
+        background-color: $greenCustom;
+        color: white;
+        padding-left: 0.65rem;
+        padding-right: 1rem;
+    }
+}
+
+@media screen and (max-width: 1400px) {}
+
+@media screen and (max-width: 1239px) {
+    .section-two .card .card-title {
+        font-weight: 700;
+        font-size: 3.2rem;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .section-two .bg-image {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .section-two .card {
+        max-width: 40rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .section-two .card {
+        padding: 1rem;
+        .card-text {
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+        .card-title {
+            font-weight: 700;
+            font-size: 2.6rem;
+        }
+        .number-days {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .section-two .card .card-title {
+        font-size: 2.4rem;
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .section-two .card {
+        .card-title {
+            font-size: 2.0rem;
+        }
+        .card-text {
+            font-size: 1.15rem;
+        }
+        button {
+            font-size: 1.15rem;
+        }
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .section-two .card {
+        .card-title {
+            font-size: 2.0rem;
+        }
+        .card-text {
+            font-size: 1.15rem;
+        }
+        button {
+            font-size: 1.15rem;
+        }
+        .number-days {
+            padding-left: 0.2rem;
+            padding-right: 0.2rem;
+        }
+    }
+    .section-two .bg-image {
+        padding: 2rem;
+    }
+}
