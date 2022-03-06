@@ -59,6 +59,22 @@
 }
 
 //standart queries to use
+@media screen and (max-width: 360px) {
+    .section-three .card {
+        .card-title {
+            font-size: 1.8rem;
+            margin: 1.5rem;
+            font-weight: bolder;
+        }
+        .card-text {
+            line-height: 1.5;
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 1rem;
+        }
+    }
+}
+
 @media screen and (max-width: 576px) {}
 
 @media screen and (max-width: 768px) {
