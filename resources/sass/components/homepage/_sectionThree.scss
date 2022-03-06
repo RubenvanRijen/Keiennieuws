@@ -75,6 +75,20 @@
     }
 }
 
+@media screen and (max-width: 300px) {
+    .section-three .card {
+        .card-title {
+            font-size: 1.4rem;
+        }
+        .card-text {
+            font-size: 0.9rem;
+        }
+        button {
+            width: 10rem;
+        }
+    }
+}
+
 @media screen and (max-width: 576px) {}
 
 @media screen and (max-width: 768px) {
