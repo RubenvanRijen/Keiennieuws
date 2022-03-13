@@ -5624,6 +5624,8 @@ __webpack_require__(/*! ./bootstrap/bootstrap.bundle */ "./resources/js/bootstra
 
 __webpack_require__(/*! ./main */ "./resources/js/main.js");
 
+__webpack_require__(/*! ./sectionFive */ "./resources/js/sectionFive.js");
+
 
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
@@ -13026,6 +13028,38 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/sectionFive.js":
+/*!*************************************!*\
+  !*** ./resources/js/sectionFive.js ***!
+  \*************************************/
+/***/ (() => {
+
+window.onload = function () {
+  var hideName = document.getElementById("hideName");
+  var showName = document.getElementById("showName");
+  var authorName = document.getElementById("authorNameBlock");
+
+  if (hideName !== null && hideName !== undefined && showName !== null && showName !== undefined) {
+    if (showName.checked === false) {
+      authorName.style.display = "none";
+    } else {
+      authorName.style.display = "block";
+    }
+  }
+
+  hideName.onclick = function () {
+    showName.checked = false;
+    authorName.style.display = "none";
+  };
+
+  showName.onclick = function () {
+    hideName.checked = false;
+    showName.checked == true ? authorName.style.display = "block" : authorName.style.display = "none";
+  };
+};
 
 /***/ }),
 
