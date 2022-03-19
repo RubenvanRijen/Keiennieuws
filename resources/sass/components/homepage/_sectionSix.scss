@@ -1,0 +1,38 @@
+.section-six {
+    margin-top: 8rem;
+}
+
+.section-six button {
+    bottom: 0;
+    color: $purpleCustom;
+    border-color: $purpleCustom;
+    width: 16rem;
+    font-size: 1.1rem;
+    padding: 0;
+    font-weight: 600;
+    border-width: 0.15rem;
+    border-radius: 0;
+    margin-top: 1.5rem;
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+.section-six button:hover {
+    background-color: $purpleCustom;
+    color: white;
+    border-color: $purpleCustom;
+}
+
+.section-six label {
+    font-weight: 750;
+}
+
+.section-six input {
+    border-color: black;
+}
+
+.section-six textarea {
+    border-color: black;
+}

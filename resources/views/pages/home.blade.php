@@ -17,5 +17,8 @@
 <div class="section-five">
     @include('components/homepage/sectionFive')
 </div>
+<div class="section-six">
+    @include('components/homepage/sectionSix')
+</div>
 
 @endsection

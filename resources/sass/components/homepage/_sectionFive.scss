@@ -4,6 +4,15 @@
     border-radius: 2.5rem;
 }
 
+.section-five input[type=file]::file-selector-button {
+    background-color: black;
+    color: white;
+}
+
+.section-five input {
+    border-color: black;
+}
+
 .section-five h1 {
     font-size: 5rem;
     margin-bottom: 3.5rem;
