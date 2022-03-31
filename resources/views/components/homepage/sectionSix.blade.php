@@ -1,9 +1,15 @@
 <div class="container">
     <div class="row">
         <div class="col left-side">
-
-
+            <h1>HET KN IS OPZOEK<br> NAAR MEER HANDEN</h1>
+            <div>
+                <p>3 uurtjes per maand de tijd?</p>
+                <p>interesse in lokale nieuwstje?</p>
+                <p>zin om te schrijven?</p>
+                <p>een enthousiaste persoonlijkheid?</p>
+            </div>
         </div>
+
         <div class="col right-side">
             <form class="">
 

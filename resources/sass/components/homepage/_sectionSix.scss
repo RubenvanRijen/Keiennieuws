@@ -1,8 +1,27 @@
 .section-six {
     margin-top: 8rem;
+    margin-bottom: 8rem;
 }
 
-.section-six button {
+.section-six .left-side {
+    background-color: $purpleCustom;
+    color: white;
+    max-width: 50%;
+    padding: 3rem;
+    h1 {
+        font-size: 3.9rem;
+        margin-bottom: 2rem;
+    }
+}
+
+.section-six .right-side {
+    margin-left: 3rem;
+    textarea {
+        height: 264px;
+    }
+}
+
+.section-six .right-side button {
     bottom: 0;
     color: $purpleCustom;
     border-color: $purpleCustom;
@@ -35,4 +54,43 @@
 
 .section-six textarea {
     border-color: black;
+}
+
+@media screen and (max-width: 576px) {}
+
+@media screen and (max-width: 768px) {
+    .section-six {
+        .right-side {
+            margin-top: 3rem;
+            margin-left: 0;
+            flex: 1 1 100% !important;
+        }
+        .left-side {
+            max-width: unset;
+            flex: 1 1 100% !important;
+        }
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .section-six .left-side {
+        h1 {
+            font-size: 3rem;
+        }
+    }
+    .section-six .right-side {
+        button {
+            width: 13rem;
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {}
+
+@media screen and (max-width: 1400px) {
+    .section-six .right-side {
+        textarea {
+            height: 336px;
+        }
+    }
 }
