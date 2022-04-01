@@ -110,4 +110,12 @@
     }
 }
 
-@media screen and (max-width: 576px) {}
+@media screen and (max-width: 576px) {
+    .section-five h1 {
+        font-size: 2rem;
+        margin-bottom: 2.5rem;
+    }
+    .section-five form {
+        max-width: 400px;
+    }
+}

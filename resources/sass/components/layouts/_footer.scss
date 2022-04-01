@@ -1,0 +1,68 @@
+//the footer basics
+.page-footer {
+    background-color: white;
+    color: black;
+}
+
+.page-footer .right-side {
+    margin-top: 3rem;
+}
+
+.page-footer .footer-text {
+    margin-top: 3rem;
+}
+
+.page-footer .footer-text .footer-text-title {
+    margin-bottom: 2rem;
+}
+
+//links
+.page-footer a {
+    color: black;
+    font-weight: 900;
+}
+
+.page-footer .footer-links a:hover:before {
+    margin-left: 0;
+    opacity: 1;
+    visibility: visible;
+}
+
+.page-footer .footer-links a:before {
+    // content: "\f14f";
+    display: inline-block;
+    vertical-align: baseline;
+    margin-left: -28px;
+    margin-right: 7px;
+    opacity: 0;
+    visibility: hidden;
+    transition: .22s ease;
+    color: black;
+}
+
+//social media
+.page-footer .social-container a:hover {
+    color: black;
+}
+
+.page-footer .social-container .col {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.page-footer .social-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 23px;
+    text-transform: uppercase;
+    color: black;
+}
+
+@media screen and (max-width: 768px) {
+    .page-footer {
+        text-align: center;
+        .right-side {
+            margin-top: 0;
+        }
+    }
+}
