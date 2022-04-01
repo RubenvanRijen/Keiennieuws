@@ -35,6 +35,7 @@
 }
 
 .section-two .card {
+    box-sizing: border-box;
     border-radius: 40px;
     padding: 2rem;
     max-width: 50rem;
@@ -135,5 +136,76 @@
     }
     .section-two .bg-image {
         padding: 2rem;
+    }
+}
+
+@media only screen and (max-height: 462px) and (max-width: 560px) {
+    .section-two .card {
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.4rem;
+        }
+        .card-text {
+            font-size: 0.9rem;
+            line-height: 1rem;
+        }
+        button {
+            font-size: 1.15rem;
+            width: 10rem;
+        }
+        .number-days {
+            padding-left: 0.2rem;
+            padding-right: 0.2rem;
+        }
+    }
+    .section-two .bg-image {
+        padding: 0.2rem;
+    }
+}
+
+@media only screen and (max-height: 400px) and (min-width: 100px) {
+    .section-two .card {
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.4rem;
+        }
+        .card-text {
+            font-size: 0.9rem;
+            line-height: 1rem;
+        }
+        button {
+            font-size: 1.15rem;
+            width: 10rem;
+        }
+        .number-days {
+            padding-left: 0.2rem;
+            padding-right: 0.2rem;
+        }
+    }
+    .section-two .bg-image {
+        padding: 0.2rem;
+    }
+}
+
+@media only screen and (max-width: 336px) {
+    .section-two .card {
+        .card-title {
+            font-size: 1.1rem;
+        }
+        .card-text {
+            font-size: 0.9rem;
+            line-height: 1rem;
+        }
+        button {
+            font-size: 1.15rem;
+            width: 10rem;
+        }
+        .number-days {
+            padding-left: 0.2rem;
+            padding-right: 0.2rem;
+        }
+    }
+    .section-two .bg-image {
+        padding: 0.2rem;
     }
 }

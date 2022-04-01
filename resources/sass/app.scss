@@ -2,15 +2,20 @@
 @import "colors";
 //layout
 @import "components/layouts/header";
+@import "components/layouts/footer";
 //homepage
 @import "components/homepage/sectionOne";
 @import "components/homepage/sectionTwo";
 @import "components/homepage/sectionThree";
 @import "components/homepage/sectionFour";
 @import "components/homepage/sectionFive";
+@import "components/homepage/sectionSix";
+@import "components/homepage/sectionSeven";
 //bootstrap
 @import "~bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons.css";
+//slider
+@import "@splidejs/splide/dist/css/splide.min.css";
 //standart queries to use
 @media screen and (max-width: 576px) {}
 

@@ -1,7 +1,14 @@
+import Alpine from 'alpinejs';
+
 require('./bootstrap/bootstrap.bundle');
 require('./main');
+require('./sectionFive');
+require('./sectionSeven');
 
-import Alpine from 'alpinejs';
+
+
+
+
 
 window.Alpine = Alpine;
 

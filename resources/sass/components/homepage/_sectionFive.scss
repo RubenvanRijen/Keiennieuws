@@ -1,1 +1,121 @@
 .section-five {}
+
+.section-five img {
+    border-radius: 2.5rem;
+}
+
+.section-five input[type=file]::file-selector-button {
+    background-color: black;
+    color: white;
+}
+
+.section-five input {
+    border-color: black;
+}
+
+.section-five h1 {
+    font-size: 5rem;
+    margin-bottom: 3.5rem;
+    font-weight: 700;
+}
+
+.section-five .custom-file-input {
+    margin-bottom: 3rem;
+    p {
+        margin-bottom: -0.01rem;
+    }
+    .form-label {
+        margin-bottom: 1.4rem;
+    }
+}
+
+.section-five button {
+    margin-top: 1.5rem;
+    border-radius: 0;
+}
+
+.section-five p {
+    font-weight: 750;
+}
+
+@media screen and (max-width: 1400px) {}
+
+@media screen and (max-width: 1200px) {
+    .section-five h1 {
+        font-size: 3.9rem;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .section-five h1 {
+        font-size: 2.9rem;
+        margin-bottom: 2.5rem;
+    }
+    .section-five .custom-file-input {
+        margin-bottom: 2rem;
+    }
+    .section-five .right-side {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .section-five .right-side {
+        display: none;
+    }
+    .section-five .left-side {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        form {
+            position: relative;
+        }
+        &::before {
+            content: "";
+            background-image: url('/images/sectionFive.jpeg');
+            background-size: cover;
+            background-position: bottom;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            opacity: 0.75;
+        }
+    }
+    .section-five .col {
+        flex: none;
+    }
+    .section-five .row {
+        text-align: center;
+    }
+    .section-five .form-check {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+    .section-five img {
+        margin-top: 2rem;
+        max-height: 40rem;
+    }
+    .section-five .showNameButton {
+        margin-left: -1rem
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .section-five h1 {
+        font-size: 2rem;
+        margin-bottom: 2.5rem;
+    }
+    .section-five form {
+        max-width: 400px;
+    }
+}
