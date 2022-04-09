@@ -18,7 +18,13 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
+            'firstname' => $this->faker->firstName(),
+            'lastname' => $this->faker->lastName(),
+            'postcode' => $this->faker->postcode(),
+            'house_number' => $this->faker->numberBetween(1, 100),
+            'city' => $this->faker->city(),
+            'street_name' => $this->faker->streetName(),
+            'has_subscription' => false,
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

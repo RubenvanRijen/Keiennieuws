@@ -1,0 +1,35 @@
+.homeSubscription {
+    text-align: center;
+}
+
+.homeSubscription .begin-text {
+    margin-top: 5rem;
+    text-align: center;
+    h1 {
+        font-size: 6rem;
+        font-weight: 700;
+    }
+    p {
+        font-weight: 700;
+        font-size: 1.71rem;
+    }
+}
+
+.homeSubscription .row {
+    margin-top: 7rem;
+}
+
+.homeSubscription .title-text {
+    background-color: $customYellow;
+    font-weight: 700;
+    padding: 0.5rem;
+    font-size: 1.56rem;
+    width: inherit;
+    border-radius: 0;
+    border: 0;
+    a {
+        text-decoration: none;
+        color: inherit;
+        width: inherit;
+    }
+}

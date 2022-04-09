@@ -17,6 +17,14 @@ Route::get('/', function () {
     return view('/pages/home');
 });
 
+Route::get('/home', function () {
+    return view('/pages/home');
+});
+
+Route::get('/subscription', function () {
+    return view('/pages/subscription/homeSubscription');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

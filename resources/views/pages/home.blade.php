@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="section-one">
     @include('components/homepage/sectionOne')
 </div>
@@ -23,5 +22,5 @@
 <div class="section-seven">
     @include('components/homepage/sectionSeven')
 </div>
-
+@include('components.layouts.footer')
 @endsection
