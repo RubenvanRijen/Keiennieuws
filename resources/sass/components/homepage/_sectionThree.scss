@@ -22,6 +22,10 @@
         vertical-align: middle;
         font-size: 1.1rem;
     }
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
     button {
         bottom: 0;
         color: black;
@@ -32,10 +36,6 @@
         font-weight: 600;
         border-width: 0.15rem;
         margin: 1.5rem;
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
     }
     button:hover {
         background-color: black;

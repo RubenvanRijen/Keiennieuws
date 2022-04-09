@@ -1783,16 +1783,17 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?c1d7432ee75fa194e49925c1b
   height: auto;
 }
 
+.section-one a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .section-one button {
   background-color: #575757;
   width: 13rem;
   font-size: 1.4rem;
   padding: 0;
   color: white;
-}
-.section-one button a {
-  text-decoration: none;
-  color: inherit;
 }
 
 .section-one button:hover {
@@ -1843,6 +1844,11 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?c1d7432ee75fa194e49925c1b
   border-color: #ADC7AA;
 }
 
+.section-two a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .section-two button {
   color: #ADC7AA;
   border-color: #ADC7AA;
@@ -1851,10 +1857,6 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?c1d7432ee75fa194e49925c1b
   padding: 0;
   font-weight: 600;
   border-width: 0.15rem;
-}
-.section-two button a {
-  text-decoration: none;
-  color: inherit;
 }
 
 .section-two .card {
@@ -2043,6 +2045,10 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?c1d7432ee75fa194e49925c1b
   vertical-align: middle;
   font-size: 1.1rem;
 }
+.section-three .card a {
+  text-decoration: none;
+  color: inherit;
+}
 .section-three .card button {
   bottom: 0;
   color: black;
@@ -2053,10 +2059,6 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?c1d7432ee75fa194e49925c1b
   font-weight: 600;
   border-width: 0.15rem;
   margin: 1.5rem;
-}
-.section-three .card button a {
-  text-decoration: none;
-  color: inherit;
 }
 .section-three .card button:hover {
   background-color: black;
@@ -2465,6 +2467,42 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?c1d7432ee75fa194e49925c1b
     border-radius: 50px;
   }
 }
+.homeSubscription {
+  text-align: center;
+}
+
+.homeSubscription .begin-text {
+  margin-top: 5rem;
+  text-align: center;
+}
+.homeSubscription .begin-text h1, .homeSubscription .begin-text .h1 {
+  font-size: 6rem;
+  font-weight: 700;
+}
+.homeSubscription .begin-text p {
+  font-weight: 700;
+  font-size: 1.71rem;
+}
+
+.homeSubscription .row {
+  margin-top: 7rem;
+}
+
+.homeSubscription .title-text {
+  background-color: #FFE395;
+  font-weight: 700;
+  padding: 0.5rem;
+  font-size: 1.56rem;
+  width: inherit;
+  border-radius: 0;
+  border: 0;
+}
+.homeSubscription .title-text a {
+  text-decoration: none;
+  color: inherit;
+  width: inherit;
+}
+
 /*!
  * Bootstrap v5.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

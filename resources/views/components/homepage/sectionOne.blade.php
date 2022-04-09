@@ -4,16 +4,16 @@
             <img class="" loading="lazy" src="{{url('/images/logo.JPEG')}}">
         </div>
         <div class="col mt-3">
-            <button type="button" class="btn  rounded-0"><a href="/abonnement">Abonnement</a></button>
+            <a href="/subscription"> <button type="button" class="btn rounded-0">Abonnement</button></a>
         </div>
         <div class="col mt-3">
-            <button type="button" class="btn  rounded-0"><a href="/contact">Contact</a></button>
+            <a href="/contact"> <button type="button" class="btn  rounded-0">Contact</button></a>
         </div>
         <div class="col mt-3">
-            <button type="button" class="btn rounded-0"><a href="/information">Informatie</a></button>
+            <a href="/information"> <button type="button" class="btn rounded-0">Informatie</button></a>
         </div>
         <div class="col mt-3">
-            <button type="button" class="btn  rounded-0"><a href="/deliver">Aanleveren</a></button>
+            <a href="/deliver"> <button type="button" class="btn  rounded-0">Aanleveren</button></a>
         </div>
     </div>
 </div>
