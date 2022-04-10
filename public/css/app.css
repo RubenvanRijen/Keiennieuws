@@ -2581,6 +2581,311 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?c1d7432ee75fa194e49925c1b
     font-size: 1rem;
   }
 }
+.login-container a {
+  color: #92badd;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.login-container {
+  height: 100%;
+}
+
+.login-container h1, .login-container .h1 {
+  font-size: 10rem;
+  font-weight: 500;
+}
+
+.login-container p {
+  font-size: 2rem;
+  font-weight: bolder;
+  margin-top: -3rem;
+}
+
+.login-container h2, .login-container .h2 {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: inline-block;
+  margin: 40px 8px 10px 8px;
+  color: #cccccc;
+}
+
+/* STRUCTURE */
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 90vh;
+  padding: 20px;
+}
+
+#formContent {
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  padding: 30px;
+  width: 90%;
+  max-width: 650px;
+  position: relative;
+  padding: 0px;
+  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+#formFooter {
+  background-color: #f6f6f6;
+  border-top: 1px solid #dce8f1;
+  padding: 25px;
+  text-align: center;
+  border-radius: 0 0 10px 10px;
+}
+
+/* TABS */
+.login-container h2.inactive, .login-container .inactive.h2 {
+  color: #cccccc;
+}
+
+.login-container h2.active, .login-container .active.h2 {
+  color: #0d0d0d;
+  border-bottom: 2px solid #5fbae9;
+}
+
+/* FORM TYPOGRAPHY*/
+.login-container input[type=button],
+.login-container input[type=submit],
+.login-container input[type=reset] {
+  background-color: #2E3CFF;
+  border: none;
+  color: white;
+  padding: 15px 80px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 13px;
+  box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+  border-radius: 5px 5px 5px 5px;
+  margin: 5px 20px 40px 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-container input[type=button]:hover,
+.login-container input[type=submit]:hover,
+.login-container input[type=reset]:hover {
+  background-color: #39ace7;
+}
+
+.login-container input[type=button]:active,
+.login-container input[type=submit]:active,
+.login-container input[type=reset]:active {
+  transform: scale(0.95);
+}
+
+.login-container input[type=text],
+.login-container input[type=number],
+.login-container input[type=email],
+.login-container input[type=password] {
+  background-color: #f6f6f6;
+  color: #0d0d0d;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  width: 90%;
+  border: 2px solid #f6f6f6;
+  transition: all 0.5s ease-in-out;
+  border-radius: 5px 5px 5px 5px;
+}
+
+.login-container input[type=number]::-moz-placeholder {
+  color: gray;
+  opacity: 0.5;
+}
+
+.login-container input[type=number]:-ms-input-placeholder {
+  color: gray;
+  opacity: 0.5;
+}
+
+.login-container input[type=number]::placeholder {
+  color: gray;
+  opacity: 0.5;
+}
+
+.login-container input[type=text]:focus,
+input[type=email]:focus,
+input[type=password]:focus {
+  background-color: #fff;
+  border-bottom: 2px solid #5fbae9;
+}
+
+.login-container input[type=text]::-moz-placeholder, input[type=email]::-moz-placeholder, input[type=password]::-moz-placeholder {
+  color: #cccccc;
+}
+
+.login-container input[type=text]:-ms-input-placeholder, input[type=email]:-ms-input-placeholder, input[type=password]:-ms-input-placeholder {
+  color: #cccccc;
+}
+
+.login-container input[type=text]::placeholder,
+input[type=email]::placeholder,
+input[type=password]::placeholder {
+  color: #cccccc;
+}
+
+.login-container .password-field input {
+  width: 95%;
+}
+
+/* ANIMATIONS */
+/* Simple CSS3 Fade-in-down Animation */
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+/* Simple CSS3 Fade-in Animation */
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fadeIn {
+  opacity: 0;
+  -webkit-animation: fadeIn ease-in 1;
+  animation: fadeIn ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+}
+
+.fadeIn.first {
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+
+.fadeIn.second {
+  -webkit-animation-delay: 0.6s;
+  animation-delay: 0.6s;
+}
+
+.fadeIn.third {
+  -webkit-animation-delay: 0.8s;
+  animation-delay: 0.8s;
+}
+
+.fadeIn.fourth {
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
+}
+
+.fadeIn.fifth {
+  -webkit-animation-delay: 1.2s;
+  animation-delay: 1.2s;
+}
+
+.fadeIn.sixth {
+  -webkit-animation-delay: 1.4s;
+  animation-delay: 1.4s;
+}
+
+/* Simple CSS3 Fade-in Animation */
+.underlineHover:after {
+  display: block;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 2px;
+  background-color: #56baed;
+  content: "";
+  transition: width 0.2s;
+}
+
+.underlineHover:hover {
+  color: #0d0d0d;
+}
+
+.underlineHover:hover:after {
+  width: 100%;
+}
+
+/* OTHERS */
+*:focus {
+  outline: none;
+}
+
+#icon {
+  width: 60%;
+}
+
+@media screen and (max-width: 700px) {
+  .login-container .col {
+    flex: 1 0 100% !important;
+  }
+
+  .login-container .password-field input {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 425px) {
+  .login-container h1, .login-container .h1 {
+    font-size: 8rem;
+  }
+
+  .login-container p {
+    font-size: 1.6rem;
+    margin-top: -2rem;
+  }
+}
+@media screen and (max-width: 300px) {
+  .login-container input[type=button],
+.login-container input[type=submit],
+.login-container input[type=reset] {
+    padding: 10px 60px;
+  }
+}
 /*!
  * Bootstrap v5.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

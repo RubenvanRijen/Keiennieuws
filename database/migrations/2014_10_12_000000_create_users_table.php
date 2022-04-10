@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('street_name');
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('has_subscription');
+            $table->string('has_subscription')->default(false);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

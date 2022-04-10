@@ -17,18 +17,35 @@ class adminUserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'firstname' => Str::random(10),
-            'lastname' => Str::random(10),
-            'postcode' => '5248LK',
-            'house_number' => 5,
-            'city' => 'oss',
-            'street_name' => 'beukenlaan',
-            'has_subscription' => true,
-            'email' => 'hugegander2815@gmail.com',
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
-        ]);
+        DB::table('users')->insert(
+            [
+                'firstname' => Str::random(10),
+                'lastname' => Str::random(10),
+                'postcode' => '5248LK',
+                'house_number' => 5,
+                'city' => 'oss',
+                'street_name' => 'beukenlaan',
+                'has_subscription' => true,
+                'email' => 'hugegander2815@gmail.com',
+                'email_verified_at' => now(),
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'remember_token' => Str::random(10),
+            ]
+        );
+        DB::table('users')->insert(
+            [
+                'firstname' => 'admin',
+                'lastname' => 'boss',
+                'postcode' => '5248LK',
+                'house_number' => 5,
+                'city' => 'oss',
+                'street_name' => 'beukenlaan',
+                'has_subscription' => true,
+                'email' => 'admin@gmail.com',
+                'email_verified_at' => now(),
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'remember_token' => Str::random(10),
+            ],
+        );
     }
 }
