@@ -1,0 +1,52 @@
+.notfound {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    height: 100%;
+}
+
+.notfound .information {
+    text-align: center;
+}
+
+.notfound .error-code {
+    height: 200px;
+    line-height: 200px;
+}
+
+.notfound .error-code h1 {
+    font-size: 168px;
+    margin: 0;
+    color: #2E3CFF;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.notfound p {
+    font-size: 22px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #222;
+    margin: 0;
+}
+
+.notfound a {
+    display: inline-block;
+    font-weight: 700;
+    border-radius: 15px;
+    text-decoration: none;
+    color: #39b1cb;
+}
+
+.notfound a>.arrow {
+    position: relative;
+    top: -1px;
+    border: solid #39b1cb;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    -webkit-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    transform: rotate(135deg);
+}

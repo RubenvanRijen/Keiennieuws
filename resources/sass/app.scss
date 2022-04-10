@@ -15,6 +15,8 @@
 @import "pages/subscriptions/homeSubscription";
 //auth
 @import "pages/auth//login";
+//errors
+@import "pages/errors/errors";
 //bootstrap
 @import "~bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons.css";
@@ -30,3 +32,11 @@
 @media screen and (max-width: 1200px) {}
 
 @media screen and (max-width: 1400px) {}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
