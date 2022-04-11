@@ -28,11 +28,11 @@
                         <a class="nav-link {{ request()->is('publication*') ? 'active' : '' }}" href="/publication">Aanleveren</a>
                     </li>
                     @guest
-                    <li class="nav-item d-flex special-login {{ request()->is('login*') || request()->is('register*') ? 'active' : '' }}">
-                        <a class="nav-link" href=" {{ route('login') }}">
+                    <li class="nav-item d-flex special-login ">
+                        <a class="nav-link {{ request()->is('login*') ? 'active' : '' }}" href=" {{ route('login') }}">
                             {{ __('Inloggen/') }}
                         </a>
-                        <a class="nav-link special-navlink" href=" {{ route('register') }}">
+                        <a class="nav-link special-navlink  {{request()->is('register*') ? 'active' : '' }}" href=" {{ route('register') }}">
                             {{ __('Registreren') }}
                         </a>
                     </li>

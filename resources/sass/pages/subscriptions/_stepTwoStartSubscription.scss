@@ -1,0 +1,94 @@
+.stepTwoStartSubscription {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    label {
+        font-weight: 700;
+    }
+    .custom-input {
+        margin-top: 2rem;
+    }
+    .row p {
+        font-weight: 700;
+        font-size: 1.6rem;
+    }
+    .gender-checkboxes {
+        --bs-gutter-x: 0;
+        .form-check {
+            label {
+                margin-top: 0.25rem;
+                margin-left: 0.3rem;
+            }
+            input {
+                border-radius: 0;
+                border: 2px black solid;
+                width: 1.375rem;
+                height: 1.375rem;
+            }
+        }
+    }
+}
+
+.stepTwoStartSubscription .right-bottom-custom {
+    display: -webkit-box;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    justify-content: end;
+    align-items: center;
+    text-align: center;
+    margin-right: 5rem;
+    margin-bottom: 5rem;
+    .arrow {
+        content: "";
+        z-index: 11;
+        display: block;
+        width: 15px;
+        height: 15px;
+        border-top: 6px solid #fff;
+        border-left: 6px solid #fff;
+    }
+    .right {
+        transform: rotate(135deg);
+        -webkit-transform: rotate(135deg);
+        margin-left: -0.2rem;
+    }
+    button {
+        margin-left: 1rem;
+        padding: 1rem;
+        background-color: $customYellow;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .stepTwoStartSubscription {
+        .col {
+            flex: 1 0 100%;
+        }
+        .form-check {
+            flex: 1 0 0%;
+        }
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .stepTwoStartSubscription .right-bottom-custom {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-top: 4rem;
+        margin-right: 0;
+        margin-bottom: 0;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .stepTwoStartSubscription {
+        .row p {
+            font-size: 1.3rem;
+        }
+    }
+}

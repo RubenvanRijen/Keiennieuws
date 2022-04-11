@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('postcode');
             $table->string('house_number');
             $table->string('city');
+            $table->enum('gender', ['Dhr', 'Mevr', 'Anders', 'Dhr/Mevr'])->default('Dhr/Mevr');
             $table->string('street_name');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('has_subscription')->default(false);

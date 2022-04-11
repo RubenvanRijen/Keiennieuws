@@ -9,7 +9,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <a href="/subscription/start" class="btn btn-warning title-text">Starten</a>
+                <a href="/subscription/startstepone" class="btn btn-warning title-text">Starten</a>
                 <div class="card">
                     <div class="card-body">
                         <p class="card-text">Wanneer u een abonnement start dan is dat voor onbepaalde tijd. Een abonnement op het Keiennieuws kost per editie

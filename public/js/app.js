@@ -8027,6 +8027,8 @@ __webpack_require__(/*! ./sectionFive */ "./resources/js/sectionFive.js");
 
 __webpack_require__(/*! ./sectionSeven */ "./resources/js/sectionSeven.js");
 
+__webpack_require__(/*! ./switchPage */ "./resources/js/switchPage.js");
+
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
 
@@ -15502,6 +15504,45 @@ window.onload = function () {
   };
   var splide = new _splidejs_splide__WEBPACK_IMPORTED_MODULE_0__["default"]('.splide', options);
   splide.mount();
+};
+
+/***/ }),
+
+/***/ "./resources/js/switchPage.js":
+/*!************************************!*\
+  !*** ./resources/js/switchPage.js ***!
+  \************************************/
+/***/ (() => {
+
+function startTimer(duration, display) {
+  var timer = duration,
+      minutes,
+      seconds;
+  setInterval(function () {
+    minutes = parseInt(timer / 60, 10);
+    seconds = parseInt(timer % 60, 10);
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? seconds : seconds;
+    display.textContent = " " + seconds; // display.textContent = seconds + "";
+
+    if (--timer < 0) {
+      timer = duration;
+    }
+
+    if (seconds === 0) {
+      timer = 0;
+    }
+  }, 1000);
+}
+
+window.onload = function () {
+  var myEle = document.getElementById("timer");
+
+  if (myEle) {
+    var time = document.querySelector('#timer').getAttribute('data-time');
+    var display = document.querySelector('#timer');
+    startTimer(time, display);
+  }
 };
 
 /***/ }),

@@ -1,0 +1,29 @@
+.stepOneSubscription {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    h2 {
+        font-weight: 700;
+        margin-bottom: 2.5rem;
+    }
+    p {
+        font-weight: 700;
+        font-size: 1.34rem;
+        margin-bottom: 2.5rem;
+    }
+    a {
+        text-decoration: none;
+        color: inherit;
+        width: inherit;
+        button {
+            background-color: $customYellow;
+            font-weight: 700;
+            font-size: 1.3rem;
+            width: 12rem;
+            border-radius: 0;
+            border: 0;
+        }
+    }
+}

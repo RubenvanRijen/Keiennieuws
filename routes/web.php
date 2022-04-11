@@ -25,6 +25,25 @@ Route::get('/subscription', function () {
     return view('/pages/subscription/homeSubscription');
 });
 
+Route::get('/subscription/startstepone', function () {
+    return view('/pages/subscription/stepOneStartSubscription');
+});
+
+Route::get('/subscription/startsteptwo', function () {
+    return view('/pages/subscription/stepTwoStartSubscription');
+});
+
+Route::post('/subscription/startsteptwo', function () {
+    return redirect('/subscription/endingSubscription');
+})->name('endingSubscription');
+
+Route::get('/subscription/endingSubscription', function () {
+    return view('/pages/subscription/endingSubscription');
+});
+
+
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
