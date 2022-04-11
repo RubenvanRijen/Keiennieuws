@@ -28,19 +28,13 @@
                         <a class="nav-link {{ request()->is('publication*') ? 'active' : '' }}" href="/publication">Aanleveren</a>
                     </li>
                     @guest
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {{ request()->is('login*') || request()->is('register*') ? 'active' : '' }}" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            login/registreren
+                    <li class="nav-item d-flex special-login {{ request()->is('login*') || request()->is('register*') ? 'active' : '' }}">
+                        <a class="nav-link" href=" {{ route('login') }}">
+                            {{ __('Inloggen/') }}
                         </a>
-                        <ul class="dropdown-menu dropdown-menu text-center" aria-labelledby="navbarDarkDropdownMenuLink">
-
-                            <a class="dropdown-item" href="{{ route('login') }}">
-                                {{ __('Inloggen') }}
-                            </a>
-                            <a class="dropdown-item" href="{{ route('register') }}">
-                                {{ __('Registreren') }}
-                            </a>
-                        </ul>
+                        <a class="nav-link special-navlink" href=" {{ route('register') }}">
+                            {{ __('Registreren') }}
+                        </a>
                     </li>
                     @else
                     <li class="nav-item dropdown">

@@ -1710,6 +1710,19 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?c1d7432ee75fa194e49925c1b
   width: auto;
 }
 
+.custom-header .special-navlink {
+  margin-left: -0.9rem;
+}
+
+@media screen and (max-width: 768px) {
+  .custom-header .special-navlink {
+    margin-left: 0rem;
+  }
+
+  .custom-header .special-login {
+    justify-content: center;
+  }
+}
 .page-footer {
   background-color: white;
   color: black;
