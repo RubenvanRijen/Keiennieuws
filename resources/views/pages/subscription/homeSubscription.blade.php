@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="col">
-                <a href="/subscription/end" class="btn btn-warning title-text">Eindigen </a>
+                <a href="/subscription/endstepone" class="btn btn-warning title-text">Eindigen </a>
                 <div class="card">
                     <div class="card-body">
                         <p class="card-text">Wanneer u geen interesse meer heeft in het Keiennieuws, dan moet u dit voor de 25ste van de maand beëindigen.</p>

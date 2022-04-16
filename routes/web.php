@@ -27,7 +27,7 @@ Route::get('/subscription', function () {
 
 Route::get('/subscription/startstepone', function () {
     return view('/pages/subscription/stepOneStartSubscription');
-});
+})->middleware('role:admin');
 
 Route::get('/subscription/startsteptwo', function () {
     return view('/pages/subscription/stepTwoStartSubscription');
@@ -37,10 +37,14 @@ Route::post('/subscription/startsteptwo', function () {
     return redirect('/subscription/endingSubscription');
 })->name('endingSubscription');
 
+
 Route::get('/subscription/endingSubscription', function () {
     return view('/pages/subscription/endingSubscription');
 });
 
+Route::get('/subscription/endstepone', function () {
+    return view('/pages/subscription/stepOneEndSubscription');
+});
 
 
 
