@@ -20,11 +20,11 @@ function startTimer(duration, display) {
     }, 1000);
 }
 
-window.onload = () => {
+$(document).ready(function() {
     const myEle = document.getElementById("timer");
     if (myEle) {
         let time = document.querySelector('#timer').getAttribute('data-time');
         let display = document.querySelector('#timer');
         startTimer(time, display);
     }
-};
+});
