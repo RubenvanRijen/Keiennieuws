@@ -15,7 +15,6 @@ window.onload = () => {
         } else {
             document.body.style.height = '100%';
         }
-
     }
 }
 

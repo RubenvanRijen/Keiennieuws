@@ -1,72 +1,85 @@
-    .information {
-        height: 100%;
-        display: flex;
+.information {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    h4 {
+        font-weight: 700;
+        margin-top: 3rem;
+        margin-bottom: 1rem;
+    }
+    .col {
+        display: grid;
+        align-content: center;
         justify-content: center;
         align-items: center;
-        p {
-            margin-top: 1.5rem;
-            margin-bottom: 1.5rem;
+        justify-items: stretch;
+        padding: 3rem;
+    }
+    .left-column {
+        h1 {
+            font-size: 4rem;
+            font-weight: 500;
         }
+        color: $purpleCustom
+    }
+    .middle-column {}
+    .right-column {
+        display: flow-root;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .information {
         h4 {
-            font-weight: 700;
-            margin-top: 3rem;
-            margin-bottom: 1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        p {
+            margin-top: 0.75rem;
+            margin-bottom: 0.75rem;
         }
         .col {
-            display: grid;
-            align-content: center;
-            justify-content: space-between;
-            align-items: center;
-            justify-items: stretch;
-            padding: 3rem;
+            flex: 1 0 100%;
         }
+        .right-column {
+            display: grid;
+        }
+    }
+}
+
+@media screen and (max-width: 992px) {}
+
+@media screen and (max-width: 768px) {
+    .information {
+        .col {
+            flex: 1 0 100%;
+            padding-top: 1rem;
+            padding-bottom: 0.5rem;
+            padding-right: 2rem;
+            padding-left: 2rem;
+        }
+        h4 {
+            margin-top: 0.75rem;
+            margin-bottom: 0.25rem;
+        }
+        p {
+            margin-top: 0.25rem;
+            margin-bottom: 0.25rem;
+        }
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .information {
         .left-column {
             h1 {
-                font-size: 4rem;
-                font-weight: 500;
-            }
-            color: $purpleCustom
-        }
-        .middle-column {}
-        .right-column {}
-    }
-    
-    @media screen and (max-width: 1200px) {
-        .information {
-            h4 {
-                margin-top: 1.5rem;
-                margin-bottom: 0.5rem;
-            }
-            p {
-                margin-top: 0.75rem;
-                margin-bottom: 0.75rem;
-            }
-            .col {
-                flex: 1 0 50%;
+                font-size: 3rem;
             }
         }
     }
-    
-    @media screen and (max-width: 992px) {}
-    
-    @media screen and (max-width: 768px) {
-        .information {
-            .col {
-                flex: 1 0 100%;
-                padding-top: 0.5rem;
-                padding-bottom: 0.5rem;
-                padding-right: 2rem;
-                padding-left: 2rem;
-            }
-            h4 {
-                margin-top: 0.75rem;
-                margin-bottom: 0.25rem;
-            }
-            p {
-                margin-top: 0.25rem;
-                margin-bottom: 0.25rem;
-            }
-        }
-    }
-    
-    @media screen and (max-width: 576px) {}
+}
