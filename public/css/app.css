@@ -2772,6 +2772,66 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?c1d7432ee75fa194e49925c1b
   margin-left: 1.5rem;
 }
 
+.information {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.information p {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.information h4, .information .h4 {
+  font-weight: 700;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+.information .col {
+  display: grid;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+  justify-items: stretch;
+  padding: 3rem;
+}
+.information .left-column {
+  color: #959CFF;
+}
+.information .left-column h1, .information .left-column .h1 {
+  font-size: 4rem;
+  font-weight: 500;
+}
+@media screen and (max-width: 1200px) {
+  .information h4, .information .h4 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .information p {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .information .col {
+    flex: 1 0 50%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .information .col {
+    flex: 1 0 100%;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+  .information h4, .information .h4 {
+    margin-top: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+  .information p {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+}
 .login-container a {
   color: #92badd;
   display: inline-block;

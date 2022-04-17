@@ -16,8 +16,10 @@
 @import "pages/subscriptions/endingSubscription";
 @import "pages/subscriptions/formSubscription";
 @import "pages/subscriptions/introductionSubscriptionAction";
+//information
+@import "pages/information";
 //auth
-@import "pages/auth//login";
+@import "pages/auth/login";
 //errors
 @import "pages/errors/errors";
 //bootstrap

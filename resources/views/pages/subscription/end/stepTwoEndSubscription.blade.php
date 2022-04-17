@@ -23,7 +23,7 @@
                 <input type="text" name="postcode" class="form-control" id="postcode" aria-describedby="postcode">
             </div>
             <div class="right-bottom-custom">
-                <p>Bedankt voor het ivbullen.<br> Klik op de button om het af te ronden</p>
+                <p>Bedankt voor het ivnullen.<br> Klik op de button om het af te ronden</p>
                 <button type="submit" class="btn"><i class="arrow right"></i></button>
             </div>
         </form>
