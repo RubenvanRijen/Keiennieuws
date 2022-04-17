@@ -70,6 +70,43 @@ class SubscriptionController extends Controller
         return view('/pages/subscription/edit/stepOneEditSubscription');
     }
 
+    public function editAdress()
+    {
+        return view('/pages/subscription/edit/stepTwoEditAdressSubscription');
+    }
+
+    public function editAdressForm(Request $request)
+    {
+        //TODO doe iets met het form
+        return redirect('/subscription/editFinalAdress');
+    }
+
+    public function editEmail()
+    {
+        return view('/pages/subscription/edit/stepTwoEditEmailSubscription');
+    }
+
+    public function editEmailForm(Request $request)
+    {
+        //TODO doe iets met het form
+        return redirect('/subscription/editFinalEmail');
+    }
+
+    public function editFinalEmail()
+    {
+        $title = 'UW EMAILADRES IS GEWIJZIGD';
+        $text = 'U ontvangt binnen enkele minute een automatische email die naar uw nieuwe emailadres wordt gestuurd.
+        Dit wordt gedaan om te controleren of de wijzigingen goed gelukt zijn.';
+        return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
+    }
+
+    public function editFinalAdress()
+    {
+        $title = 'UW BEZORGADRES IS GEWIJZIGD.';
+        $text = 'U ontvangt binnen enkele dagen een bevestigingsmail van uw wijziging.';
+        return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

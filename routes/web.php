@@ -36,6 +36,12 @@ Route::post('/subscription/endsteptwo', [SubscriptionController::class, 'endStep
 Route::get('/subscription/endfinal', [SubscriptionController::class, 'endFinal']);
 //EDIT
 Route::get('/subscription/editstepone', [SubscriptionController::class, 'editStepOne']);
+Route::get('/subscription/editsteptwoadress', [SubscriptionController::class, 'editAdress']);
+Route::post('/subscription/editsteptwoadress', [SubscriptionController::class, 'editAdressForm']);
+Route::get('/subscription/editsteptwoemail', [SubscriptionController::class, 'editEmail']);
+Route::post('/subscription/editsteptwoemail', [SubscriptionController::class, 'editEmailForm']);
+Route::get('/subscription/editFinalAdress', [SubscriptionController::class, 'editFinalAdress']);
+Route::get('/subscription/editFinalEmail', [SubscriptionController::class, 'editFinalEmail']);
 
 
 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="formSubscription stepTwoEndSubscription">
+<div class="formSubscription stepTwoEndSubscription small-sibscription-form">
     <div class="container">
         <form id="start-subscription" action="{{ url('/subscription/endsteptwo') }}" method="POST">
             @csrf
@@ -22,13 +22,11 @@
                 <label for="postcode" class="form-label">Postcode: </label>
                 <input type="text" name="postcode" class="form-control" id="postcode" aria-describedby="postcode">
             </div>
+            <div class="right-bottom-custom">
+                <p>Bedankt voor het ivbullen.<br> Klik op de button om het af te ronden</p>
+                <button type="submit" class="btn"><i class="arrow right"></i></button>
+            </div>
+        </form>
     </div>
-
-    <div class="right-bottom-custom">
-        <p>Bedankt voor het inbullen.<br> Klik op de button om het af te ronden</p>
-        <button class="btn"><i class="arrow right"></i></button>
-    </div>
-    </form>
-</div>
 </div>
 @endsection

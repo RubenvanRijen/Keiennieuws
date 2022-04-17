@@ -73,8 +73,8 @@
                 </div>
             </div>
             <div class="right-bottom-custom">
-                <p>Bedankt voor het inbullen.<br> Klik op de button om het af te ronden</p>
-                <button class="btn"><i class="arrow right"></i></button>
+                <p>Bedankt voor het invullen.<br> Klik op de button om het af te ronden</p>
+                <button type="submit" class="btn"><i class="arrow right"></i></button>
             </div>
         </form>
     </div>

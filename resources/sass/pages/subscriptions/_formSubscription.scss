@@ -28,6 +28,21 @@
             }
         }
     }
+    .extra-info {
+        font-weight: 700;
+        font-size: 1.6rem;
+        margin-bottom: 5rem;
+    }
+    .edit-button {
+        margin-top: 3rem;
+        background-color: $customYellow;
+        font-weight: 700;
+        font-size: 1.2rem;
+        width: 12rem;
+        border-radius: 0;
+        border: 0;
+        padding: 0.1rem;
+    }
 }
 
 .formSubscription .right-bottom-custom {
@@ -61,7 +76,15 @@
     }
 }
 
-.stepTwoEndSubscription {
+.stepTwoEditAdressSubscription {
+    .extra-info {
+        font-weight: 700;
+        font-size: 1.6rem;
+        margin-bottom: 2rem;
+    }
+}
+
+.small-sibscription-form {
     .container {
         display: flex;
         justify-content: center;
