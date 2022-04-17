@@ -40,6 +40,20 @@ Route::post('/subscription/editsteptwoemail', [SubscriptionController::class, 'e
 Route::get('/subscription/editFinalAdress', [SubscriptionController::class, 'editFinalAdress']);
 Route::get('/subscription/editFinalEmail', [SubscriptionController::class, 'editFinalEmail']);
 
+Route::get('/placebooking', function () {
+    return view('/pages/placeBooking');
+});
+
+Route::post('/placebooking', function () {
+    return redirect('/successactionbooking');
+});
+
+Route::get('/successactionbooking', function () {
+    return view('/pages/successAction', ['title' => 'BEDANKT VOOR UW RESERVATIE!', 'text' => 'U zult binnen enkele minuten een bevestigingsmail ontvangen']);
+});
+
+
+
 
 
 Route::get('/dashboard', function () {

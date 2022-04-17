@@ -8,10 +8,10 @@
                     december 2020 </p>
                 <div class="row">
                     <div class="col mt-2">
-                        <a href="/deliver" class=""> <button class="btn btn-outline-success rounded-0">Aanleveren</button></a>
+                        <a href="/placepublication" class=""> <button class="btn btn-outline-success rounded-0">Aanleveren</button></a>
                     </div>
                     <div class="col mt-2">
-                        <a href="/reserve" class=""> <button class="btn btn-outline-success rounded-0"> Reserveren</button></a>
+                        <a href="/placebooking" class=""> <button class="btn btn-outline-success rounded-0"> Reserveren</button></a>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-.information {
+.informationPage {
     height: 100%;
     display: flex;
     justify-content: center;
@@ -34,7 +34,7 @@
 }
 
 @media screen and (max-width: 1200px) {
-    .information {
+    .informationPage {
         h4 {
             margin-top: 1.5rem;
             margin-bottom: 0.5rem;
@@ -55,7 +55,7 @@
 @media screen and (max-width: 992px) {}
 
 @media screen and (max-width: 768px) {
-    .information {
+    .informationPage {
         .col {
             flex: 1 0 100%;
             padding-top: 1rem;
@@ -75,7 +75,7 @@
 }
 
 @media screen and (max-width: 400px) {
-    .information {
+    .informationPage {
         .left-column {
             h1 {
                 font-size: 3rem;

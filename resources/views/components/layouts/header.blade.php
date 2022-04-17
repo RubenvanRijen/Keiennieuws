@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light border-bottom border-secondary border-2">
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom border-secondary border-2">
     <div class="container-fluid">
         <div class="d-flex">
             <a class="navbar-brand border p-2 border-dark" href="{{ url('/') }}">
@@ -25,7 +25,10 @@
                         <a class="nav-link {{ request()->is('information*') ? 'active' : '' }}" href="/information">Informatie</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('publication*') ? 'active' : '' }}" href="/publication">Aanleveren</a>
+                        <a class="nav-link {{ request()->is('placepublication*') ? 'active' : '' }}" href="/placepublication">Aanleveren</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('placebooking*') ? 'active' : '' }}" href="/placebooking">Reserveren</a>
                     </li>
                     @guest
                     <li class="nav-item d-flex special-login ">
