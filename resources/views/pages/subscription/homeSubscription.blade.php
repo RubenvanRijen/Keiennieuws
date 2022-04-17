@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="col">
-                <a href="/subscription/edit" class="btn btn-warning title-text">Wijzigen </a>
+                <a href="/subscription/editstepone" class="btn btn-warning title-text">Wijzigen </a>
                 <div class="card">
                     <div class="card-body">
                         <p class="card-text">Bent u verhuisd? Of heeft u een nieuw mailadres? geef dit kosteloos aan ons door.</p>

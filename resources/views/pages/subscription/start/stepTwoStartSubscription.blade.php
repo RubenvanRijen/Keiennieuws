@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="stepTwoStartSubscription">
+<div class="formSubscription stepTwoStartSubscription">
     <div class="container">
-        <form id="start-subscription" action="{{ route('endingSubscription') }}" method="POST">
+        <form id="start-subscription" action="{{ url('/subscription/startsteptwo') }}" method="POST">
             @csrf
             <div class="row">
                 <div class="col left-side">

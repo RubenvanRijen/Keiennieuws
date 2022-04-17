@@ -1,8 +1,8 @@
-.stepOneSubscription {
+.introductionSubscriptionAction {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 94%;
     text-align: center;
     h2 {
         font-weight: 700;
@@ -24,6 +24,20 @@
             width: 12rem;
             border-radius: 0;
             border: 0;
+            padding: 0.1rem;
+        }
+    }
+}
+
+//edit 
+.stepOneEditSubscription {
+    .buttons-group-custom {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        a {
+            margin-right: 1.5rem;
+            margin-left: 1.5rem;
         }
     }
 }

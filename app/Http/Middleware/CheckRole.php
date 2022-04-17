@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Support\Facades\Auth;
+
 use Closure;
 use Illuminate\Http\Request;
 
@@ -16,6 +18,9 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, $role)
     {
+        if (!auth()->check()) {
+            abort(401, 'This action is unauthorized.');
+        }
         if (!$request->user()->hasRole($role)) {
             abort(401, 'This action is unauthorized.');
         }
