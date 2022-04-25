@@ -6,6 +6,8 @@ require('./main');
 require('./sectionFive');
 require('./sectionSeven');
 require('./switchPage');
+require('./startStepTwo');
+require('./placePublication');
 
 
 window.onload = () => {

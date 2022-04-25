@@ -9,19 +9,19 @@
                 <div class="col left-side">
                     <div class="row gender-checkboxes">
                         <div class="col form-check">
-                            <input name="gender" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input name="gender" class="form-check-input" type="checkbox" value="" id="male-gender">
                             <label class="form-check-label" for="flexCheckDefault">
                                 Dhr
                             </label>
                         </div>
                         <div class="col form-check">
-                            <input name="gender" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input name="gender" class="form-check-input" type="checkbox" value="" id="female-gender">
                             <label class="form-check-label" for="flexCheckDefault">
                                 Mevr
                             </label>
                         </div>
                         <div class="col form-check">
-                            <input name="gender" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input name="gender" class="form-check-input" type="checkbox" value="" id="other-gender">
                             <label class="form-check-label" for="flexCheckDefault">
                                 Anders
                             </label>

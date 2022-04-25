@@ -8030,6 +8030,10 @@ __webpack_require__(/*! ./sectionSeven */ "./resources/js/sectionSeven.js");
 
 __webpack_require__(/*! ./switchPage */ "./resources/js/switchPage.js");
 
+__webpack_require__(/*! ./startStepTwo */ "./resources/js/startStepTwo.js");
+
+__webpack_require__(/*! ./placePublication */ "./resources/js/placePublication.js");
+
 window.onload = function () {
   if (window.location.pathname === '/information') {
     if (window.matchMedia("(max-width: 1200px)").matches || window.matchMedia("(max-height: 870px)").matches) {
@@ -15444,6 +15448,79 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/js/placePublication.js":
+/*!******************************************!*\
+  !*** ./resources/js/placePublication.js ***!
+  \******************************************/
+/***/ (() => {
+
+$(document).ready(function () {
+  var placedBooking = document.getElementById("placedBooking");
+  var placedNoBooking = document.getElementById("placedNoBooking");
+  var placeBooking = document.getElementById("placeBooking");
+  var placeNoBooking = document.getElementById("placeNoBooking");
+  var bookingInformation = document.getElementsByClassName("extra-info-custom");
+  var page = document.getElementsByClassName('.place-publication-page');
+
+  if (placedBooking && placedNoBooking && bookingInformation[0]) {
+    placedBooking.onclick = function () {
+      placedBooking.checked = true;
+      placedNoBooking.checked = false;
+      bookingInformation[0].style.display = "none";
+    };
+
+    placedNoBooking.onclick = function () {
+      placedBooking.checked = false;
+      placedNoBooking.checked = true;
+      bookingInformation[0].style.display = "block";
+      page[0].style.height = "unset";
+    };
+
+    placeBooking.onclick = function () {
+      placeBooking.checked = true;
+      placeNoBooking.checked = false;
+    };
+
+    placeNoBooking.onclick = function () {
+      placeBooking.checked = false;
+      placeNoBooking.checked = true;
+    };
+  }
+
+  $('#formFileMultiple').change(function () {
+    console.log('change');
+    var input = $('#formFileMultiple')[0].files;
+    var output = document.getElementById('fileList');
+    var maxFilesMessage = document.getElementById('maxFilesMessage');
+    var uploadedFilesMessage = document.getElementById('uploadedFilesMessage');
+
+    if (maxFilesMessage) {
+      if (input.length > 5) {
+        maxFilesMessage.classList.remove('d-none');
+        maxFilesMessage.style.display = 'block';
+        output.innerHTML = '<div>';
+        '</div>';
+      } else {
+        maxFilesMessage.classList.add('d-none');
+        uploadedFilesMessage.classList.remove('d-none');
+        var children = "";
+
+        for (var i = 0; i < input.length; ++i) {
+          children += '<div class="ml-1">' + (i + 1) + ': ' + input[i].name + '</div>';
+        }
+
+        output.innerHTML = '<div>' + children + '</div>';
+        $(this).next('#file-Label').html('Aantal bestanden gekozen:' + input.length);
+      }
+    } else {
+      var file = $('#file')[0].files[0].name;
+      $(this).next('#file-Label').html(file);
+    }
+  });
+});
+
+/***/ }),
+
 /***/ "./resources/js/sectionFive.js":
 /*!*************************************!*\
   !*** ./resources/js/sectionFive.js ***!
@@ -15521,6 +15598,40 @@ $(document).ready(function () {
   if (carousels.length > 0) {
     var splide = new _splidejs_splide__WEBPACK_IMPORTED_MODULE_0__["default"]('.splide', options);
     splide.mount();
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/startStepTwo.js":
+/*!**************************************!*\
+  !*** ./resources/js/startStepTwo.js ***!
+  \**************************************/
+/***/ (() => {
+
+$(document).ready(function () {
+  var male = document.getElementById("male-gender");
+  var female = document.getElementById("female-gender");
+  var other = document.getElementById("other-gender");
+
+  if (male && female && other) {
+    male.onclick = function () {
+      male.checked = true;
+      female.checked = false;
+      other.checked = false;
+    };
+
+    female.onclick = function () {
+      male.checked = false;
+      female.checked = true;
+      other.checked = false;
+    };
+
+    other.onclick = function () {
+      male.checked = false;
+      female.checked = false;
+      other.checked = true;
+    };
   }
 });
 

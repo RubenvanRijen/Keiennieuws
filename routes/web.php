@@ -55,6 +55,23 @@ Route::get('/successactionbooking', function () {
 
 
 
+Route::get('/placepublication', function () {
+    return view('/pages/placePublication');
+});
+
+Route::post('/placepublication', function () {
+    return redirect('/successactionpublication');
+});
+
+Route::get('/successactionpublication', function () {
+    return view('/pages/successAction', ['title' => 'UW PUBLICATIE IS GEUPLOAD!', 'text' => 'Uw bestand word zo spoedig mogelijk verwerkt']);
+});
+
+
+
+
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
