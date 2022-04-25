@@ -1,0 +1,185 @@
+.place-publication-page {
+    background-image: url('/images/INHOUD-publicatie-aanleveren.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: max-content;
+    width: auto;
+    padding-bottom: 20rem;
+    label {
+        font-weight: bolder;
+        margin-bottom: 0.5rem;
+    }
+    .extra-info-custom {
+        display: none;
+    }
+    .place-publication-row {
+        margin-right: 0;
+        margin-left: 0;
+        display: flex;
+        justify-content: center;
+        padding: 2rem;
+        .content-title {
+            display: none;
+        }
+        .left-column {
+            display: flex;
+            justify-content: end;
+            margin-top: 5rem;
+            form {
+                width: 45rem;
+                background-color: white;
+                padding: 3rem;
+                border-radius: 50px;
+                input[type=file] {
+                    border: 2px $greenCustom solid;
+                }
+                input[type=file]::file-selector-button {
+                    background-color: $greenCustom;
+                    color: white;
+                    border: 2px $greenCustom solid;
+                }
+                textarea {
+                    height: 200px;
+                }
+                .form-container-custom {
+                    padding: 2rem;
+                }
+                .custom-input {
+                    margin-bottom: 1rem;
+                }
+                .place-booking-checkboxes {
+                    margin-left: 0;
+                    input[type="checkbox"] {
+                        border-color: gray;
+                        border-radius: 0;
+                        width: 1.5rem;
+                        height: 1.5rem;
+                    }
+                    label {
+                        margin-left: 0.5rem;
+                        margin-top: 0.2rem;
+                    }
+                    margin-bottom: 1rem;
+                    .form-check {
+                        display: inline-block;
+                    }
+                }
+                .custom-submit-right {
+                    text-align: right;
+                    button {
+                        margin-top: 3rem;
+                        color: $greenCustom;
+                        border-radius: 0;
+                        width: 12rem;
+                        padding: 0.1rem;
+                        border: 3px $greenCustom solid;
+                        &:hover {
+                            background-color: $greenCustom;
+                            border: 3px $greenCustom solid;
+                        }
+                    }
+                }
+            }
+        }
+        .right-column {
+            height: auto;
+            display: block;
+            margin-top: 15rem;
+            h1 {
+                color: white;
+                font-size: 5rem;
+                max-width: 30rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .place-publication-page {
+        .place-publication-row {
+            .col {
+                flex: 1 0 100%;
+                justify-content: center;
+                display: flex;
+            }
+            .left-column {
+                justify-content: center;
+                display: flex;
+            }
+            .right-column {
+                display: none;
+                height: 0;
+            }
+            .content-title {
+                display: block;
+                margin-top: 3rem;
+                color: white;
+                text-align: center;
+                h1 {
+                    font-size: 4rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1053px) {
+    .place-publication-page {
+        height: fit-content;
+    }
+}
+
+@media screen and (max-width: 992px) {}
+
+@media screen and (max-width: 795px) {}
+
+@media screen and (max-width: 576px) {
+    .place-publication-page {
+        .place-publication-row {
+            .content-title {
+                h1 {
+                    font-size: 3rem;
+                }
+            }
+            .left-column {
+                form {
+                    padding: 2rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .place-publication-page {
+        .place-publication-row {
+            text-align: center;
+            .left-column {
+                form {
+                    .custom-submit-right {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .place-publication-page {
+        .place-publication-row {
+            padding: 0.7rem;
+            .content-title {
+                h1 {
+                    font-size: 3rem;
+                }
+            }
+            .left-column {
+                form {
+                    padding: 1.3rem;
+                }
+            }
+        }
+    }
+}

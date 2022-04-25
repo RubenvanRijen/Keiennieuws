@@ -11,6 +11,23 @@
 @import "components/homepage/sectionFive";
 @import "components/homepage/sectionSix";
 @import "components/homepage/sectionSeven";
+//subscription
+@import "pages/subscriptions/homeSubscription";
+@import "pages/subscriptions/endingSubscription";
+@import "pages/subscriptions/formSubscription";
+@import "pages/subscriptions/introductionSubscriptionAction";
+//information
+@import "pages/information";
+//booking
+@import "pages/placeBooking";
+//success
+@import "pages/successAction";
+//publication
+@import "pages/placePublication";
+//auth
+@import "pages/auth/login";
+//errors
+@import "pages/errors/errors";
 //bootstrap
 @import "~bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons.css";
@@ -26,3 +43,11 @@
 @media screen and (max-width: 1200px) {}
 
 @media screen and (max-width: 1400px) {}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}

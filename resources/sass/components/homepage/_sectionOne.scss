@@ -7,16 +7,17 @@
     height: auto;
 }
 
+.section-one a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .section-one button {
     background-color: $grayCustom;
     width: 13rem;
     font-size: 1.4rem;
     padding: 0;
     color: white;
-    a {
-        text-decoration: none;
-        color: inherit;
-    }
 }
 
 .section-one button:hover {

@@ -1,0 +1,91 @@
+.place-booking-page {
+    height: 94%;
+    h1 {
+        color: $greenCustom;
+        font-weight: 700;
+        font-size: 5rem;
+        text-align: center;
+        margin-top: 5rem;
+        margin-bottom: 5rem;
+    }
+    .custom-shadow {
+        box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px 20px;
+        z-index: 10;
+        padding-bottom: 7rem;
+    }
+    .booking-data {
+        height: 100%;
+    }
+    button {
+        margin-top: 3rem;
+        color: $greenCustom;
+        border-radius: 0;
+        width: 12rem;
+        padding: 0.1rem;
+        border: 3px $greenCustom solid;
+        &:hover {
+            background-color: $greenCustom;
+            border: 3px $greenCustom solid;
+        }
+    }
+    label {
+        margin-top: 2rem;
+        font-weight: 700;
+    }
+    form {
+        padding: 4rem;
+    }
+    .custom-inputfields-width {
+        // max-width: 35rem;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .place-booking-page {
+        .col-5 {
+            flex: 0 0 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .place-booking-page {
+        h1 {
+            font-size: 4rem;
+        }
+        form {
+            padding: 1.5rem;
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .place-booking-page {
+        h1 {
+            font-size: 3rem;
+        }
+    }
+}
+
+@media screen and (max-width: 364px) {
+    .place-booking-page {
+        text-align: center;
+        h1 {
+            font-size: 2rem;
+        }
+        button {
+            width: 7rem;
+        }
+        form {
+            padding: 0.3rem;
+        }
+    }
+}
+
+@media only screen and (max-height: 803px) {
+    .place-booking-page {
+        .booking-data {
+            height: auto;
+        }
+    }
+}

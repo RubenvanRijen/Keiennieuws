@@ -1,0 +1,21 @@
+.eindingSubscription {
+    background-color: $yellowCustom;
+    height: 94%;
+    margin-top: -1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    .container {
+        max-width: 55rem;
+        h1 {
+            font-weight: 700;
+            font-size: 3rem;
+        }
+        p {
+            margin-top: 3rem;
+            font-weight: 700;
+            font-size: 1.7rem;
+        }
+    }
+}

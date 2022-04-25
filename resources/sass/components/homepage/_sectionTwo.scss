@@ -20,6 +20,11 @@
     border-color: $greenCustom;
 }
 
+.section-two a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .section-two button {
     color: $greenCustom;
     border-color: $greenCustom;
@@ -28,10 +33,6 @@
     padding: 0;
     font-weight: 600;
     border-width: 0.15rem;
-    a {
-        text-decoration: none;
-        color: inherit;
-    }
 }
 
 .section-two .card {
@@ -207,5 +208,11 @@
     }
     .section-two .bg-image {
         padding: 0.2rem;
+    }
+}
+
+@media only screen and (max-width: 270px) {
+    .section-two .bg-image {
+        padding: 0;
     }
 }

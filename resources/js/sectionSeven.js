@@ -1,5 +1,5 @@
 import Splide from '@splidejs/splide';
-window.onload = () => {
+$(document).ready(function() {
     const options = {
         type: 'slide',
         perPage: 4,
@@ -26,9 +26,9 @@ window.onload = () => {
             }
         }
     }
-    const splide = new Splide('.splide', options);
-
-
-    splide.mount();
-
-};
+    const carousels = document.getElementsByClassName('splide');
+    if (carousels.length > 0) {
+        const splide = new Splide('.splide', options);
+        splide.mount();
+    }
+});

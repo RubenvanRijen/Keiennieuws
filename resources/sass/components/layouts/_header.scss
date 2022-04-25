@@ -2,3 +2,16 @@
     height: 1.5rem;
     width: auto;
 }
+
+.custom-header .special-navlink {
+    margin-left: -0.9rem;
+}
+
+@media screen and (max-width: 992px) {
+    .custom-header .special-navlink {
+        margin-left: 0rem;
+    }
+    .custom-header .special-login {
+        justify-content: center;
+    }
+}

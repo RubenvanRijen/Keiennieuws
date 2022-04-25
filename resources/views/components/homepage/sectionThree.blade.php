@@ -8,7 +8,7 @@
                         <p class="card-text">Download de pdf, hierin staan vragen die jouw mee zullen helpen een leuk verhaal te schrijven over jouw studententijd.</p>
                     </div>
                     <div class="bottom-button">
-                        <button class="btn btn-outline-dark"><a>Download pdf</a></button>
+                        <a> <button class="btn btn-outline-dark">Download pdf</button></a>
                     </div>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                         <p class="card-text"></p>
                     </div>
                     <div class="bottom-button">
-                        <button class="btn btn-outline-dark"><a>Download pdf</a></button>
+                        <a> <button class="btn btn-outline-dark">Download pdf</button></a>
                     </div>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                         </p>
                     </div>
                     <div class="bottom-button">
-                        <button class="btn btn-outline-dark"><a>Download pdf</a></button>
+                        <a> <button class="btn btn-outline-dark">Download pdf</button></a>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                             <p class="card-text">Download de pdf, hierin staan vragen die jouw mee zullen helpen een leuk verhaal te schrijven over jouw studententijd.</p>
                         </div>
                         <div class="bottom-button">
-                            <button class="btn btn-outline-dark"><a>Download pdf</a></button>
+                            <a> <button class="btn btn-outline-dark">Download pdf</button></a>
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                             <p class="card-text"></p>
                         </div>
                         <div class="bottom-button">
-                            <button class="btn btn-outline-dark"><a>Download pdf</a></button>
+                            <a> <button class="btn btn-outline-dark">Download pdf</button></a>
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                             </p>
                         </div>
                         <div class="bottom-button">
-                            <button class="btn btn-outline-dark"><a>Download pdf</a></button>
+                            <a> <button class="btn btn-outline-dark">Download pdf</button></a>
                         </div>
                     </div>
                 </div>

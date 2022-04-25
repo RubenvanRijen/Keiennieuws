@@ -1,0 +1,135 @@
+.homeSubscription {
+    text-align: center;
+}
+
+.homeSubscription .begin-text {
+    margin-top: 5rem;
+    text-align: center;
+    h1 {
+        font-size: 6rem;
+        font-weight: 700;
+    }
+    p {
+        font-weight: 700;
+        font-size: 1.71rem;
+    }
+}
+
+.homeSubscription .row {
+    margin-top: 5rem;
+}
+
+.homeSubscription .col {
+    margin-top: 2rem;
+}
+
+.homeSubscription .title-text {
+    background-color: $yellowCustom;
+    font-weight: 700;
+    padding: 0.4rem;
+    font-size: 1.56rem;
+    width: inherit;
+    border-radius: 0;
+    border: 0;
+    a {
+        text-decoration: none;
+        color: inherit;
+        width: inherit;
+    }
+}
+
+.homeSubscription .card {
+    margin-top: 1.3rem;
+    border-radius: 0px;
+    border-color: black;
+    border-width: 0.3rem;
+    text-align: center;
+    height: 21rem;
+    text-align: center;
+    .card-text {
+        line-height: 1.5;
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 1.1rem;
+        padding: 1.3rem;
+    }
+}
+
+@media screen and (max-width: 1400px) {}
+
+@media screen and (max-width: 1200px) {}
+
+@media screen and (max-width: 992px) {
+    .homeSubscription .col {
+        flex: 1 0 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .homeSubscription .begin-text {
+        h1 {
+            font-size: 4rem;
+        }
+        p {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {}
+
+@media screen and (max-width: 480px) {
+    .homeSubscription .begin-text {
+        h1 {
+            font-size: 3rem;
+        }
+        p {
+            font-size: 1.4rem;
+        }
+    }
+    .homeSubscription .title-text {
+        background-color: $yellowCustom;
+        font-weight: 700;
+        padding: 0.2rem;
+        font-size: 1.15rem;
+        width: inherit;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .homeSubscription .card {
+        .card-text {
+            line-height: 1.5;
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 1rem;
+        }
+    }
+    .homeSubscription .begin-text {
+        h1 {
+            font-size: 2.5rem;
+        }
+        p {
+            font-size: 1.2rem;
+        }
+    }
+}
+
+@media screen and (max-width: 336px) {
+    .homeSubscription .card {
+        .card-text {
+            font-size: 0.9rem;
+        }
+    }
+}
+
+@media screen and (max-width: 336px) {
+    .homeSubscription .begin-text {
+        h1 {
+            font-size: 1.9rem;
+        }
+        p {
+            font-size: 1rem;
+        }
+    }
+}
