@@ -33,12 +33,12 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        $rule = ['required', 'string', 'email', 'max:255', 'unique:users'];
+        $rule = ['required', 'string', 'email', 'max:255', 'unique:users', 'confirmed'];
         $email = $request->input('email');
         $user = User::where('email', $email)->first();
         if ($user !== null && Auth::attempt(['email' => $email, 'password' => 'Test123?'])) {
             $request->session()->regenerate();
-            $rule = ['required', 'string', 'email', 'max:255'];
+            $rule = ['required', 'string', 'email', 'max:255', 'confirmed'];
         }
 
         $request->validate([

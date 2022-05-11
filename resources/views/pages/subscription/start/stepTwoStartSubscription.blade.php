@@ -6,8 +6,9 @@
         <form id="start-subscription" action="{{ url('/subscription/startsteptwo') }}" method="POST">
             @csrf
             @if(session()->has('error'))
-            <div class="alert alert-danger">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 {{ session()->get('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
             <div class="row">
@@ -34,7 +35,7 @@
                     </div>
                     <div class="custom-input" style="margin-top: 6rem;">
                         <label for="firtsname" class="form-label">Voornaam: </label>
-                        <input value="{{ old('firstname') ?? $user->firstname ?? null }}" class="form-control @error('firstname') is-invalid @enderror" type="text" name="firstname" required class="form-control" id="firstname" aria-describedby="voornaam">
+                        <input value="{{ old('firstname') ?? $user->firstname ?? null }}" required class="form-control @error('firstname') is-invalid @enderror" type="text" name="firstname" required class="form-control" id="firstname" aria-describedby="voornaam">
                         @error('firstname')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -43,7 +44,7 @@
                     </div>
                     <div class="custom-input">
                         <label for="lastname" class="form-label">Achternaam: </label>
-                        <input value="{{ old('lastname')?? $user->lastname?? null }}" class="form-control @error('lastname') is-invalid @enderror" type="text" name="lastname" class="form-control" id="lastname" aria-describedby="achternaam">
+                        <input value="{{ old('lastname')?? $user->lastname?? null }}" required class="form-control @error('lastname') is-invalid @enderror" type="text" name="lastname" class="form-control" id="lastname" aria-describedby="achternaam">
                         @error('lastname')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -52,7 +53,7 @@
                     </div>
                     <div class="custom-input">
                         <label for="emailadres" class="form-label">Emailadres: </label>
-                        <input value="{{ old('email')?? $user->email?? null }}" class="form-control @error('email') is-invalid @enderror" type="email" name="email" class="form-control" id="email" aria-describedby="email">
+                        <input value="{{ old('email')?? $user->email?? null }}" required class="form-control @error('email') is-invalid @enderror" type="email" name="email" class="form-control" id="email" aria-describedby="email">
                         @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -66,7 +67,7 @@
                         <div class="col-9">
                             <div class="custom-input" style="margin-top: 1.8rem;">
                                 <label for="street_name" class="form-label">Straat naam: </label>
-                                <input value="{{ old('street_name')?? $user->street_name ?? null}}" class="form-control @error('street_name') is-invalid @enderror" type="text" name="street_name" class="form-control" id="street_name" aria-describedby="straat naam">
+                                <input value="{{ old('street_name')?? $user->street_name ?? null}}" required class="form-control @error('street_name') is-invalid @enderror" type="text" name="street_name" class="form-control" id="street_name" aria-describedby="straat naam">
                                 @error('street_name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -77,7 +78,7 @@
                         <div class="col-3">
                             <div class="custom-input" style="margin-top: 1.8rem;">
                                 <label for="house_number" class="form-label">Huis nr: </label>
-                                <input value="{{ old('house_number')?? $user->house_number ?? null}}" class="form-control @error('house_number') is-invalid @enderror" type="text" name="house_number" class="form-control" id="house_number" aria-describedby="Huisnummer">
+                                <input value="{{ old('house_number')?? $user->house_number ?? null}}" required class="form-control @error('house_number') is-invalid @enderror" type="text" name="house_number" class="form-control" id="house_number" aria-describedby="Huisnummer">
                                 @error('house_number')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -90,7 +91,7 @@
                         <div class="col-9">
                             <div class="custom-input">
                                 <label for="postcode" class="form-label">Postcode: </label>
-                                <input value="{{ old('postcode')?? $user->postcode ?? null}}" class="form-control @error('postcode') is-invalid @enderror" type="text" name="postcode" class="form-control" id="postcode" aria-describedby="postcode">
+                                <input value="{{ old('postcode')?? $user->postcode ?? null}}" required class="form-control @error('postcode') is-invalid @enderror" type="text" name="postcode" class="form-control" id="postcode" aria-describedby="postcode">
                                 @error('postcode')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -101,7 +102,7 @@
                         <div class="col-3">
                             <div class="custom-input">
                                 <label for="city" class="form-label">Plaats: </label>
-                                <input class="form-control @error('city') is-invalid @enderror" type="text" name="city" class="form-control" id="city" value="{{ old('city') ?? $user->city?? 'Megen' }}" aria-describedby="Plaats">
+                                <input class="form-control @error('city') is-invalid @enderror" required type="text" name="city" class="form-control" id="city" value="{{ old('city') ?? $user->city?? 'Megen' }}" aria-describedby="Plaats">
                                 @error('city')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
