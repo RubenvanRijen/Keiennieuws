@@ -19,6 +19,12 @@ use Illuminate\Support\Facades\URL;
 class SubscriptionController extends Controller
 {
 
+    public function standartResponse()
+    {
+        $title = 'DE LINK IS VERLOPEN';
+        $text = 'Beste klant de verificatie link is verlopen. Vul het formulier opnieuw in om een nieuwe link te ontvangen om het process te herstarten';
+        return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
+    }
 
 
     public function checkTokenStart(Request $request)
@@ -34,9 +40,7 @@ class SubscriptionController extends Controller
             }
             return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
         } else {
-            $title = 'DE LINK IS VERLOPEN';
-            $text = 'Beste klant de verificatie link is verlopen. Vul het formulier opnieuw in om een nieuwe link te ontvangen om het process te herstarten';
-            return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
+            $this->standartResponse();
         }
     }
 
@@ -52,9 +56,7 @@ class SubscriptionController extends Controller
             }
             return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
         } else {
-            $title = 'DE LINK IS VERLOPEN';
-            $text = 'Beste klant de verificatie link is verlopen. Vul het formulier opnieuw in om een nieuwe link te ontvangen om het process te herstarten';
-            return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
+            $this->standartResponse();
         }
     }
 
@@ -78,9 +80,7 @@ class SubscriptionController extends Controller
             }
             return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
         } else {
-            $title = 'DE LINK IS VERLOPEN';
-            $text = 'Beste klant de verificatie link is verlopen. Vul het formulier opnieuw in om een nieuwe link te ontvangen om het process te herstarten';
-            return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
+            $this->standartResponse();
         }
     }
     /**
@@ -175,7 +175,6 @@ class SubscriptionController extends Controller
         } else if ($user->subscription()->first() === null) {
             return back()->with('error', 'U heeft geen abonnement op het keiennieuws')->withInput();
         } else {
-            $subscription = Subscription::find($user->subscription()->first()->id);
             $url = URL::temporarySignedRoute('unsubscribe', now()->addDays(1), ['user' => $user->id]);
             Mail::to($user->email)->send(new EndSubscription($url, $user));
         }
@@ -203,7 +202,6 @@ class SubscriptionController extends Controller
 
     public function editAdressForm(Request $request)
     {
-        //{user}{email}{city}{streetname}{postcode}{housenumber}
         $validation =  $request->validate([
             'email' =>  ['required', 'string', 'email', 'max:255'],
             'postcode' => 'required|postal_code:NL,DE,FR,BE',
