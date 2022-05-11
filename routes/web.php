@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SubscriptionController;
+use App\Models\Subscription;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,11 +27,15 @@ Route::get('/subscription/startstepone', [SubscriptionController::class, 'startS
 Route::get('/subscription/startsteptwo',    [SubscriptionController::class, 'startStepTwo']);
 Route::post('/subscription/startsteptwo', [SubscriptionController::class, 'startStepTwoForm']);
 Route::get('/subscription/startfinal', [SubscriptionController::class, 'startFinal']);
+Route::post('/subscription/{subscription}/start/{user}', [SubscriptionController::class, 'checkToken'])->name('subscribe')->middleware('signed');
+Route::get('/subscription/{subscription}/start/{user}', [SubscriptionController::class, 'checkToken']);
 //END
 Route::get('/subscription/endstepone', [SubscriptionController::class, 'endStepOne']);
 Route::get('/subscription/endsteptwo', [SubscriptionController::class, 'endStepTwo']);
 Route::post('/subscription/endsteptwo', [SubscriptionController::class, 'endStepTwoForm']);
 Route::get('/subscription/endfinal', [SubscriptionController::class, 'endFinal']);
+Route::post('/subscription/{unsubscribe}/end/{user}', [SubscriptionController::class, 'checkToken'])->name('unsubscribe')->middleware('signed');
+Route::get('/subscription/{unsubscribe}/end/{user}', [SubscriptionController::class, 'checkToken']);
 //EDIT
 Route::get('/subscription/editstepone', [SubscriptionController::class, 'editStepOne']);
 Route::get('/subscription/editsteptwoadress', [SubscriptionController::class, 'editAdress']);
@@ -39,6 +44,9 @@ Route::get('/subscription/editsteptwoemail', [SubscriptionController::class, 'ed
 Route::post('/subscription/editsteptwoemail', [SubscriptionController::class, 'editEmailForm']);
 Route::get('/subscription/editFinalAdress', [SubscriptionController::class, 'editFinalAdress']);
 Route::get('/subscription/editFinalEmail', [SubscriptionController::class, 'editFinalEmail']);
+Route::post('/subscription/{edit}/editinfo/{user}', [SubscriptionController::class, 'checkToken'])->name('editinfo')->middleware('signed');
+Route::get('/subscription/{edit}/editinfo/{user}', [SubscriptionController::class, 'checkToken']);
+
 
 Route::get('/placebooking', function () {
     return view('/pages/placeBooking');
@@ -51,8 +59,6 @@ Route::post('/placebooking', function () {
 Route::get('/successactionbooking', function () {
     return view('/pages/successAction', ['title' => 'BEDANKT VOOR UW RESERVATIE!', 'text' => 'U zult binnen enkele minuten een bevestigingsmail ontvangen']);
 });
-
-
 
 
 Route::get('/placepublication', function () {
@@ -69,8 +75,8 @@ Route::get('/successactionpublication', function () {
 
 
 
-
-
+Route::post('/subscription/{subscription}/start/{user}', [SubscriptionController::class, 'checkToken'])->name('subscribe')->middleware('signed');
+Route::get('/subscription/{subscription}/start/{user}', [SubscriptionController::class, 'checkToken']);
 
 
 Route::get('/dashboard', function () {

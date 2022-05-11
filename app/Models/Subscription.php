@@ -17,6 +17,7 @@ class Subscription extends Model
      */
     protected $fillable = [
         'endDate',
+        'validTill'
     ];
 
     public function user()
