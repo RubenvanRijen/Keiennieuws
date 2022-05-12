@@ -2,12 +2,87 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\EditEmail;
+use App\Mail\EditResidence;
+use App\Mail\EndSubscription;
+use App\Mail\StartSubscription;
 use App\Models\Subscription;
+use App\Models\Token;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use PDO;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
 
 class SubscriptionController extends Controller
 {
+
+    public function standartResponse()
+    {
+        $title = 'DE LINK IS VERLOPEN';
+        $text = 'Beste klant de verificatie link is verlopen. Vul het formulier opnieuw in om een nieuwe link te ontvangen om het process te herstarten';
+        return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
+    }
+
+
+    public function checkTokenStart(Request $request)
+    {
+        if ($request->hasValidSignature()) {
+            $user = User::find($request->user);
+            $title = 'VOLTOOID!';
+            $text = 'Uw abonnement is geverifieerd en voltooid';
+            if ($user->subscription()->first() === null) {
+                $subscription =  new Subscription();
+                $subscription->user()->associate($user);
+                $subscription->save();
+            }
+            return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
+        } else {
+            $this->standartResponse();
+        }
+    }
+
+    public function checkTokenStop(Request $request)
+    {
+        if ($request->hasValidSignature()) {
+            $user = User::find($request->user);
+            $title = 'VOLTOOID!';
+            $text = 'Uw abonnement is stop gezet';
+            if ($user->subscription()->first() !== null) {
+                $subscription = Subscription::find($user->subscription()->first()->id);
+                $subscription->delete();
+            }
+            return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
+        } else {
+            $this->standartResponse();
+        }
+    }
+
+    public function checkTokenEdit(Request $request)
+    {
+        if ($request->hasValidSignature()) {
+            $user = User::find($request->user);
+            if ($request->city === null) {
+                $user->email = $request->email;
+                $user->save();
+                $title = 'VOLTOOID!';
+                $text = 'Uw email is geverifieerd en aangepast';
+            } else {
+                $user->city = $request->city;
+                $user->postcode = $request->postcode;
+                $user->street_name = $request->street_name;
+                $user->house_number = $request->house_number;
+                $user->save();
+                $title = 'VOLTOOID!';
+                $text = 'Uw woonadres is geverifieerd en aangepast';
+            }
+            return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
+        } else {
+            $this->standartResponse();
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -25,19 +100,49 @@ class SubscriptionController extends Controller
 
     public function startStepTwo()
     {
-        return view('/pages/subscription/start/stepTwoStartSubscription');
+        $user = Auth::user();
+        return view('/pages/subscription/start/stepTwoStartSubscription', ['user' => $user]);
     }
 
     public function startStepTwoForm(Request $request)
     {
-        //TODO doe iets met het form
+        $customer = User::where('email', $request->input('email'))->first();
+        if ($customer !== null && $customer->subscription()->first() !== null) {
+            return back()->with('error', 'U heeft al een abonnement op het Keiennieuws')->withInput();
+        }
+
+        $validation =  $request->validate([
+            'firstname' => ['required', 'string', 'max:255', 'min:3'],
+            'lastname' => ['required', 'string', 'max:255', 'min:3'],
+            'gender' => ['required'],
+            'postcode' => 'required|postal_code:NL,DE,FR,BE',
+            'house_number' => 'required|regex:/[0-9][a-z]?/',
+            'city' => ['required', 'string', 'max:255'],
+            'email' =>  ['required', 'string', 'email', 'max:255'],
+            'street_name' => ['required', 'string', 'max:255', 'min:3'],
+        ]);
+
+        $userData = User::where('email', $validation['email'])->first();
+        $data = [];
+        if ($userData === null && !(Auth::attempt(['email' => $validation['email'], 'password' => 'Test123?']))) {
+            $request->session()->regenerate();
+            $data = ['password' => Hash::make('Test123?')];
+        }
+        $user = User::updateOrCreate(
+            ['email' => $request->email],
+            $data
+        );
+        $user->fill($validation)->save();
+
+        $url = URL::temporarySignedRoute('subscribe', now()->addDays(1), ['user' => $user->id]);
+        Mail::to($user->email)->send(new StartSubscription($url, $user));
         return redirect('/subscription/startfinal');
     }
 
     public function startFinal()
     {
         $title = 'VOLTOOID!';
-        $text = 'Binnen nu en 7 dagen ontvangt u een bevestigingsemail.
+        $text = 'Binnen nu en 1 dag ontvangt u een bevestigingsemail.
             het redactie team wenst u veel lees plezier.';
         return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
     }
@@ -50,11 +155,30 @@ class SubscriptionController extends Controller
 
     public function endStepTwo()
     {
-        return view('/pages/subscription/end/stepTwoEndSubscription');
+        $user = Auth::user();
+        return view('/pages/subscription/end/stepTwoEndSubscription', ['user' => $user]);
     }
 
     public function endStepTwoForm(Request $request)
-    { //TODO doe iets met het form
+    {
+        $validation =  $request->validate([
+            'firstname' => ['required', 'string', 'max:255', 'min:3'],
+            'lastname' => ['required', 'string', 'max:255', 'min:3'],
+            'postcode' => 'required|postal_code:NL,DE,FR,BE',
+            'email' =>  ['required', 'string', 'email', 'max:255'],
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if ($user === null) {
+            return back()->with('error', 'U heeft een verkeer e-mailadres opgegeven')->withInput();
+        } else if ($user->subscription()->first() === null) {
+            return back()->with('error', 'U heeft geen abonnement op het keiennieuws')->withInput();
+        } else {
+            $url = URL::temporarySignedRoute('unsubscribe', now()->addDays(1), ['user' => $user->id]);
+            Mail::to($user->email)->send(new EndSubscription($url, $user));
+        }
+
         return redirect('/subscription/endfinal');
     }
 
@@ -72,23 +196,56 @@ class SubscriptionController extends Controller
 
     public function editAdress()
     {
-        return view('/pages/subscription/edit/stepTwoEditAdressSubscription');
+        $user = Auth::user();
+        return view('/pages/subscription/edit/stepTwoEditAdressSubscription', ['user' => $user]);
     }
 
     public function editAdressForm(Request $request)
     {
-        //TODO doe iets met het form
+        $validation =  $request->validate([
+            'email' =>  ['required', 'string', 'email', 'max:255'],
+            'postcode' => 'required|postal_code:NL,DE,FR,BE',
+            'house_number' => 'required|regex:/[0-9][a-z]?/',
+            'street_name' => ['required', 'string', 'max:255', 'min:3'],
+            'city' => ['required', 'string', 'max:255'],
+        ]);
+        $user = User::where('email', $request->email)->first();
+        if ($user !== null) {
+            $url = URL::temporarySignedRoute('editinfo', now()->addDays(1), [
+                'user' => $user->id,
+                'city' => $request->city,
+                'street_name' => $validation['street_name'],
+                'house_number' => $validation['house_number'],
+                'postcode' => $request->postcode
+            ]);
+            Mail::to($user->email)->send(new EditResidence($url, $user, $request->city, $request->house_number, $request->postcode, $request->street_name));
+        } else {
+            return back()->with('error', 'U heeft een verkeer e-mailadres opgegeven')->withInput();
+        }
         return redirect('/subscription/editFinalAdress');
     }
 
     public function editEmail()
     {
-        return view('/pages/subscription/edit/stepTwoEditEmailSubscription');
+        $user = Auth::user();
+        return view('/pages/subscription/edit/stepTwoEditEmailSubscription', ['user' => $user]);
     }
 
     public function editEmailForm(Request $request)
     {
-        //TODO doe iets met het form
+        //{user}{email}{city}{streetname}{postcode}{housenumber}
+        $validation =  $request->validate([
+            'email' =>  ['required', 'string', 'email', 'max:255'],
+            'confirmation-email' => ['required', 'email', 'max:255', 'min:4', 'different:email']
+        ]);
+        $user = User::where('email', $request->email)->first();
+        if ($user !== null) {
+            $url = URL::temporarySignedRoute('editinfo', now()->addDays(1), ['user' => $user->id, 'email' => $validation['confirmation-email']]);
+            Mail::to($user->email)->send(new EditEmail($url, $user, $validation['confirmation-email']));
+        } else {
+            return back()->with('error', 'U heeft een verkeer e-mailadres opgegeven')->withInput();
+        }
+
         return redirect('/subscription/editFinalEmail');
     }
 
@@ -105,71 +262,5 @@ class SubscriptionController extends Controller
         $title = 'UW BEZORGADRES IS GEWIJZIGD.';
         $text = 'U ontvangt binnen enkele dagen een bevestigingsmail van uw wijziging.';
         return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Subscription  $subscription
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Subscription $subscription)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Subscription  $subscription
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Subscription $subscription)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Subscription  $subscription
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Subscription $subscription)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Subscription  $subscription
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Subscription $subscription)
-    {
-        //
     }
 }

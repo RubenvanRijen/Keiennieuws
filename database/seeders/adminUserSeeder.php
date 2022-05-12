@@ -37,7 +37,6 @@ class adminUserSeeder extends Seeder
         $userOne->assignRole('admin');
 
         $subscriptionOne =  new Subscription();
-        $subscriptionOne->endDate = Carbon::createFromDate(2200, 01, 01)->format('Y-m-d H:i:s');
         $subscriptionOne->user()->associate($userOne);
         $subscriptionOne->save();
 
@@ -59,7 +58,6 @@ class adminUserSeeder extends Seeder
         $userTwo->assignRole('admin');
 
         $subscriptionTwo =  new Subscription();
-        $subscriptionTwo->endDate = Carbon::createFromDate(2300, 01, 01)->format('Y-m-d H:i:s');
         $subscriptionTwo->user()->associate($userTwo);
         $subscriptionTwo->save();
     }

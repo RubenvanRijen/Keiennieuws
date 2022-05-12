@@ -33,29 +33,39 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        $rule = ['required', 'string', 'email', 'max:255', 'unique:users', 'confirmed'];
+        $email = $request->input('email');
+        $user = User::where('email', $email)->first();
+        if ($user !== null && Auth::attempt(['email' => $email, 'password' => 'Test123?'])) {
+            $request->session()->regenerate();
+            $rule = ['required', 'string', 'email', 'max:255', 'confirmed'];
+        }
 
         $request->validate([
-            'firstname' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
-
+            'firstname' => ['required', 'string', 'max:255', 'min:3'],
+            'lastname' => ['required', 'string', 'max:255', 'min:3'],
             'postcode' => 'required|postal_code:NL,DE,FR,BE',
             'house_number' => 'required|regex:/[0-9][a-z]?/',
-            'city' => ['required', 'string', 'max:255'],
-            'street_name' => ['required', 'string', 'max:255'],
-
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'city' => ['required', 'string', 'max:255', 'min:3'],
+            'street_name' => ['required', 'string', 'max:255', 'min:3'],
+            'email' => $rule,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-        $user = User::create([
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
-            'postcode' => $request->postcode,
-            'house_number' => $request->house_number,
-            'city' => $request->city,
-            'street_name' => $request->street_name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+
+        $user = User::updateOrCreate(
+            ['email' => $request->email],
+            [
+                'firstname' => $request->firstname,
+                'lastname' => $request->lastname,
+                'postcode' => $request->postcode,
+                'house_number' => $request->house_number,
+                'city' => $request->city,
+                'gender' => 'Dhr/Mevr',
+                'street_name' => $request->street_name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]
+        );
 
         $user->assignRole('user');
 
