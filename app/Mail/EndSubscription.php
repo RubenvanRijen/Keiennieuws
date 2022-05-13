@@ -33,6 +33,6 @@ class EndSubscription extends Mailable
     public function build()
     {
         return $this->from('knstadskrant@gmail.com', 'knstadskrant')
-            ->view('emails.endSubscription');
+            ->view('emails.endSubscription')->subject('Abonnement eindigen');
     }
 }

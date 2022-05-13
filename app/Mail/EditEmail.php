@@ -36,6 +36,6 @@ class EditEmail extends Mailable
     public function build()
     {
         return $this->from('knstadskrant@gmail.com', 'knstadskrant')
-            ->view('emails.editEmail');
+            ->view('emails.editEmail')->subject('Email aanpassen');
     }
 }

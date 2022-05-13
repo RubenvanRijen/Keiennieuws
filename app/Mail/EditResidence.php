@@ -42,6 +42,6 @@ class EditResidence extends Mailable
     public function build()
     {
         return $this->from('knstadskrant@gmail.com', 'knstadskrant')
-            ->view('emails.editResidence');
+            ->view('emails.editResidence')->subject('Adress confirmatie');
     }
 }

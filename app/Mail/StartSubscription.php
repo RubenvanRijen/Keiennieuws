@@ -34,6 +34,6 @@ class StartSubscription extends Mailable
     public function build()
     {
         return $this->from('knstadskrant@gmail.com', 'knstadskrant')
-            ->view('emails.startSubscription');
+            ->view('emails.startSubscription')->subject('Abonnement starten');
     }
 }

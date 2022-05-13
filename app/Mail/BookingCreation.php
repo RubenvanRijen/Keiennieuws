@@ -34,6 +34,6 @@ class BookingCreation extends Mailable
     public function build()
     {
         return $this->from('knstadskrant@gmail.com', 'knstadskrant')
-            ->view('emails.placeBooking');
+            ->view('emails.placeBooking')->subject('Reservering confirmatie');
     }
 }
