@@ -63,6 +63,7 @@ class BookingController extends Controller
             $editionDB = Edition::find($edition);
             $editionDB->bookings()->attach($booking);
         }
+        return redirect('/successactionbooking');
     }
 
     public function successBooking()
