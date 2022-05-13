@@ -15,8 +15,6 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('edition_id')->constrained('editions')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->nullable();
             $table->string('title');
             $table->enum('type', ['advertisement', 'column', 'newsFeed', 'eventPoster', 'knowledge', 'article', 'sponsorship']);
             $table->enum('size', ['A4', 'A5', 'A6', 'A7']);

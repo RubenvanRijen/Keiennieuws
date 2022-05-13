@@ -16,16 +16,18 @@
     .booking-data {
         height: 100%;
     }
-    button {
-        margin-top: 3rem;
-        color: $greenCustom;
-        border-radius: 0;
-        width: 12rem;
-        padding: 0.1rem;
-        border: 3px $greenCustom solid;
-        &:hover {
-            background-color: $greenCustom;
+    .row {
+        button {
+            margin-top: 3rem;
+            color: $greenCustom;
+            border-radius: 0;
+            width: 12rem;
+            padding: 0.1rem;
             border: 3px $greenCustom solid;
+            &:hover {
+                background-color: $greenCustom;
+                border: 3px $greenCustom solid;
+            }
         }
     }
     label {
@@ -35,15 +37,26 @@
     form {
         padding: 4rem;
     }
-    .custom-inputfields-width {
-        // max-width: 35rem;
+    .custom-inputfields-width .editions-select {
+        label {
+            margin-top: 0 !important;
+        }
+        .placeholder {
+            color: white;
+        }
+        .multiselect-dropdown-list-wrapper {
+            width: 100% !important;
+        }
+        .multiselect-dropdown {
+            width: 100% !important;
+        }
     }
 }
 
 @media screen and (max-width: 992px) {
     .place-booking-page {
-        .col-5 {
-            flex: 0 0 100%;
+        .col {
+            flex: 0 0 100% !important;
         }
     }
 }

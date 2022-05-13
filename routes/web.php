@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SubscriptionController;
 use App\Models\Subscription;
@@ -48,17 +49,9 @@ Route::post('/subscription/editinfo/{user}{email}{city}{street_name}{postcode}{h
 Route::get('/subscription/editinfo/{user}', [SubscriptionController::class, 'checkTokenEdit']);
 
 
-Route::get('/placebooking', function () {
-    return view('/pages/placeBooking');
-});
-
-Route::post('/placebooking', function () {
-    return redirect('/successactionbooking');
-});
-
-Route::get('/successactionbooking', function () {
-    return view('/pages/successAction', ['title' => 'BEDANKT VOOR UW RESERVATIE!', 'text' => 'U zult binnen enkele minuten een bevestigingsmail ontvangen']);
-});
+Route::get('/placebooking', [BookingController::class, 'indexBooking']);
+Route::post('/placebooking', [BookingController::class, 'createBooking']);
+Route::get('/successactionbooking', [BookingController::class, 'successBooking']);
 
 
 Route::get('/placepublication', function () {

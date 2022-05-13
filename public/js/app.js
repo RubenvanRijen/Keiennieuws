@@ -3356,6 +3356,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 }
 
 // packages/alpinejs/src/evaluator.js
+var shouldAutoEvaluateFunctions = true;
+function dontAutoEvaluateFunctions(callback) {
+  let cache = shouldAutoEvaluateFunctions;
+  shouldAutoEvaluateFunctions = false;
+  callback();
+  shouldAutoEvaluateFunctions = cache;
+}
 function evaluate(el, expression, extras = {}) {
   let result;
   evaluateLater(el, expression)((value) => result = value, extras);
@@ -3426,7 +3433,7 @@ function generateEvaluatorFromString(dataStack, expression, el) {
   };
 }
 function runIfTypeOfFunction(receiver, value, scope2, params, el) {
-  if (typeof value === "function") {
+  if (shouldAutoEvaluateFunctions && typeof value === "function") {
     let result = value.apply(scope2, params);
     if (result instanceof Promise) {
       result.then((i) => runIfTypeOfFunction(receiver, i, scope2, params)).catch((error2) => handleError(error2, el, value));
@@ -3560,6 +3567,7 @@ var directiveOrder = [
   "bind",
   "init",
   "for",
+  "mask",
   "model",
   "modelable",
   "transition",
@@ -3588,11 +3596,17 @@ function dispatch(el, name, detail = {}) {
 // packages/alpinejs/src/nextTick.js
 var tickStack = [];
 var isHolding = false;
-function nextTick(callback) {
-  tickStack.push(callback);
+function nextTick(callback = () => {
+}) {
   queueMicrotask(() => {
     isHolding || setTimeout(() => {
       releaseNextTicks();
+    });
+  });
+  return new Promise((res) => {
+    tickStack.push(() => {
+      callback();
+      res();
     });
   });
 }
@@ -4342,8 +4356,9 @@ var Alpine = {
   get raw() {
     return raw;
   },
-  version: "3.9.6",
+  version: "3.10.0",
   flushAndStopDeferringMutations,
+  dontAutoEvaluateFunctions,
   disableEffectScheduling,
   setReactivityEngine,
   closestDataStack,
@@ -4414,8 +4429,8 @@ var slotFlagsText = {
 };
 var specialBooleanAttrs = `itemscope,allowfullscreen,formnovalidate,ismap,nomodule,novalidate,readonly`;
 var isBooleanAttr2 = /* @__PURE__ */ makeMap(specialBooleanAttrs + `,async,autofocus,autoplay,controls,default,defer,disabled,hidden,loop,open,required,reversed,scoped,seamless,checked,muted,multiple,selected`);
-var EMPTY_OBJ =  true ? Object.freeze({}) : 0;
-var EMPTY_ARR =  true ? Object.freeze([]) : 0;
+var EMPTY_OBJ =  false ? 0 : {};
+var EMPTY_ARR =  false ? 0 : [];
 var extend = Object.assign;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 var hasOwn = (val, key) => hasOwnProperty.call(val, key);
@@ -4451,8 +4466,8 @@ var hasChanged = (value, oldValue) => value !== oldValue && (value === value || 
 var targetMap = new WeakMap();
 var effectStack = [];
 var activeEffect;
-var ITERATE_KEY = Symbol( true ? "iterate" : 0);
-var MAP_KEY_ITERATE_KEY = Symbol( true ? "Map key iterate" : 0);
+var ITERATE_KEY = Symbol( false ? 0 : "");
+var MAP_KEY_ITERATE_KEY = Symbol( false ? 0 : "");
 function isEffect(fn) {
   return fn && fn._isEffect === true;
 }
@@ -4542,14 +4557,7 @@ function track(target, type, key) {
   if (!dep.has(activeEffect)) {
     dep.add(activeEffect);
     activeEffect.deps.push(dep);
-    if (activeEffect.options.onTrack) {
-      activeEffect.options.onTrack({
-        effect: activeEffect,
-        target,
-        type,
-        key
-      });
-    }
+    if (false) {}
   }
 }
 function trigger(target, type, key, newValue, oldValue, oldTarget) {
@@ -4606,17 +4614,7 @@ function trigger(target, type, key, newValue, oldValue, oldTarget) {
     }
   }
   const run = (effect3) => {
-    if (effect3.options.onTrigger) {
-      effect3.options.onTrigger({
-        effect: effect3,
-        target,
-        key,
-        type,
-        newValue,
-        oldValue,
-        oldTarget
-      });
-    }
+    if (false) {}
     if (effect3.options.scheduler) {
       effect3.options.scheduler(effect3);
     } else {
@@ -4744,15 +4742,11 @@ var mutableHandlers = {
 var readonlyHandlers = {
   get: readonlyGet,
   set(target, key) {
-    if (true) {
-      console.warn(`Set operation on key "${String(key)}" failed: target is readonly.`, target);
-    }
+    if (false) {}
     return true;
   },
   deleteProperty(target, key) {
-    if (true) {
-      console.warn(`Delete operation on key "${String(key)}" failed: target is readonly.`, target);
-    }
+    if (false) {}
     return true;
   }
 };
@@ -4819,9 +4813,7 @@ function set$1(key, value) {
   if (!hadKey) {
     key = toRaw(key);
     hadKey = has2.call(target, key);
-  } else if (true) {
-    checkIdentityKeys(target, has2, key);
-  }
+  } else if (false) {}
   const oldValue = get3.call(target, key);
   target.set(key, value);
   if (!hadKey) {
@@ -4838,9 +4830,7 @@ function deleteEntry(key) {
   if (!hadKey) {
     key = toRaw(key);
     hadKey = has2.call(target, key);
-  } else if (true) {
-    checkIdentityKeys(target, has2, key);
-  }
+  } else if (false) {}
   const oldValue = get3 ? get3.call(target, key) : void 0;
   const result = target.delete(key);
   if (hadKey) {
@@ -4851,7 +4841,7 @@ function deleteEntry(key) {
 function clear() {
   const target = toRaw(this);
   const hadItems = target.size !== 0;
-  const oldTarget =  true ? isMap(target) ? new Map(target) : new Set(target) : 0;
+  const oldTarget =  false ? 0 : void 0;
   const result = target.clear();
   if (hadItems) {
     trigger(target, "clear", void 0, void 0, oldTarget);
@@ -4896,10 +4886,7 @@ function createIterableMethod(method, isReadonly, isShallow) {
 }
 function createReadonlyMethod(type) {
   return function(...args) {
-    if (true) {
-      const key = args[0] ? `on key "${args[0]}" ` : ``;
-      console.warn(`${capitalize(type)} operation ${key}failed: target is readonly.`, toRaw(this));
-    }
+    if (false) {}
     return type === "delete" ? false : this;
   };
 }
@@ -4995,13 +4982,6 @@ var readonlyCollectionHandlers = {
 var shallowReadonlyCollectionHandlers = {
   get: createInstrumentationGetter(true, true)
 };
-function checkIdentityKeys(target, has2, key) {
-  const rawKey = toRaw(key);
-  if (rawKey !== key && has2.call(target, rawKey)) {
-    const type = toRawType(target);
-    console.warn(`Reactive ${type} contains both the raw and reactive versions of the same object${type === `Map` ? ` as keys` : ``}, which can lead to inconsistencies. Avoid differentiating between the raw and reactive versions of an object and only use the reactive version if possible.`);
-  }
-}
 var reactiveMap = new WeakMap();
 var shallowReactiveMap = new WeakMap();
 var readonlyMap = new WeakMap();
@@ -5034,9 +5014,7 @@ function readonly(target) {
 }
 function createReactiveObject(target, isReadonly, baseHandlers, collectionHandlers, proxyMap) {
   if (!isObject(target)) {
-    if (true) {
-      console.warn(`value cannot be made reactive: ${String(target)}`);
-    }
+    if (false) {}
     return target;
   }
   if (target["__v_raw"] && !(isReadonly && target["__v_isReactive"])) {
@@ -5148,7 +5126,7 @@ magic("el", (el) => el);
 warnMissingPluginMagic("Focus", "focus", "focus");
 warnMissingPluginMagic("Persist", "persist", "persist");
 function warnMissingPluginMagic(name, magicName, slug) {
-  magic(magicName, (el) => warn(`You can't use [$${directiveName}] without first installing the "${name}" plugin here: https://alpine.dev/plugins/${slug}`, el));
+  magic(magicName, (el) => warn(`You can't use [$${directiveName}] without first installing the "${name}" plugin here: https://alpinejs.dev/plugins/${slug}`, el));
 }
 
 // packages/alpinejs/src/directives/x-modelable.js
@@ -5837,8 +5815,9 @@ directive("on", skipDuringClone((el, {value, modifiers, expression}, {cleanup: c
 warnMissingPluginDirective("Collapse", "collapse", "collapse");
 warnMissingPluginDirective("Intersect", "intersect", "intersect");
 warnMissingPluginDirective("Focus", "trap", "focus");
+warnMissingPluginDirective("Mask", "mask", "mask");
 function warnMissingPluginDirective(name, directiveName2, slug) {
-  directive(directiveName2, (el) => warn(`You can't use [x-${directiveName2}] without first installing the "${name}" plugin here: https://alpine.dev/plugins/${slug}`, el));
+  directive(directiveName2, (el) => warn(`You can't use [x-${directiveName2}] without first installing the "${name}" plugin here: https://alpinejs.dev/plugins/${slug}`, el));
 }
 
 // packages/alpinejs/src/index.js
@@ -8033,6 +8012,8 @@ __webpack_require__(/*! ./switchPage */ "./resources/js/switchPage.js");
 __webpack_require__(/*! ./startStepTwo */ "./resources/js/startStepTwo.js");
 
 __webpack_require__(/*! ./placePublication */ "./resources/js/placePublication.js");
+
+__webpack_require__(/*! ./multiselect-dropdown */ "./resources/js/multiselect-dropdown.js");
 
 window.onload = function () {
   if (window.location.pathname === '/information') {
@@ -15445,6 +15426,218 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/multiselect-dropdown.js":
+/*!**********************************************!*\
+  !*** ./resources/js/multiselect-dropdown.js ***!
+  \**********************************************/
+/***/ (() => {
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var style = document.createElement('style');
+style.setAttribute("id", "multiselect_dropdown_styles");
+style.innerHTML = "\n.multiselect-dropdown{\n  display: inline-block;\n  padding: 2px 5px 0px 5px;\n  border-radius: 4px;\n  border: solid 1px #ced4da;\n  background-color: white;\n  position: relative;\n  background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e\");\n  background-repeat: no-repeat;\n  background-position: right .75rem center;\n  background-size: 16px 12px;\n}\n.multiselect-dropdown span.optext, .multiselect-dropdown span.placeholder{\n  margin-right:0.5em; \n  margin-bottom:2px;\n  padding:1px 0; \n  border-radius: 4px; \n  display:inline-block;\n}\n.multiselect-dropdown span.optext{\n  background-color:lightgray;\n  padding:1px 0.75em; \n}\n.multiselect-dropdown span.optext .optdel {\n  float: right;\n  margin: 0 -6px 1px 5px;\n  font-size: 0.7em;\n  margin-top: 2px;\n  cursor: pointer;\n  color: #666;\n}\n.multiselect-dropdown span.optext .optdel:hover { color: #c66;}\n.multiselect-dropdown span.placeholder{\n  color:#ced4da;\n}\n.multiselect-dropdown-list-wrapper{\n  box-shadow: gray 0 3px 8px;\n  z-index: 100;\n  padding:2px;\n  border-radius: 4px;\n  border: solid 1px #ced4da;\n  display: none;\n  margin: -1px;\n  position: absolute;\n  top:0;\n  left: 0;\n  right: 0;\n  background: white;\n}\n.multiselect-dropdown-list-wrapper .multiselect-dropdown-search{\n  margin-bottom:5px;\n}\n.multiselect-dropdown-list{\n  padding:2px;\n  height: 15rem;\n  overflow-y:auto;\n  overflow-x: hidden;\n}\n.multiselect-dropdown-list::-webkit-scrollbar {\n  width: 6px;\n}\n.multiselect-dropdown-list::-webkit-scrollbar-thumb {\n  background-color: #bec4ca;\n  border-radius:3px;\n}\n\n.multiselect-dropdown-list div{\n  padding: 5px;\n}\n.multiselect-dropdown-list input{\n  height: 1.15em;\n  width: 1.15em;\n  margin-right: 0.35em;  \n}\n.multiselect-dropdown-list div.checked{\n}\n.multiselect-dropdown-list div:hover{\n  background-color: #ced4da;\n}\n.multiselect-dropdown span.maxselected {width:100%;}\n.multiselect-dropdown-all-selector {border-bottom:solid 1px #999;}\n";
+document.head.appendChild(style);
+
+function MultiselectDropdown(options) {
+  var config = _objectSpread({
+    search: true,
+    height: '15rem',
+    placeholder: 'select',
+    txtSelected: 'selected',
+    txtAll: 'All',
+    txtRemove: 'Remove',
+    txtSearch: 'search'
+  }, options);
+
+  function newEl(tag, attrs) {
+    var e = document.createElement(tag);
+    if (attrs !== undefined) Object.keys(attrs).forEach(function (k) {
+      if (k === 'class') {
+        Array.isArray(attrs[k]) ? attrs[k].forEach(function (o) {
+          return o !== '' ? e.classList.add(o) : 0;
+        }) : attrs[k] !== '' ? e.classList.add(attrs[k]) : 0;
+      } else if (k === 'style') {
+        Object.keys(attrs[k]).forEach(function (ks) {
+          e.style[ks] = attrs[k][ks];
+        });
+      } else if (k === 'text') {
+        attrs[k] === '' ? e.innerHTML = '&nbsp;' : e.innerText = attrs[k];
+      } else e[k] = attrs[k];
+    });
+    return e;
+  }
+
+  document.querySelectorAll("select[multiple]").forEach(function (el, k) {
+    var _config$style$width, _config$style, _config$style$padding, _config$style2, _config$searchInput$c, _config$searchInput, _el$attributes$multis;
+
+    var div = newEl('div', {
+      "class": 'multiselect-dropdown',
+      style: {
+        width: (_config$style$width = (_config$style = config.style) === null || _config$style === void 0 ? void 0 : _config$style.width) !== null && _config$style$width !== void 0 ? _config$style$width : el.clientWidth + 'px',
+        padding: (_config$style$padding = (_config$style2 = config.style) === null || _config$style2 === void 0 ? void 0 : _config$style2.padding) !== null && _config$style$padding !== void 0 ? _config$style$padding : ''
+      }
+    });
+    el.style.display = 'none';
+    el.parentNode.insertBefore(div, el.nextSibling);
+    var listWrap = newEl('div', {
+      "class": 'multiselect-dropdown-list-wrapper'
+    });
+    var list = newEl('div', {
+      "class": 'multiselect-dropdown-list',
+      style: {
+        height: config.height
+      }
+    });
+    var search = newEl('input', {
+      "class": ['multiselect-dropdown-search'].concat([(_config$searchInput$c = (_config$searchInput = config.searchInput) === null || _config$searchInput === void 0 ? void 0 : _config$searchInput["class"]) !== null && _config$searchInput$c !== void 0 ? _config$searchInput$c : 'form-control']),
+      style: {
+        width: '100%',
+        display: ((_el$attributes$multis = el.attributes['multiselect-search']) === null || _el$attributes$multis === void 0 ? void 0 : _el$attributes$multis.value) === 'true' ? 'block' : 'none'
+      },
+      placeholder: config.txtSearch
+    });
+    listWrap.appendChild(search);
+    div.appendChild(listWrap);
+    listWrap.appendChild(list);
+
+    el.loadOptions = function () {
+      var _el$attributes$multis2;
+
+      list.innerHTML = '';
+
+      if (((_el$attributes$multis2 = el.attributes['multiselect-select-all']) === null || _el$attributes$multis2 === void 0 ? void 0 : _el$attributes$multis2.value) == 'true') {
+        var op = newEl('div', {
+          "class": 'multiselect-dropdown-all-selector'
+        });
+        var ic = newEl('input', {
+          type: 'checkbox'
+        });
+        op.appendChild(ic);
+        op.appendChild(newEl('label', {
+          text: config.txtAll
+        }));
+        op.addEventListener('click', function () {
+          op.classList.toggle('checked');
+          op.querySelector("input").checked = !op.querySelector("input").checked;
+          var ch = op.querySelector("input").checked;
+          list.querySelectorAll(":scope > div:not(.multiselect-dropdown-all-selector)").forEach(function (i) {
+            if (i.style.display !== 'none') {
+              i.querySelector("input").checked = ch;
+              i.optEl.selected = ch;
+            }
+          });
+          el.dispatchEvent(new Event('change'));
+        });
+        ic.addEventListener('click', function (ev) {
+          ic.checked = !ic.checked;
+        });
+        list.appendChild(op);
+      }
+
+      Array.from(el.options).map(function (o) {
+        var op = newEl('div', {
+          "class": o.selected ? 'checked' : '',
+          optEl: o
+        });
+        var ic = newEl('input', {
+          type: 'checkbox',
+          checked: o.selected
+        });
+        op.appendChild(ic);
+        op.appendChild(newEl('label', {
+          text: o.text
+        }));
+        op.addEventListener('click', function () {
+          op.classList.toggle('checked');
+          op.querySelector("input").checked = !op.querySelector("input").checked;
+          op.optEl.selected = !!!op.optEl.selected;
+          el.dispatchEvent(new Event('change'));
+        });
+        ic.addEventListener('click', function (ev) {
+          ic.checked = !ic.checked;
+        });
+        o.listitemEl = op;
+        list.appendChild(op);
+      });
+      div.listEl = listWrap;
+
+      div.refresh = function () {
+        var _el$attributes$multis3, _el$attributes$multis4, _el$attributes$placeh, _el$attributes$placeh2;
+
+        div.querySelectorAll('span.optext, span.placeholder').forEach(function (t) {
+          return div.removeChild(t);
+        });
+        var sels = Array.from(el.selectedOptions);
+
+        if (sels.length > ((_el$attributes$multis3 = (_el$attributes$multis4 = el.attributes['multiselect-max-items']) === null || _el$attributes$multis4 === void 0 ? void 0 : _el$attributes$multis4.value) !== null && _el$attributes$multis3 !== void 0 ? _el$attributes$multis3 : 5)) {
+          div.appendChild(newEl('span', {
+            "class": ['optext', 'maxselected'],
+            text: sels.length + ' ' + config.txtSelected
+          }));
+        } else {
+          sels.map(function (x) {
+            var _el$attributes$multis5;
+
+            var c = newEl('span', {
+              "class": 'optext',
+              text: x.text,
+              srcOption: x
+            });
+            if (((_el$attributes$multis5 = el.attributes['multiselect-hide-x']) === null || _el$attributes$multis5 === void 0 ? void 0 : _el$attributes$multis5.value) !== 'true') c.appendChild(newEl('span', {
+              "class": 'optdel',
+              text: '🗙',
+              title: config.txtRemove,
+              onclick: function onclick(ev) {
+                c.srcOption.listitemEl.dispatchEvent(new Event('click'));
+                div.refresh();
+                ev.stopPropagation();
+              }
+            }));
+            div.appendChild(c);
+          });
+        }
+
+        if (0 == el.selectedOptions.length) div.appendChild(newEl('span', {
+          "class": 'placeholder',
+          text: (_el$attributes$placeh = (_el$attributes$placeh2 = el.attributes['placeholder']) === null || _el$attributes$placeh2 === void 0 ? void 0 : _el$attributes$placeh2.value) !== null && _el$attributes$placeh !== void 0 ? _el$attributes$placeh : config.placeholder
+        }));
+      };
+
+      div.refresh();
+    };
+
+    el.loadOptions();
+    search.addEventListener('input', function () {
+      list.querySelectorAll(":scope div:not(.multiselect-dropdown-all-selector)").forEach(function (d) {
+        var txt = d.querySelector("label").innerText.toUpperCase();
+        d.style.display = txt.includes(search.value.toUpperCase()) ? 'block' : 'none';
+      });
+    });
+    div.addEventListener('click', function () {
+      div.listEl.style.display = 'block';
+      search.focus();
+      search.select();
+    });
+    document.addEventListener('click', function (event) {
+      if (!div.contains(event.target)) {
+        listWrap.style.display = 'none';
+        div.refresh();
+      }
+    });
+  });
+}
+
+window.addEventListener('load', function () {
+  MultiselectDropdown(window.MultiselectDropdownOptions);
+});
 
 /***/ }),
 
