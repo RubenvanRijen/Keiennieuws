@@ -54,7 +54,7 @@ class BookingController extends Controller
         if ($found != null) {
             return back()->with('error', 'U heeft al een reservering geplaats in de ' . $found->title . ' editie')->withInput();
         } else if ($fullEdition != null) {
-            return back()->with('error', 'hij zit vol')->withInput();
+            return back()->with('error', 'U heeft al een reservering geplaats in de ' . $found->title . ' editie die helaas vol zit')->withInput();
         }
         $booking = new Booking();
         $booking->fill($validation);
