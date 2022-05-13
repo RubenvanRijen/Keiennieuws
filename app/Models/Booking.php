@@ -58,4 +58,9 @@ class Booking extends Model
     {
         return $this->belongsToMany(Edition::class, 'editions_bookings');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

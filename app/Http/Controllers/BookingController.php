@@ -90,11 +90,13 @@ class BookingController extends Controller
             $booking->type = $request->type;
             $booking->email = $request->email;
             $booking->title = $request->title;
+            $booking->user_id = $request->user;
             $booking->save();
             foreach ($editions  as $edition) {
                 $editionDB = Edition::find($edition);
                 $editionDB->bookings()->attach($booking);
             }
+            $user = User::find($request->user);
             $title = 'BEDANKT VOOR UW RESERVATIE!';
             $text = 'Beste klant uw reservering is geplaatst en ontvangt zo spoedig mogelijk een link voor de publicatie';
             return view('/pages/successAction', ['title' => $title, 'text' => $text]);
