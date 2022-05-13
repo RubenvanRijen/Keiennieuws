@@ -45,14 +45,16 @@ Route::get('/subscription/editsteptwoemail', [SubscriptionController::class, 'ed
 Route::post('/subscription/editsteptwoemail', [SubscriptionController::class, 'editEmailForm']);
 Route::get('/subscription/editFinalAdress', [SubscriptionController::class, 'editFinalAdress']);
 Route::get('/subscription/editFinalEmail', [SubscriptionController::class, 'editFinalEmail']);
-Route::post('/subscription/editinfo/{user}{email}{city}{street_name}{postcode}{house_number}')->name('editinfo')->middleware('signed');
-Route::get('/subscription/editinfo/{user}', [SubscriptionController::class, 'checkTokenEdit']);
-
+Route::post('/subscription/editAdress/{user}/{email}/{city}/{street_name}/{postcode}/{house_number}')->name('editinfoAdress')->middleware('signed');
+Route::get('/subscription/editAdress/{user}/{email}/{city}/{street_name}/{postcode}/{house_number}', [SubscriptionController::class, 'checkTokenEditAdress']);
+Route::post('/subscription/editEmail/{user}/{email}')->name('editinfoEmail')->middleware('signed');
+Route::get('/subscription/editEmail/{user}/{email}', [SubscriptionController::class, 'checkTokenEditEmail']);
 
 Route::get('/placebooking', [BookingController::class, 'indexBooking']);
 Route::post('/placebooking', [BookingController::class, 'createBooking']);
 Route::get('/successactionbooking', [BookingController::class, 'successBooking']);
-
+Route::post('/placedbooking/success/{user}/{email}/{title}/{size}/{type}/{editions}')->name('bookingsuccess')->middleware('signed');
+Route::get('/placedbooking/success/{user}/{email}/{title}/{size}/{type}/{editions}', [BookingController::class, 'checkTokenBooking']);
 
 Route::get('/placepublication', function () {
     return view('/pages/placePublication');

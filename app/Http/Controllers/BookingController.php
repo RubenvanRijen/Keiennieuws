@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BookingCreation;
 use App\Models\Booking;
 use App\Models\Edition;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Hash;
 
 class BookingController extends Controller
 {
@@ -56,14 +61,48 @@ class BookingController extends Controller
         } else if ($fullEdition != null) {
             return back()->with('error', 'U heeft al een reservering geplaats in de ' . $found->title . ' editie die helaas vol zit')->withInput();
         }
-        $booking = new Booking();
-        $booking->fill($validation);
-        $booking->save();
-        foreach ($validation['edition'] as $edition) {
-            $editionDB = Edition::find($edition);
-            $editionDB->bookings()->attach($booking);
+
+        $user = User::where('email', $validation['email'])->first();
+        if ($user == null) {
+            $user = new User();
+            $user->email = $validation['email'];
+            $user->password = Hash::make('Test123?');
+            $user->save();
         }
+        $url = URL::temporarySignedRoute('bookingsuccess', now()->addYear(2), [
+            'user' => $user->id,
+            'email' => $validation['email'],
+            'size' => $validation['size'],
+            'type' => $validation['type'],
+            'title' => $validation['title'],
+            'editions' => urlencode(serialize($validation['edition'])),
+        ]);
+        Mail::to($user->email)->send(new BookingCreation($url, $user));
         return redirect('/successactionbooking');
+    }
+
+    public function checkTokenBooking(Request $request)
+    {
+        if ($request->hasValidSignature()) {
+            $editions = unserialize(urldecode($request->editions));
+            $booking = new Booking();
+            $booking->size = $request->size;
+            $booking->type = $request->type;
+            $booking->email = $request->email;
+            $booking->title = $request->title;
+            $booking->save();
+            foreach ($editions  as $edition) {
+                $editionDB = Edition::find($edition);
+                $editionDB->bookings()->attach($booking);
+            }
+            $title = 'BEDANKT VOOR UW RESERVATIE!';
+            $text = 'Beste klant uw reservering is geplaatst en ontvangt zo spoedig mogelijk een link voor de publicatie';
+            return view('/pages/successAction', ['title' => $title, 'text' => $text]);
+        } else {
+            $title = 'DE LINK IS VERLOPEN';
+            $text = 'Beste klant de verificatie link is verlopen. Vul het formulier opnieuw in om een nieuwe link te ontvangen om het process te herstarten';
+            return view('/pages/successAction', ['title' => $title, 'text' => $text]);
+        }
     }
 
     public function successBooking()
