@@ -1,8 +1,9 @@
 .formSubscription {
     display: flex;
-    justify-content: center;
+    justify-content: center !important;
     align-items: center;
-    height: 94%;
+    align-self: center;
+    height: 100%;
     label {
         font-weight: 700;
     }

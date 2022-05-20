@@ -44,10 +44,9 @@
 
 @media screen and (max-width: 1400px) {}
 
-html {
-    height: 100%;
-}
-
+html,
 body {
+    margin: 0;
+    padding: 0;
     height: 100%;
 }
