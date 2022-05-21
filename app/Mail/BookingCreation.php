@@ -2,16 +2,17 @@
 
 namespace App\Mail;
 
-use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class EndSubscription extends Mailable
+class BookingCreation extends Mailable
 {
     use Queueable, SerializesModels;
+
+
     public $url;
     public $user;
     /**
@@ -33,6 +34,6 @@ class EndSubscription extends Mailable
     public function build()
     {
         return $this->from('knstadskrant@gmail.com', 'knstadskrant')
-            ->view('emails.endSubscription')->subject('Abonnement eindigen');
+            ->view('emails.placeBooking')->subject('Reservering confirmatie');
     }
 }

@@ -60,24 +60,31 @@ class SubscriptionController extends Controller
         }
     }
 
-    public function checkTokenEdit(Request $request)
+    public function checkTokenEditAdress(Request $request)
     {
         if ($request->hasValidSignature()) {
             $user = User::find($request->user);
-            if ($request->city === null) {
-                $user->email = $request->email;
-                $user->save();
-                $title = 'VOLTOOID!';
-                $text = 'Uw email is geverifieerd en aangepast';
-            } else {
-                $user->city = $request->city;
-                $user->postcode = $request->postcode;
-                $user->street_name = $request->street_name;
-                $user->house_number = $request->house_number;
-                $user->save();
-                $title = 'VOLTOOID!';
-                $text = 'Uw woonadres is geverifieerd en aangepast';
-            }
+            $user->city = $request->city;
+            $user->postcode = $request->postcode;
+            $user->street_name = $request->street_name;
+            $user->house_number = $request->house_number;
+            $user->save();
+            $title = 'VOLTOOID!';
+            $text = 'Uw woonadres is geverifieerd en aangepast';
+            return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
+        } else {
+            $this->standartResponse();
+        }
+    }
+
+    public function checkTokenEditEmail(Request $request)
+    {
+        if ($request->hasValidSignature()) {
+            $user = User::find($request->user);
+            $user->email = $request->email;
+            $user->save();
+            $title = 'VOLTOOID!';
+            $text = 'Uw email is geverifieerd en aangepast';
             return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
         } else {
             $this->standartResponse();
@@ -211,12 +218,13 @@ class SubscriptionController extends Controller
         ]);
         $user = User::where('email', $request->email)->first();
         if ($user !== null) {
-            $url = URL::temporarySignedRoute('editinfo', now()->addDays(1), [
+            $url = URL::temporarySignedRoute('editinfoAdress', now()->addDays(1), [
                 'user' => $user->id,
                 'city' => $request->city,
                 'street_name' => $validation['street_name'],
                 'house_number' => $validation['house_number'],
-                'postcode' => $request->postcode
+                'postcode' => $request->postcode,
+                'email' => $user->email
             ]);
             Mail::to($user->email)->send(new EditResidence($url, $user, $request->city, $request->house_number, $request->postcode, $request->street_name));
         } else {
@@ -233,15 +241,18 @@ class SubscriptionController extends Controller
 
     public function editEmailForm(Request $request)
     {
-        //{user}{email}{city}{streetname}{postcode}{housenumber}
         $validation =  $request->validate([
-            'email' =>  ['required', 'string', 'email', 'max:255'],
-            'confirmation-email' => ['required', 'email', 'max:255', 'min:4', 'different:email']
+            'confirmation_email' =>  ['required', 'string', 'email', 'max:255',],
+            'email' => ['required', 'email', 'max:255', 'min:4', 'different:confirmation_email', 'unique:users']
         ]);
-        $user = User::where('email', $request->email)->first();
+
+        $user = User::where('email', $request->confirmation_email)->first();
         if ($user !== null) {
-            $url = URL::temporarySignedRoute('editinfo', now()->addDays(1), ['user' => $user->id, 'email' => $validation['confirmation-email']]);
-            Mail::to($user->email)->send(new EditEmail($url, $user, $validation['confirmation-email']));
+            $url = URL::temporarySignedRoute('editinfoEmail', now()->addDays(1), [
+                'user' => $user->id,
+                'email' => $validation['email'],
+            ]);
+            Mail::to($user->email)->send(new EditEmail($url, $user, $validation['confirmation_email']));
         } else {
             return back()->with('error', 'U heeft een verkeer e-mailadres opgegeven')->withInput();
         }

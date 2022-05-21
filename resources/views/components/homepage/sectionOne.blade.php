@@ -13,7 +13,7 @@
             <a href="/information"> <button type="button" class="btn rounded-0">Informatie</button></a>
         </div>
         <div class="col mt-3">
-            <a href="/deliver"> <button type="button" class="btn  rounded-0">Aanleveren</button></a>
+            <a href="/placepublication"> <button type="button" class="btn  rounded-0">Aanleveren</button></a>
         </div>
     </div>
 </div>

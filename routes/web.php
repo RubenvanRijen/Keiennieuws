@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SubscriptionController;
 use App\Models\Subscription;
@@ -44,22 +45,16 @@ Route::get('/subscription/editsteptwoemail', [SubscriptionController::class, 'ed
 Route::post('/subscription/editsteptwoemail', [SubscriptionController::class, 'editEmailForm']);
 Route::get('/subscription/editFinalAdress', [SubscriptionController::class, 'editFinalAdress']);
 Route::get('/subscription/editFinalEmail', [SubscriptionController::class, 'editFinalEmail']);
-Route::post('/subscription/editinfo/{user}{email}{city}{street_name}{postcode}{house_number}')->name('editinfo')->middleware('signed');
-Route::get('/subscription/editinfo/{user}', [SubscriptionController::class, 'checkTokenEdit']);
+Route::post('/subscription/editAdress/{user}/{email}/{city}/{street_name}/{postcode}/{house_number}')->name('editinfoAdress')->middleware('signed');
+Route::get('/subscription/editAdress/{user}/{email}/{city}/{street_name}/{postcode}/{house_number}', [SubscriptionController::class, 'checkTokenEditAdress']);
+Route::post('/subscription/editEmail/{user}/{email}')->name('editinfoEmail')->middleware('signed');
+Route::get('/subscription/editEmail/{user}/{email}', [SubscriptionController::class, 'checkTokenEditEmail']);
 
-
-Route::get('/placebooking', function () {
-    return view('/pages/placeBooking');
-});
-
-Route::post('/placebooking', function () {
-    return redirect('/successactionbooking');
-});
-
-Route::get('/successactionbooking', function () {
-    return view('/pages/successAction', ['title' => 'BEDANKT VOOR UW RESERVATIE!', 'text' => 'U zult binnen enkele minuten een bevestigingsmail ontvangen']);
-});
-
+Route::get('/placebooking', [BookingController::class, 'indexBooking']);
+Route::post('/placebooking', [BookingController::class, 'createBooking']);
+Route::get('/successactionbooking', [BookingController::class, 'successBooking']);
+Route::post('/placedbooking/success/{user}/{email}/{title}/{size}/{type}/{editions}')->name('bookingsuccess')->middleware('signed');
+Route::get('/placedbooking/success/{user}/{email}/{title}/{size}/{type}/{editions}', [BookingController::class, 'checkTokenBooking']);
 
 Route::get('/placepublication', function () {
     return view('/pages/placePublication');

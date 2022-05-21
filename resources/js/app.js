@@ -8,7 +8,7 @@ require('./sectionSeven');
 require('./switchPage');
 require('./startStepTwo');
 require('./placePublication');
-
+require('./multiselect-dropdown');
 
 window.onload = () => {
     if (window.location.pathname === '/information') {

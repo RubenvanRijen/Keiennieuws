@@ -44,10 +44,11 @@
 
 @media screen and (max-width: 1400px) {}
 
-html {
+body {
+    font-family: "Open Sans", sans-serif !important;
     height: 100%;
 }
 
-body {
+html {
     height: 100%;
 }

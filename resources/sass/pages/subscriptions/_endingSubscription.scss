@@ -1,8 +1,9 @@
 .eindingSubscription {
     background-color: $yellowCustom;
-    height: 94%;
+    height: 100%;
     margin-top: -1rem;
-    display: flex;
+    vertical-align: middle;
+    display: grid;
     justify-content: center;
     align-items: center;
     text-align: center;

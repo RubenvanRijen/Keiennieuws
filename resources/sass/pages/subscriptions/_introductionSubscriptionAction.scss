@@ -1,9 +1,10 @@
 .introductionSubscriptionAction {
-    display: flex;
     justify-content: center;
     align-items: center;
-    height: 94%;
+    height: 100%;
     text-align: center;
+    vertical-align: middle;
+    display: grid;
     h2 {
         font-weight: 700;
         margin-bottom: 2.5rem;

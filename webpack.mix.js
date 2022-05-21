@@ -16,6 +16,12 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
     require('autoprefixer'),
 ]).browserSync('127.0.0.1:8000').sass('resources/sass/app.scss', 'public/css');
 
+mix.webpackConfig({
+    stats: {
+        children: true,
+    },
+});
+
 if (mix.inProduction()) {
     mix.version();
 }
