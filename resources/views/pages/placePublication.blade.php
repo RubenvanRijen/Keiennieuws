@@ -85,7 +85,6 @@
                     </div>
                     <div class="custom-submit-right">
                         <button disabled type="submit" class="btn btn-outline-success">Aanleveren</button>
-                        <p>U kunt op het moment nog niet aanleveren, de mogelijkheid komt er snel aan</p>
                     </div>
                 </div>
             </form>
