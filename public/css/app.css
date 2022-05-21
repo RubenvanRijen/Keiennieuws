@@ -2604,12 +2604,13 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?7ff3ca6fa798de3f8ac2251c7
   height: 100%;
   margin-top: -1rem;
   vertical-align: middle;
-  display: grid;
+  display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 .eindingSubscription .container {
+  margin: auto;
   max-width: 55rem;
 }
 .eindingSubscription .container h1, .eindingSubscription .container .h1 {
@@ -2624,11 +2625,14 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?7ff3ca6fa798de3f8ac2251c7
 
 .formSubscription {
   vertical-align: middle;
-  display: grid;
+  display: flex;
   justify-content: center !important;
   align-items: center;
   align-self: center;
   height: 100%;
+}
+.formSubscription .container {
+  margin: auto;
 }
 .formSubscription label {
   font-weight: 700;
@@ -2745,7 +2749,10 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?7ff3ca6fa798de3f8ac2251c7
   height: 100%;
   text-align: center;
   vertical-align: middle;
-  display: grid;
+  display: flex;
+}
+.introductionSubscriptionAction .container {
+  margin: auto;
 }
 .introductionSubscriptionAction h2, .introductionSubscriptionAction .h2 {
   font-weight: 700;
