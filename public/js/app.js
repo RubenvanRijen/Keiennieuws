@@ -15681,7 +15681,6 @@ $(document).ready(function () {
   }
 
   $('#formFileMultiple').change(function () {
-    console.log('change');
     var input = $('#formFileMultiple')[0].files;
     var output = document.getElementById('fileList');
     var maxFilesMessage = document.getElementById('maxFilesMessage');

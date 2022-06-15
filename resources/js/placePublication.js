@@ -33,7 +33,6 @@ $(document).ready(function() {
     }
 
     $('#formFileMultiple').change(function() {
-        console.log('change');
         let input = $('#formFileMultiple')[0].files;
         let output = document.getElementById('fileList');
         let maxFilesMessage = document.getElementById('maxFilesMessage');
