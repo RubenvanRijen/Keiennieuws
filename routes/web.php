@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index']);
 Route::get('/information', [HomeController::class, 'informationIndex']);
+Route::post('/home/volunteerapplication', [HomeController::class, 'volunteerApplication']);
 
 //subscriptions
 Route::get('/subscription', [SubscriptionController::class, 'index']);
