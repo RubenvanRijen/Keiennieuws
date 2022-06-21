@@ -101,7 +101,7 @@ class HomeController extends Controller
         if ($request->hasFile('file')) {
             foreach ($request->file as $file) {
                 $fileName = date("Y-m-d H:i:s") . '-' . $file->getClientOriginalName();
-                $fileData = $file->store('/public');
+                $fileData = $file->store('/public/temp');
                 array_push($files, $fileData);
             }
         }

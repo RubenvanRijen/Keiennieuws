@@ -40,7 +40,7 @@ class Uploadpicture extends Mailable
             ->view('emails.uploadPicture')->subject('Photo upload');
 
         foreach ($this->files as $file) {
-            $email->attach($file);
+            $email->attachFromStorageDisk('local', $file);
         }
     }
 }
