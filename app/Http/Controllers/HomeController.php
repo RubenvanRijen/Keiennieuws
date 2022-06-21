@@ -75,7 +75,7 @@ class HomeController extends Controller
 
         $validator = Validator::make($request->all(), [
             'file' => ['required', 'array', 'between:1,5'],
-            'file.*' => ['max:10000'],
+            'file.*' => ['max:5048'],
             'showName' => ['required'],
             'name' => ['required_if:showName,==,1', 'max:255'],
         ], [

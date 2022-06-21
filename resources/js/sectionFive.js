@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     const hideName = document.getElementById("hideName");
     const showName = document.getElementById("showName");
     const authorName = document.getElementById("authorNameBlock");
