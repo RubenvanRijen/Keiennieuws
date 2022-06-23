@@ -18,9 +18,10 @@ use Illuminate\Support\Facades\Route;
 */
 //home
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/home', [HomeController::class, 'index']);
+Route::get('/home', [HomeController::class, 'index'])->name('homepage');
 Route::get('/information', [HomeController::class, 'informationIndex']);
 Route::post('/home/volunteerapplication', [HomeController::class, 'volunteerApplication']);
+Route::post('/home/uploadpicture', [HomeController::class, 'photoUpload']);
 
 //subscriptions
 Route::get('/subscription', [SubscriptionController::class, 'index']);

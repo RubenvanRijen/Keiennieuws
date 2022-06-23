@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendEmailJob;
 use App\Mail\BookingCreation;
 use App\Models\Booking;
 use App\Models\Edition;
@@ -77,7 +78,7 @@ class BookingController extends Controller
             'title' => $validation['title'],
             'editions' => urlencode(serialize($validation['edition'])),
         ]);
-        Mail::to($user->email)->send(new BookingCreation($url, $user));
+        SendEmailJob::dispatch($user->email, new BookingCreation($url, $user));
         return redirect('/successactionbooking');
     }
 
