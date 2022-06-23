@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendEmailJob;
 use App\Mail\EditEmail;
 use App\Mail\EditResidence;
 use App\Mail\EndSubscription;
@@ -142,7 +143,7 @@ class SubscriptionController extends Controller
         $user->fill($validation)->save();
 
         $url = URL::temporarySignedRoute('subscribe', now()->addDays(1), ['user' => $user->id]);
-        Mail::to($user->email)->send(new StartSubscription($url, $user));
+        SendEmailJob::dispatch($user->email, new StartSubscription($url, $user));
         return redirect('/subscription/startfinal');
     }
 
@@ -183,7 +184,7 @@ class SubscriptionController extends Controller
             return back()->with('error', 'U heeft geen abonnement op het keiennieuws')->withInput();
         } else {
             $url = URL::temporarySignedRoute('unsubscribe', now()->addDays(1), ['user' => $user->id]);
-            Mail::to($user->email)->send(new EndSubscription($url, $user));
+            SendEmailJob::dispatch($user->email, new EndSubscription($url, $user));
         }
 
         return redirect('/subscription/endfinal');
@@ -226,7 +227,7 @@ class SubscriptionController extends Controller
                 'postcode' => $request->postcode,
                 'email' => $user->email
             ]);
-            Mail::to($user->email)->send(new EditResidence($url, $user, $request->city, $request->house_number, $request->postcode, $request->street_name));
+            SendEmailJob::dispatch($user->email, new EditResidence($url, $user, $request->city, $request->house_number, $request->postcode, $request->street_name));
         } else {
             return back()->with('error', 'U heeft een verkeer e-mailadres opgegeven')->withInput();
         }
@@ -252,7 +253,7 @@ class SubscriptionController extends Controller
                 'user' => $user->id,
                 'email' => $validation['email'],
             ]);
-            Mail::to($user->email)->send(new EditEmail($url, $user, $validation['confirmation_email']));
+            SendEmailJob::dispatch($user->email, new EditEmail($url, $user, $validation['confirmation_email']));
         } else {
             return back()->with('error', 'U heeft een verkeer e-mailadres opgegeven')->withInput();
         }
