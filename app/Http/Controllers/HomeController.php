@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\DeleteFiles;
+use App\Jobs\sendEmailJob;
 use App\Mail\Uploadpicture;
 use App\Mail\VolunteerApplication;
 use App\Models\Edition;
@@ -11,6 +13,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Bus;
+
 
 class HomeController extends Controller
 {
@@ -61,7 +65,12 @@ class HomeController extends Controller
 
         $validation = $validator->validated();
 
-        Mail::to('knstadskrant@gmail.com')->send(new VolunteerApplication($validation['nameVolunteer'], $validation['email'], $validation['explenation']));
+        //TODO werk hier aan de cronjob voor het versturen van emails en stuff
+
+        sendEmailJob::dispatch('knstadskrant@gmail.com', new VolunteerApplication($validation['nameVolunteer'], $validation['email'], $validation['explenation']));
+
+
+
         return view('/pages/successAction', ['title' => $title, 'text' => $text]);
     }
 
@@ -105,12 +114,12 @@ class HomeController extends Controller
                 array_push($files, $fileData);
             }
         }
+        Bus::chain([
+            new sendEmailJob('knstadskrant@gmail.com', new Uploadpicture($validation['name'], $files)),
+            new DeleteFiles($files)
+        ])->dispatch();
 
-        Mail::to('knstadskrant@gmail.com')->send(new Uploadpicture($validation['name'], $files));
 
-        foreach ($files as $file) {
-            Storage::disk('local')->delete($file);
-        }
 
         return view('/pages/successAction', ['title' => $title, 'text' => $text]);
     }
