@@ -29,6 +29,15 @@ class BookingController extends Controller
 
     public function createBooking(Request $request)
     {
+        $result =  $this->generateBooking($request);
+        if ($result) {
+            return $result;
+        }
+        return redirect('/successactionbooking');
+    }
+
+    public static function generateBooking(Request $request)
+    {
         $validation =  $request->validate([
             'title' => ['required', 'min:3', 'max:255'],
             'size' => ['required'],
@@ -79,7 +88,6 @@ class BookingController extends Controller
             'editions' => urlencode(serialize($validation['edition'])),
         ]);
         SendEmailJob::dispatch($user->email, new BookingCreation($url, $user));
-        return redirect('/successactionbooking');
     }
 
     public function checkTokenBooking(Request $request)
