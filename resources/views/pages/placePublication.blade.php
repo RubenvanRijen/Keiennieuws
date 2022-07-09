@@ -52,11 +52,26 @@
                         @enderror
                     </div>
                     <div class="custom-input">
-                        <label for="title" class="form-label">Wat voor type publicatie is het?</label>
-                        <select id="inputState" class="form-select">
-                            <option selected>Choose...</option>
-                            <option>...</option>
+                        <label for="title" class="form-label">Wat voor type publicatie is het? </label>
+                        <select name="type" id="type" required class="form-select @error('type') is-invalid @enderror">
+                            @foreach ($types as $type => $name)
+                            <option value="{{$type}}" {{ (old("type") == $type ? "selected":"") }}>{{$name}}</option>
+                            @endforeach
                         </select>
+                        @error('type')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="custom-input" style="margin-top: -0.2rem;">
+                        <label for="title" class="form-label">Titel van uw publicatie </label>
+                        <input value="{{ old('title')?? '' }}" class="form-control @error('title') is-invalid @enderror" type="text" name="title" class="form-control" id="title" aria-describedby="title">
+                        @error('title')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     <div class="custom-input editions-select">
                         <label for="title" class="form-label">In welke edit moet het geplaatst worden?</label>
@@ -69,11 +84,17 @@
 
                     <div class="extra-info-custom">
                         <div class="custom-input">
-                            <label for="title" class="form-label">Wat is het formaat van uw publicatie?</label>
-                            <select id="inputState" class="form-select">
-                                <option selected>Choose...</option>
-                                <option>...</option>
+                            <label for="title" class="form-label">Wat is het formaat van uw publicatie? </label>
+                            <select name="size" id="size" required class="form-select @error('size') is-invalid @enderror">
+                                @foreach ($sizes as $key =>$value)
+                                <option value="{{$key}}" {{ (old("size") == $key ? "selected":"") }}>{{$value}}</option>
+                                @endforeach
                             </select>
+                            @error('size')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                         <label>Gelijk uw plek reserveren?</label>
                         <p>Als u een plek reserveerd, dan kunt u ervan uitgaan dat uw aangeleverde publicatie in het aangegeven Keiennieuws komt.</p>

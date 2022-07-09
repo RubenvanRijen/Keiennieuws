@@ -21,7 +21,11 @@ class PublicationController extends Controller
         $date = date("Y/m/d");
         $editions = Edition::whereDate('endDateUpload', '>=', $date)->orderBy('endDateUpload', 'asc')->paginate(12);
         $user = Auth::user();
-        return view('/pages/placePublication', ['user' => $user, 'editions' => $editions]);
+
+        $types = Publication::getEnumType();
+        $sizes = Publication::getEnumSize();
+
+        return view('/pages/placePublication', ['user' => $user, 'editions' => $editions, 'sizes' => $sizes, 'types' => $types,]);
     }
 
 
@@ -40,7 +44,10 @@ class PublicationController extends Controller
         $user = User::find($request->user_id);
         $booking = Booking::find($request->booking_id);
 
-        return view('/pages/placePublication', ['user' => $user, 'booking' => $booking, 'editions' => $editions]);
+        $types = Publication::getEnumType();
+        $sizes = Publication::getEnumSize();
+
+        return view('/pages/placePublication', ['user' => $user, 'booking' => $booking, 'editions' => $editions, 'sizes' => $sizes, 'types' => $types,]);
     }
 
     /**
@@ -51,6 +58,17 @@ class PublicationController extends Controller
      */
     public function store(Request $request)
     {
+        $validation =  $request->validate([
+            'title' => ['required', 'min:3', 'max:255'],
+            'size' => ['required'],
+            'type' => ['required'],
+            'edition' => ['required', 'array', 'min:1'],
+            'email' => ['required', 'email', 'min:3', 'max:255'],
+            'file' => ['required', 'array', 'between:1,5'],
+            'file.*' => ['max:5048'],
+            'placedBooking' => 'required',
+            'placeBooking' => 'required_if:placedBooking,1|',
+        ]);
 
         //TODO code voor opslaan
         return redirect('/successactionpublication');
