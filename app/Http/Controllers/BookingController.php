@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Jobs\SendEmailJob;
 use App\Mail\BookingCreation;
+use App\Mail\PublicationUploadLink;
 use App\Models\Booking;
 use App\Models\Edition;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class BookingController extends Controller
 {
@@ -108,6 +109,13 @@ class BookingController extends Controller
             $user = User::find($request->user);
             $title = 'BEDANKT VOOR UW RESERVATIE!';
             $text = 'Beste klant uw reservering is geplaatst en ontvangt zo spoedig mogelijk een link voor de publicatie';
+
+            // create the link for publication
+            $url = URL::temporarySignedRoute('publicationSigned', now()->addMonths(1.5), [
+                'user_id' => $user->id,
+                'booking_id' => $booking->id
+            ]);
+            SendEmailJob::dispatch($user->email, new PublicationUploadLink($url, $user));
             return view('/pages/successAction', ['title' => $title, 'text' => $text]);
         } else {
             $title = 'DE LINK IS VERLOPEN';

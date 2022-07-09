@@ -48,6 +48,20 @@
                 .custom-input {
                     margin-bottom: 1rem;
                 }
+                .editions-select {
+                    label {
+                        margin-top: 0 !important;
+                    }
+                    .placeholder {
+                        color: white;
+                    }
+                    .multiselect-dropdown-list-wrapper {
+                        width: 100% !important;
+                    }
+                    .multiselect-dropdown {
+                        width: 100% !important;
+                    }
+                }
                 .place-booking-checkboxes {
                     margin-left: 0;
                     input[type="checkbox"] {

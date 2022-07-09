@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
+use App\Models\Edition;
 use App\Models\Publication;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PublicationController extends Controller
 {
@@ -14,17 +18,29 @@ class PublicationController extends Controller
      */
     public function index(Request $request)
     {
-        BookingController::generateBooking($request);
+        $date = date("Y/m/d");
+        $editions = Edition::whereDate('endDateUpload', '>=', $date)->orderBy('endDateUpload', 'asc')->paginate(12);
+        $user = Auth::user();
+        return view('/pages/placePublication', ['user' => $user, 'editions' => $editions]);
     }
 
+
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function indexSigned(Request $request)
     {
-        //
+        if (Auth::user() && Auth::user()->id !== $request->user_id) {
+            abort(404);
+        }
+        $date = date("Y/m/d");
+        $editions = Edition::whereDate('endDateUpload', '>=', $date)->orderBy('endDateUpload', 'asc')->paginate(12);
+        $user = User::find($request->user_id);
+        $booking = Booking::find($request->booking_id);
+
+        return view('/pages/placePublication', ['user' => $user, 'booking' => $booking, 'editions' => $editions]);
     }
 
     /**
@@ -35,51 +51,13 @@ class PublicationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        //TODO code voor opslaan
+        return redirect('/successactionpublication');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Publication  $publication
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Publication $publication)
+    public function successPublication()
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Publication  $publication
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Publication $publication)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Publication  $publication
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Publication $publication)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Publication  $publication
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Publication $publication)
-    {
-        //
+        return view('/pages/successAction', ['title' => 'UW PUBLICATIE IS GEUPLOAD!', 'text' => 'Uw bestand word zo spoedig mogelijk verwerkt']);
     }
 }

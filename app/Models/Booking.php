@@ -63,4 +63,9 @@ class Booking extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function publication()
+    {
+        return $this->hasOne(Publication::class);
+    }
 }

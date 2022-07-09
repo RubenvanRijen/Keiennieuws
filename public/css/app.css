@@ -3031,6 +3031,18 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?7ff3ca6fa798de3f8ac2251c7
 .place-publication-page .place-publication-row .left-column form .custom-input {
   margin-bottom: 1rem;
 }
+.place-publication-page .place-publication-row .left-column form .editions-select label {
+  margin-top: 0 !important;
+}
+.place-publication-page .place-publication-row .left-column form .editions-select .placeholder {
+  color: white;
+}
+.place-publication-page .place-publication-row .left-column form .editions-select .multiselect-dropdown-list-wrapper {
+  width: 100% !important;
+}
+.place-publication-page .place-publication-row .left-column form .editions-select .multiselect-dropdown {
+  width: 100% !important;
+}
 .place-publication-page .place-publication-row .left-column form .place-booking-checkboxes {
   margin-left: 0;
   margin-bottom: 1rem;

@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('publications', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['advertisement', 'column', 'newsFeed', 'eventPoster', 'knowledge', 'article', 'sponsorship']);
-            $table->string('email');
+            $table->string('location');
             $table->string('title');
-            $table->text('information')->nullable(true);
-            $table->boolean("noBooking")->nullable(true);
-            $table->foreignId('booking_id')->constrained('bookings')->onDelete('cascade');
+            $table->string('originalTitle');
+            $table->string('author')->nullable();
+            $table->foreignId('publication_id')->constrained('publications')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('publications');
+        Schema::dropIfExists('files');
     }
 };
