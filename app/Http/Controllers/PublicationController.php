@@ -21,11 +21,13 @@ class PublicationController extends Controller
         $date = date("Y/m/d");
         $editions = Edition::whereDate('endDateUpload', '>=', $date)->orderBy('endDateUpload', 'asc')->paginate(12);
         $user = Auth::user();
+        $booking = new Booking();
 
         $types = Publication::getEnumType();
         $sizes = Publication::getEnumSize();
+        $booking_editions = [];
 
-        return view('/pages/placePublication', ['user' => $user, 'editions' => $editions, 'sizes' => $sizes, 'types' => $types,]);
+        return view('/pages/placePublication', ['user' => $user, 'editions' => $editions, 'sizes' => $sizes, 'types' => $types, 'booking' => $booking, 'booking_editions' => $booking_editions,]);
     }
 
 
@@ -44,10 +46,13 @@ class PublicationController extends Controller
         $user = User::find($request->user_id);
         $booking = Booking::find($request->booking_id);
 
+
+        $booking_editions = $booking->editions->pluck('id');
+
         $types = Publication::getEnumType();
         $sizes = Publication::getEnumSize();
 
-        return view('/pages/placePublication', ['user' => $user, 'booking' => $booking, 'editions' => $editions, 'sizes' => $sizes, 'types' => $types,]);
+        return view('/pages/placePublication', ['user' => $user, 'booking' => $booking, 'editions' => $editions, 'sizes' => $sizes, 'types' => $types, 'booking_editions' => $booking_editions,]);
     }
 
     /**
@@ -58,17 +63,21 @@ class PublicationController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->input());
         $validation =  $request->validate([
             'title' => ['required', 'min:3', 'max:255'],
-            'size' => ['required'],
             'type' => ['required'],
             'edition' => ['required', 'array', 'min:1'],
             'email' => ['required', 'email', 'min:3', 'max:255'],
             'file' => ['required', 'array', 'between:1,5'],
             'file.*' => ['max:5048'],
             'placedBooking' => 'required',
-            'placeBooking' => 'required_if:placedBooking,1|',
+            'size' => ['required_if:placedBooking,1'],
+            'placeBooking' => ['required_if:placedBooking,1'],
         ]);
+
+
+        dd($validation);
 
         //TODO code voor opslaan
         return redirect('/successactionpublication');
