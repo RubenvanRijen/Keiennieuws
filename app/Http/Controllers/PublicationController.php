@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendEmailJob;
+use App\Mail\PublicationCofirmation;
 use App\Models\Booking;
 use App\Models\Edition;
 use App\Models\File;
@@ -70,12 +72,12 @@ class PublicationController extends Controller
         }
 
         $rules = [
+            'file' => ['required', 'array', 'between:1,5'],
+            'file.*' => ['max:5048'],
             'title' => ['required', 'min:3', 'max:255'],
             'type' => ['required'],
             'edition' => ['required', 'array', 'min:1'],
             'email' => ['required', 'email', 'min:3', 'max:255'],
-            'file' => ['required', 'array', 'between:1,5'],
-            'file.*' => ['max:5048'],
             'information' => ['max:20000'],
             'placedBooking' => 'required',
             'size' => ['required_if:placedBooking,1'],
@@ -88,6 +90,7 @@ class PublicationController extends Controller
         ];
 
         $validation = $this->validate($request, $rules, $customMessages);
+
 
         $booking = null;
         if ($request->booking_id == null && $request->placedBooking == 1 && $request->placeBooking == 0) {
@@ -123,10 +126,13 @@ class PublicationController extends Controller
             }
         }
 
-
-
-
-        //TODO code voor opslaan
+        $text = '';
+        if ($request->placeBooking == 0) {
+            $text = 'Uw publicatie en reservering is correct en in goed handen ontvangen';
+        } else {
+            $text = 'Uw publicatie is correct en in goed handen ontvangen';
+        }
+        SendEmailJob::dispatch($publication->email, new PublicationCofirmation($text));
         return redirect('/successactionpublication');
     }
 

@@ -7,7 +7,7 @@
             <h1>JOUW PUBLICATIE AANLEVEREN</h1>
         </div>
         <div class="col left-column">
-            <form id="start-subscription" action="{{ url('/placepublication') }}" method="POST">
+            <form id="start-subscription" action="{{ url('/placepublication') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group" style="display: none;">
                     <label for="faxonly">
