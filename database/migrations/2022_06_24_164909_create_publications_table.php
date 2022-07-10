@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('publications', function (Blueprint $table) {
             $table->id();
             $table->enum('type', ['advertisement', 'column', 'newsFeed', 'eventPoster', 'knowledge', 'article', 'sponsorship']);
+            $table->enum('size', ['A4', 'A5', 'A6', 'A7']);
             $table->string('email');
             $table->string('title');
             $table->text('information')->nullable(true);
-            $table->boolean("noBooking")->nullable(true);
-            $table->foreignId('booking_id')->constrained('bookings')->onDelete('cascade');
+            $table->foreignId('booking_id')->nullable(true)->constrained('bookings')->onDelete('cascade');
             $table->timestamps();
         });
     }
