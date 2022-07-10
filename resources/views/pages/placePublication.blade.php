@@ -30,16 +30,15 @@
                                 Nee
                             </label>
                         </div>
-                        <div class="container">
-                            @if ($errors->has('placedBooking'))
-                            @foreach ($errors->get('placedBooking') as $error)
-                            <span class="text-danger" role="alert">
-                                <strong>{{ $error }}</strong>
-                            </span>
-                            @endforeach
-                            @endif
-                        </div>
-
+                    </div>
+                    <div class="">
+                        @if ($errors->has('placedBooking'))
+                        @foreach ($errors->get('placedBooking') as $error)
+                        <span class="text-danger" role="alert">
+                            <strong>{{ $error }}</strong>
+                        </span>
+                        @endforeach
+                        @endif
                     </div>
                     <div class="extra-info-custom">
                         <label>Gelijk uw plek reserveren?</label>
