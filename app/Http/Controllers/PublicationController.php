@@ -44,6 +44,7 @@ class PublicationController extends Controller
         if (Auth::user() && Auth::user()->id !== $request->user_id) {
             abort(404);
         }
+
         $date = date("Y/m/d");
         $editions = Edition::whereDate('endDateUpload', '>=', $date)->orderBy('endDateUpload', 'asc')->paginate(12);
         $user = User::find($request->user_id);
