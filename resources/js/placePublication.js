@@ -7,27 +7,51 @@ $(document).ready(function() {
     const placeNoBooking = document.getElementById("placeNoBooking");
     const bookingInformation = document.getElementsByClassName("extra-info-custom");
     const page = document.getElementsByClassName('.place-publication-page');
+    const placePublicationContent = document.getElementById('placePublicationContent');
+    const placePublicationPage = document.getElementsByClassName('place-publication-page')[0];
+
+
+    if (placeBooking.checked == false) {
+        placePublicationPage.style.height = "inherit";
+    }
+
+    if (placedBooking.checked == true) {
+        placePublicationContent.style.display = "block";
+    }
 
     if (placedBooking && placedNoBooking && bookingInformation[0]) {
         placedBooking.onclick = function() {
             placedBooking.checked = true;
             placedNoBooking.checked = false;
             bookingInformation[0].style.display = "none";
+            placePublicationPage.style.height = "max-content";
+            placePublicationContent.style.display = "block";
+            placeBooking.checked = false;
+            placeNoBooking.checked = false;
         }
         placedNoBooking.onclick = function() {
             placedBooking.checked = false;
             placedNoBooking.checked = true;
+            placePublicationContent.style.display = "none";
+            placePublicationPage.style.height = "inherit";
             bookingInformation[0].style.display = "block";
             page[0].style.height = "unset";
+            placeBooking.checked = false;
+            placeNoBooking.checked = false;
+
         }
 
         placeBooking.onclick = function() {
             placeBooking.checked = true;
             placeNoBooking.checked = false;
+            window.location.href = "/placebooking";
+
         }
         placeNoBooking.onclick = function() {
             placeBooking.checked = false;
             placeNoBooking.checked = true;
+            placePublicationContent.style.display = "block";
+            placePublicationPage.style.height = "max-content";
         }
 
     }
