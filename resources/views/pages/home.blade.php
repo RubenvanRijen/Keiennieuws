@@ -19,7 +19,7 @@
 <div class="section-six">
     @include('components/homepage/sectionSix')
 </div>
-<div class="section-seven">
+<div id="contact-section-seven" class="section-seven">
     @include('components/homepage/sectionSeven')
 </div>
 @include('components.layouts.footer')

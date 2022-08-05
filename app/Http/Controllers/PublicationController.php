@@ -72,6 +72,21 @@ class PublicationController extends Controller
             return view('/pages/successAction', ['title' => 'UW PUBLICATIE IS GEUPLOAD!', 'text' => 'Uw bestand word zo spoedig mogelijk verwerkt']);
         }
 
+
+        // make shure a person doesn't upload more then 10 files when using the link mulitple times
+        if ($request->booking_id != null) {
+            $bok = Booking::find($request->booking_id);
+            $pubs =  $bok->publications()->get();
+            $amount = 0;
+            foreach ($pubs as $pub) {
+                $amount += count($pub->files()->get());
+            }
+            if ($amount > 10) {
+                return redirect()->back()->with('error', 'U heeft al 10 bestanden geupload');
+            }
+        }
+
+
         $rules = [
             'file' => ['required', 'array', 'between:1,5'],
             'file.*' => ['max:5048'],
@@ -85,6 +100,7 @@ class PublicationController extends Controller
             'placeBooking' => ['required_if:placedBooking,1'],
         ];
 
+
         $customMessages = [
             'placeBooking.required_if' => 'U moet kiezen of u wel of geen reservering wilt plaatsen',
             'placedBooking.required' => 'U moet kiezen of u wel of geen reservering heeft geplaatsen'
@@ -97,6 +113,8 @@ class PublicationController extends Controller
         if ($request->booking_id == null && $request->placedBooking == 1 && $request->placeBooking == 0) {
             $booking  = BookingController::generateBooking($request, true);
         }
+
+
 
         $publication = new Publication();
         $publication->title = strtolower($validation['title']);

@@ -19,7 +19,7 @@
                         <a class="nav-link {{ request()->is('subscription*') ? 'active' : '' }}" aria-current="page" href="/subscription">Abonnement</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('contact*') ? 'active' : '' }}" href="/contact">Contact</a>
+                        <a class="nav-link {{ request()->is('contact*') ? 'active' : '' }}" href="/home#contact-section-seven">Contact</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('information*') ? 'active' : '' }}" href="/information">Informatie</a>

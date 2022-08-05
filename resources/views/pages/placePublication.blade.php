@@ -92,7 +92,7 @@
                     </div>
                     <div class="custom-input">
                         <label for="title" class="form-label">Wat voor type publicatie is het? </label>
-                        <select {{$booking->id != null  ? "disabled":""}} name="type" id="type" required class="form-select @error('type') is-invalid @enderror">
+                        <select name="type" id="type" required class="form-select @error('type') is-invalid @enderror">
                             @foreach ($types as $type => $name)
                             <option value="{{$type}}" {{ ((old() ? old("type") == $type : ($booking ? $booking->type : '') == $type) ? "selected":"") }}>{{$name}}</option>
                             @endforeach
@@ -105,7 +105,7 @@
                     </div>
                     <div class="custom-input" style="margin-top: -0.2rem;">
                         <label for="title" class="form-label">Titel van uw publicatie </label>
-                        <input required {{$booking->id != null  ? "disabled":""}} value="{{ old('title')?? $booking->title ??'' }}" class="form-control @error('title') is-invalid @enderror" type="text" name="title" class="form-control" id="title" aria-describedby="title">
+                        <input required value="{{ old('title')?? $booking->title ??'' }}" class="form-control @error('title') is-invalid @enderror" type="text" name="title" class="form-control" id="title" aria-describedby="title">
                         @error('title')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -114,7 +114,7 @@
                     </div>
                     <div class="custom-input editions-select">
                         <label for="title" class="form-label">In welke editie moet het geplaatst worden?</label>
-                        <select {{$booking->id != null  ? "disabled":""}} name="edition[]" multiple multiselect-max-items="7" multiselect-search="true" multiselect-select-all="true" id="edition" class="form-control mt-1 select-checkbox-fa @error('edition') is-invalid @enderror">
+                        <select name="edition[]" multiple multiselect-max-items="7" multiselect-search="true" multiselect-select-all="true" id="edition" class="form-control mt-1 select-checkbox-fa @error('edition') is-invalid @enderror">
                             @foreach ($editions as $edition)
                             <option value="{{$edition->id}}" {{ (old() ? collect(old('edition'))->contains($edition->id) : collect($booking_editions)->contains($edition->id))? 'selected':'' }}>{{$edition->title}}</option>
                             @endforeach
@@ -128,7 +128,7 @@
                     <div class="custom-input">
                         <label for="title" class="form-label">Wat is het formaat van uw publicatie? </label><br>
                         <span>Heeft u een plek gereserveerd dan wordt dit formaat aangehouden. Reserveerd u niet dan wordt hier geen rekening mee gehouden.</span>
-                        <select {{$booking->id != null  ? "disabled":""}} name="size" id="size" required class="form-select @error('size') is-invalid @enderror">
+                        <select name="size" id="size" required class="form-select @error('size') is-invalid @enderror">
                             @foreach ($sizes as $key =>$value)
                             <option value="{{$key}}" {{ ((old() ? old("size") == $key : ($booking ? $booking->size == $key : '')) ? "selected":"") }}>{{$value}}</option>
                             @endforeach
@@ -143,7 +143,7 @@
 
                     <div class="custom-input">
                         <label for="emailadres" class="form-label">Emailadres: </label>
-                        <input {{$booking->id != null  ? "disabled":""}} required value="{{ old('email')??$user->email?? '' }}" class="form-control @error('email') is-invalid @enderror" type="email" name="email" id="email" aria-describedby="email">
+                        <input required value="{{ old('email')??$user->email?? '' }}" class="form-control @error('email') is-invalid @enderror" type="email" name="email" id="email" aria-describedby="email">
                         @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -152,7 +152,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Waar moet het keiennieuws rekening mee houden met uw publicatie?</label>
-                        <textarea class="form-control" name="information" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea class="form-control" name="information" id="exampleFormControlTextarea1" rows="3">{{ old('information')?? '' }}</textarea>
                     </div>
                     <input name="booking_id" value="{{$booking->id ?? null}}" style="visibility: hidden; display: none;">
                     <div class="custom-submit-right">

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Mockery\Undefined;
 
 class BookingController extends Controller
 {
@@ -67,6 +68,7 @@ class BookingController extends Controller
             }
         }
 
+
         if ($found != null) {
             return back()->with('error', 'U heeft al een reservering geplaats in de ' . $found->title . ' editie')->withInput();
         } else if ($fullEdition != null) {
@@ -80,6 +82,7 @@ class BookingController extends Controller
             $user->password = Hash::make('Test123?');
             $user->save();
         }
+
         if (!$acceptedReservation) {
             $url = URL::temporarySignedRoute('bookingsuccess', now()->addYear(2), [
                 'user' => $user->id,
@@ -91,6 +94,7 @@ class BookingController extends Controller
             ]);
             SendEmailJob::dispatch($user->email, new BookingCreation($url, $user));
         } else {
+            $request->user = $user->id;
             return BookingController::createBookingDB($request);
         }
     }
@@ -98,6 +102,7 @@ class BookingController extends Controller
     public static function createBookingDB(Request $request)
     {
         $editions = unserialize(urldecode($request->editions));
+        //TODO hier gaat nog iets fout als je geen booking hebt gemaakt. dus dan moeten we hier nog even naar kijken
         $booking = new Booking();
         $booking->size = $request->size;
         $booking->type = $request->type;
