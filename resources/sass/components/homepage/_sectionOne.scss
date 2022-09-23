@@ -21,9 +21,9 @@
 }
 
 .section-one button:hover {
-    background-color: white;
-    color: $grayCustom;
-    border-color: $grayCustom;
+    background-color: white !important;
+    color: $grayCustom !important;
+    border-color: $grayCustom !important;
 }
 
 //normal queries

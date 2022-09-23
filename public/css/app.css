@@ -1981,9 +1981,9 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?e559bf06bc84fd9525e61ead3
 }
 
 .section-one button:hover {
-  background-color: white;
-  color: #575757;
-  border-color: #575757;
+  background-color: white !important;
+  color: #575757 !important;
+  border-color: #575757 !important;
 }
 
 @media screen and (max-width: 576px) {
@@ -2023,9 +2023,9 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?e559bf06bc84fd9525e61ead3
 }
 
 .section-two button:hover {
-  background-color: #ADC7AA;
-  color: white;
-  border-color: #ADC7AA;
+  background-color: #ADC7AA !important;
+  color: white !important;
+  border-color: #ADC7AA !important;
 }
 
 .section-two a {
@@ -2490,9 +2490,9 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?e559bf06bc84fd9525e61ead3
 }
 
 .section-six button:hover {
-  background-color: #959CFF;
-  color: white;
-  border-color: #959CFF;
+  background-color: #959CFF !important;
+  color: white !important;
+  border-color: #959CFF !important;
 }
 
 .section-six label {
@@ -2848,6 +2848,9 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?e559bf06bc84fd9525e61ead3
 .formSubscription .right-bottom-custom button {
   margin-left: 1rem;
   padding: 1rem;
+  background-color: #FFE395;
+}
+.formSubscription .right-bottom-custom button:hover {
   background-color: #FFE395;
 }
 
@@ -3213,6 +3216,7 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?e559bf06bc84fd9525e61ead3
 .place-publication-page .place-publication-row .left-column form .custom-submit-right button:hover {
   background-color: #ADC7AA;
   border: 3px #ADC7AA solid;
+  color: white;
 }
 .place-publication-page .place-publication-row .right-column {
   height: auto;

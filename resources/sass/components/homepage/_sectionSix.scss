@@ -39,9 +39,9 @@
 }
 
 .section-six button:hover {
-    background-color: $purpleCustom;
-    color: white;
-    border-color: $purpleCustom;
+    background-color: $purpleCustom !important;
+    color: white !important;
+    border-color: $purpleCustom !important;
 }
 
 .section-six label {

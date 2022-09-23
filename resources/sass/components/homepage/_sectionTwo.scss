@@ -15,9 +15,9 @@
 }
 
 .section-two button:hover {
-    background-color: $greenCustom;
-    color: white;
-    border-color: $greenCustom;
+    background-color: $greenCustom !important;
+    color: white !important;
+    border-color: $greenCustom !important;
 }
 
 .section-two a {
