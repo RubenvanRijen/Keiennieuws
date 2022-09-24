@@ -23,8 +23,8 @@
                     </div>
                     @endif
                     <div class="custom-input custom-file-input">
-                        <p>Welke bestanden wilt u aanleveren voor uw publicatie in het Keiennieuws?</p>
-                        <label for="formFileMultiple" class="form-label">U kunt ook meerdere foto's tegelijkertijd uploaden</label>
+                        <label>Welke bestanden wilt u aanleveren voor uw publicatie in het Keiennieuws?</label>
+                        <small for="formFileMultiple" class="form-label">U kunt ook meerdere foto's/bestanden tegelijkertijd uploaden</small>
                         <input required class="form-control custom-file-input @error('file') is-invalid @enderror @error('file.*') is-invalid @enderror" name="file[]" type="file" id="formFileMultiple" multiple>
                         <span id="uploadedFilesMessage" class="d-none">Gekozen bestanden:</span>
                         <span id="maxFilesMessage" class="invalid-feedback d-none" role="alert">
@@ -79,7 +79,6 @@
                     </div>
                     <div class="custom-input">
                         <label for="title" class="form-label">Wat is het formaat van uw publicatie? </label><br>
-                        <span>Heeft u een plek gereserveerd dan wordt dit formaat aangehouden. Reserveerd u niet dan wordt hier geen rekening mee gehouden.</span>
                         <select name="size" id="size" required class="form-select @error('size') is-invalid @enderror">
                             @foreach ($sizes as $key =>$value)
                             <option value="{{$key}}" {{ ((old() ? old("size") == $key : ($booking ? $booking->size == $key : '')) ? "selected":"") }}>{{$value}}</option>
@@ -106,6 +105,22 @@
                         <label for="exampleFormControlTextarea1">Waar moet het keiennieuws rekening mee houden met uw publicatie?</label>
                         <textarea class="form-control @error('information') is-invalid @enderror" name="information" id="information" rows="3">{{ old('information')?? '' }}</textarea>
                         @error('information')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group label-payment-check">
+                        <input required class="form-check-input @error('checkPayment') is-invalid @enderror" type="checkbox" value="" id="checkPayment">
+                        <label class="form-check-label" for="checkPayment">
+                            Door deze check box aan te klikken gaat u akkoord met de<br>
+                            betalingsplicht voor het plaatsen van een artikel in het keiennieuws.<br>
+                            Bent u echter een van de vaste reubrieken dan gelden andere regels.<br>
+                            Bent u benieuwd naar de kosten <a href="/information">Klik op deze link</a><br>
+                            Wilt u echter iets leuks delen met ons <a href="/home#uploadpicture">Klik op deze link</a>
+                        </label>
+                        @error('checkPayment')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

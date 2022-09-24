@@ -97,11 +97,13 @@ class PublicationController extends Controller
             'email' => ['required', 'email', 'min:3', 'max:255'],
             'information' => ['max:20000'],
             'size' => ['required'],
+            'checkPayment' => ['required']
         ];
 
         $customMessages = [
             'information.max:20000' => 'U mag maximaal 5000 tekens gebruiken',
-            'title.min:3' => 'Uw titel moet minstens uit 3 tekens bestaand'
+            'title.min:3' => 'Uw titel moet minstens uit 3 tekens bestaand',
+            'checkPayment.required' => 'U moet deze checkbox aantikken als u het eens bent met de voorwaarden'
         ];
 
 

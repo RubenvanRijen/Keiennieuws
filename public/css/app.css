@@ -3218,6 +3218,13 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?e559bf06bc84fd9525e61ead3
   border: 3px #ADC7AA solid;
   color: white;
 }
+.place-publication-page .place-publication-row .left-column form .label-payment-check {
+  margin-top: 1rem;
+}
+.place-publication-page .place-publication-row .left-column form .label-payment-check label {
+  font-weight: normal !important;
+  margin-bottom: 0.5rem;
+}
 .place-publication-page .place-publication-row .right-column {
   height: auto;
   display: block;

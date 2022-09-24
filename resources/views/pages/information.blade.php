@@ -19,7 +19,7 @@
             <div class="col middle-column">
                 <div style="max-width: 35rem;">
                     <h4>Reserveren</h4>
-                    <p>Als u een schnrver bent van een vaste rubrlek, dan hoeft u hiervoor geen plaats te reserveren.
+                    <p>Als u een schrijver bent van een vaste rubrlek, dan hoeft u hiervoor geen plaats te reserveren.
                         Hier is al automatisch rekening mee gehouden. Wanneer u een plek reserveert heeft u voorrang
                         om in het blad te komen. </p>
                     <h4>Advertentiekosten</h4>

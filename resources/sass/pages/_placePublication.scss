@@ -92,6 +92,13 @@
                         }
                     }
                 }
+                .label-payment-check {
+                    margin-top: 1rem;
+                    label {
+                        font-weight: normal !important;
+                        margin-bottom: 0.5rem;
+                    }
+                }
             }
         }
         .right-column {
