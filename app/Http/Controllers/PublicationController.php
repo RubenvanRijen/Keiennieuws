@@ -109,11 +109,13 @@ class PublicationController extends Controller
 
 
         $booking = null;
-        if ($request->booking_id == null && $request->placedBooking == 1 && $request->placeBooking == 0) {
+        if ($request->booking_id == null) {
             $booking  = BookingController::generateBooking($request, true);
         }
 
-
+        if (!$booking instanceof Booking) {
+            return $booking;
+        }
 
         $publication = new Publication();
         $publication->title = strtolower($validation['title']);

@@ -90,10 +90,11 @@ class BookingController extends Controller
                 'size' => $validation['size'],
                 'type' => $validation['type'],
                 'title' => $validation['title'],
-                'editions' => urlencode(serialize($validation['edition'])),
+                'edition' => urlencode(serialize($validation['edition'])),
             ]);
             SendEmailJob::dispatch($user->email, new BookingCreation($url, $user));
         } else {
+            $request->edition = serialize($validation['edition']);
             $request->user = $user->id;
             return BookingController::createBookingDB($request);
         }
@@ -101,7 +102,7 @@ class BookingController extends Controller
 
     public static function createBookingDB(Request $request)
     {
-        $editions = unserialize(urldecode($request->editions));
+        $editions = unserialize(urldecode($request->edition));
         //TODO hier gaat nog iets fout als je geen booking hebt gemaakt. dus dan moeten we hier nog even naar kijken
         $booking = new Booking();
         $booking->size = $request->size;

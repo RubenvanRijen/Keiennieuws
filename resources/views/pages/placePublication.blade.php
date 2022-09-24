@@ -14,13 +14,14 @@
                         <input type="checkbox" name="botTest" id="botTest" />
                     </label>
                 </div>
-                @if(session()->has('error'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ session()->get('error') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                @endif
+
                 <div class="container form-container-custom">
+                    @if(session()->has('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session()->get('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
                     <div class="custom-input custom-file-input">
                         <p>Welke bestanden wilt u aanleveren voor uw publicatie in het Keiennieuws?</p>
                         <label for="formFileMultiple" class="form-label">U kunt ook meerdere foto's tegelijkertijd uploaden</label>

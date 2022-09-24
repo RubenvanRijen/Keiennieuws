@@ -20,6 +20,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+
         $date = Carbon::now();
         $futureDate = Carbon::now()->addMonth();
         $editions =  Edition::whereBetween('endDateUpload',  [$date, $futureDate])->get();
