@@ -76,7 +76,7 @@ class HomeController extends Controller
 
     public function photoUpload(Request $request)
     {
-        $title = "BEDANKT VOOR UW FOTO'S!";
+        $title = "BEDANKT VOOR UW FOTO'S/BESTANDEN!";
         $text = "We zullen er goed gebruik van maken";
         if ($request->botTest) {
             return view('/pages/successAction', ['title' => $title, 'text' => $text]);
