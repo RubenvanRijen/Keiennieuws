@@ -123,7 +123,7 @@ class BookingController extends Controller
             $booking = BookingController::createBookingDB($request);
             $user = User::find($request->user);
             $title = 'BEDANKT VOOR UW RESERVATIE!';
-            $text = 'Beste klant uw reservering is geplaatst en ontvangt zo spoedig mogelijk een link voor de publicatie';
+            $text = 'Beste klant uw reservering is geplaatst en ontvangt zo spoedig mogelijk een confirmatie link voor uw reservering';
 
             // create the link for publication
             $url = URL::temporarySignedRoute('publicationSigned', now()->addMonths(1.5), [
@@ -142,7 +142,7 @@ class BookingController extends Controller
     public function successBooking()
     {
         $title = 'BEDANKT VOOR UW RESERVATIE!';
-        $text = 'U zult binnen enkele minuten een bevestigingsmail ontvangen met de link om uw publicatie op een later tijdstip te uploaden';
+        $text = 'U zult binnen enkele minuten een mail ontvangen met de link om uw publicatie op een later tijdstip te uploaden';
         return view('/pages/successAction', ['title' => $title, 'text' => $text]);
     }
 }

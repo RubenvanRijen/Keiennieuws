@@ -11,6 +11,7 @@ use App\Models\Publication;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PublicationController extends Controller
 {
@@ -95,16 +96,14 @@ class PublicationController extends Controller
             'edition' => ['required', 'array', 'min:1'],
             'email' => ['required', 'email', 'min:3', 'max:255'],
             'information' => ['max:20000'],
-            'placedBooking' => 'required',
-            'size' => ['required_if:placedBooking,1'],
-            'placeBooking' => ['required_if:placedBooking,1'],
+            'size' => ['required'],
         ];
-
 
         $customMessages = [
-            'placeBooking.required_if' => 'U moet kiezen of u wel of geen reservering wilt plaatsen',
-            'placedBooking.required' => 'U moet kiezen of u wel of geen reservering heeft geplaatsen'
+            'information.max:20000' => 'U mag maximaal 5000 tekens gebruiken',
+            'title.min:3' => 'Uw titel moet minstens uit 3 tekens bestaand'
         ];
+
 
         $validation = $this->validate($request, $rules, $customMessages);
 
