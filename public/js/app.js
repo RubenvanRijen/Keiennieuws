@@ -15710,36 +15710,6 @@ window.addEventListener('load', function () {
 /***/ (() => {
 
 $(document).ready(function () {
-  var placedBooking = document.getElementById("placedBooking");
-  var placedNoBooking = document.getElementById("placedNoBooking");
-  var placeBooking = document.getElementById("placeBooking");
-  var placeNoBooking = document.getElementById("placeNoBooking");
-  var page = document.getElementsByClassName('.place-publication-page');
-  var placePublicationPage = document.getElementsByClassName('place-publication-page')[0];
-
-  if (placeBooking.checked == false) {
-    placePublicationPage.style.height = "inherit";
-  }
-
-  if (placedBooking && placedNoBooking) {
-    placedBooking.onclick = function () {
-      placedBooking.checked = true;
-      placedNoBooking.checked = false;
-      placePublicationPage.style.height = "max-content";
-      placeBooking.checked = false;
-      placeNoBooking.checked = false;
-    };
-
-    placedNoBooking.onclick = function () {
-      placedBooking.checked = false;
-      placedNoBooking.checked = true;
-      placePublicationPage.style.height = "inherit";
-      page[0].style.height = "unset";
-      placeBooking.checked = false;
-      placeNoBooking.checked = false;
-    };
-  }
-
   $('#formFileMultiple').change(function () {
     var input = $('#formFileMultiple')[0].files;
     var output = document.getElementById('fileList');

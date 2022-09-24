@@ -3,15 +3,15 @@
          <div class="col left-side">
              <form id="uploadpicture" action="{{ url('/home/uploadpicture') }}" method="POST" enctype="multipart/form-data">
                  @csrf
-                 <h1 class="">HOI MEGENSE FOTOGRAAF</h1>
+                 <h1 class="">HOI MEGENSE FOTOGRAAF&<br>SCHRIJVER</h1>
                  <div class="form-group" style="display: none;">
                      <label for="faxonly">
                          <input type="checkbox" name="botTest" id="botTest" />
                      </label>
                  </div>
                  <div class="custom-input custom-file-input">
-                     <p>Welke foto wilt u met ons delen?</p>
-                     <label for="formFileMultiple" class="form-label">U kunt ook meerdere foto's tegelijkertijd uploaden</label>
+                     <p>Welke foto's/bestanden wilt u met ons delen?</p>
+                     <label for="formFileMultiple" class="form-label">U kunt ook meerdere foto's/bestanden tegelijkertijd uploaden</label>
                      <input required class="form-control custom-file-input @error('file') is-invalid @enderror @error('file.*') is-invalid @enderror" name="file[]" type="file" id="formFileMultiple" multiple>
                      <span id="uploadedFilesMessage" class="d-none">Gekozen bestanden:</span>
                      <span id="maxFilesMessage" class="invalid-feedback d-none" role="alert">
