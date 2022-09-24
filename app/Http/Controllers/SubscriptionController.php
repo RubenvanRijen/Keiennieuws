@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Jobs\SendEmailJob;
 use App\Mail\EditEmail;
 use App\Mail\EditResidence;
+use App\Mail\EditSubscriptionNotification;
 use App\Mail\EndSubscription;
+use App\Mail\EndSubscriptionNotification;
 use App\Mail\StartSubscription;
+use App\Mail\StartSubscriptionNotification;
 use App\Models\Subscription;
 use App\Models\Token;
 use App\Models\User;
@@ -144,6 +147,8 @@ class SubscriptionController extends Controller
 
         $url = URL::temporarySignedRoute('subscribe', now()->addDays(1), ['user' => $user->id]);
         SendEmailJob::dispatch($user->email, new StartSubscription($url, $user));
+        SendEmailJob::dispatch('knstadskrant@gmail.com', new StartSubscriptionNotification());
+
         return redirect('/subscription/startfinal');
     }
 
@@ -185,6 +190,7 @@ class SubscriptionController extends Controller
         } else {
             $url = URL::temporarySignedRoute('unsubscribe', now()->addDays(1), ['user' => $user->id]);
             SendEmailJob::dispatch($user->email, new EndSubscription($url, $user));
+            SendEmailJob::dispatch('knstadskrant@gmail.com', new EndSubscriptionNotification());
         }
 
         return redirect('/subscription/endfinal');
@@ -228,6 +234,7 @@ class SubscriptionController extends Controller
                 'email' => $user->email
             ]);
             SendEmailJob::dispatch($user->email, new EditResidence($url, $user, $request->city, $request->house_number, $request->postcode, $request->street_name));
+            SendEmailJob::dispatch('knstadskrant@gmail.com', new EditSubscriptionNotification());
         } else {
             return back()->with('error', 'U heeft een verkeer e-mailadres opgegeven')->withInput();
         }
@@ -254,6 +261,7 @@ class SubscriptionController extends Controller
                 'email' => $validation['email'],
             ]);
             SendEmailJob::dispatch($user->email, new EditEmail($url, $user, $validation['confirmation_email']));
+            SendEmailJob::dispatch('knstadskrant@gmail.com', new EditSubscriptionNotification());
         } else {
             return back()->with('error', 'U heeft een verkeer e-mailadres opgegeven')->withInput();
         }

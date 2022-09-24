@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendEmailJob;
+use App\Mail\NewPublicationNotification;
 use App\Mail\PublicationCofirmation;
 use App\Models\Booking;
 use App\Models\Edition;
@@ -162,6 +163,7 @@ class PublicationController extends Controller
             $text = 'Uw publicatie is correct en in goed handen ontvangen';
         }
         SendEmailJob::dispatch($booking->email, new PublicationCofirmation($text));
+        SendEmailJob::dispatch('knstadskrant@gmail.com', new NewPublicationNotification());
         return redirect('/successactionpublication');
     }
 

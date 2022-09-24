@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\SendEmailJob;
 use App\Mail\BookingCreation;
+use App\Mail\NewReservationNotification;
 use App\Mail\PublicationUploadLink;
 use App\Models\Booking;
 use App\Models\Edition;
@@ -93,6 +94,7 @@ class BookingController extends Controller
                 'edition' => urlencode(serialize($validation['edition'])),
             ]);
             SendEmailJob::dispatch($user->email, new BookingCreation($url, $user));
+            SendEmailJob::dispatch('knstadskrant@gmail.com', new NewReservationNotification());
         } else {
             $request->edition = serialize($validation['edition']);
             $request->user = $user->id;
