@@ -3164,6 +3164,9 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?e559bf06bc84fd9525e61ead3
   color: white;
   border: 2px #ADC7AA solid;
 }
+.place-publication-page .place-publication-row .left-column form select[readonly] {
+  pointer-events: none;
+}
 .place-publication-page .place-publication-row .left-column form textarea {
   height: 200px;
 }

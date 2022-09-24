@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('originalTitle');
             $table->string('author')->nullable();
-            $table->foreignId('publication_id')->constrained('publications')->onDelete('cascade');
+            $table->foreignId('booking_id')->constrained('bookings')->onDelete('cascade');
             $table->timestamps();
         });
     }

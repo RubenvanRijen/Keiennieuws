@@ -36,6 +36,9 @@
                     color: white;
                     border: 2px $greenCustom solid;
                 }
+                select[readonly] {
+                    pointer-events: none;
+                }
                 textarea {
                     height: 200px;
                 }

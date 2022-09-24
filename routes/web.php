@@ -57,8 +57,8 @@ Route::get('/subscription/editEmail/{user}/{email}', [SubscriptionController::cl
 Route::get('/placebooking', [BookingController::class, 'indexBooking']);
 Route::post('/placebooking', [BookingController::class, 'createBooking']);
 Route::get('/successactionbooking', [BookingController::class, 'successBooking']);
-Route::post('/placedbooking/success/{user}/{email}/{title}/{size}/{type}/{editions}')->name('bookingsuccess')->middleware('signed');
-Route::get('/placedbooking/success/{user}/{email}/{title}/{size}/{type}/{editions}', [BookingController::class, 'checkTokenBooking']);
+Route::post('/placedbooking/success/{user}/{email}/{title}/{size}/{type}/{edition}')->name('bookingsuccess')->middleware('signed');
+Route::get('/placedbooking/success/{user}/{email}/{title}/{size}/{type}/{edition}', [BookingController::class, 'checkTokenBooking']);
 
 //publications
 Route::post('/placepublicationSigned/{user_id}/{booking_id}')->name('publicationSigned')->middleware('signed');

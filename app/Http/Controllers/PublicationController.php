@@ -7,14 +7,18 @@ use App\Mail\PublicationCofirmation;
 use App\Models\Booking;
 use App\Models\Edition;
 use App\Models\File;
-use App\Models\Publication;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class PublicationController extends Controller
 {
+
+    /**
+     * this controller is made to create a reservation and upload the
+     * files at the same time but also use a signed url to upload the files later to a booking
+     */
+
     /**
      * Display a listing of the resource.
      *
@@ -28,8 +32,8 @@ class PublicationController extends Controller
         $booking = new Booking();
         $booking->id = null;
 
-        $types = Publication::getEnumType();
-        $sizes = Publication::getEnumSize();
+        $types = Booking::getEnumType();
+        $sizes = Booking::getEnumSize();
         $booking_editions = [];
         return view('/pages/placePublication', ['user' => $user, 'editions' => $editions, 'sizes' => $sizes, 'types' => $types, 'booking' => $booking, 'booking_editions' => $booking_editions,]);
     }
@@ -54,8 +58,8 @@ class PublicationController extends Controller
 
         $booking_editions = $booking->editions->pluck('id');
 
-        $types = Publication::getEnumType();
-        $sizes = Publication::getEnumSize();
+        $types = Booking::getEnumType();
+        $sizes = Booking::getEnumSize();
 
         return view('/pages/placePublication', ['user' => $user, 'booking' => $booking, 'editions' => $editions, 'sizes' => $sizes, 'types' => $types, 'booking_editions' => $booking_editions,]);
     }
@@ -77,11 +81,7 @@ class PublicationController extends Controller
         // make shure a person doesn't upload more then 10 files when using the link mulitple times
         if ($request->booking_id != null) {
             $bok = Booking::find($request->booking_id);
-            $pubs =  $bok->publications()->get();
-            $amount = 0;
-            foreach ($pubs as $pub) {
-                $amount += count($pub->files()->get());
-            }
+            $amount = count($bok->files()->get());
             if ($amount > 10) {
                 return redirect()->back()->with('error', 'U heeft al 10 bestanden geupload');
             }
@@ -105,34 +105,41 @@ class PublicationController extends Controller
             'title.min:3' => 'Uw titel moet minstens uit 3 tekens bestaand',
             'checkPayment.required' => 'U moet deze checkbox aantikken als u het eens bent met de voorwaarden'
         ];
+        $sameEditions = true;
+        if ($request->booking_id) {
+            $bookingData = Booking::find($request->booking_id);
+            $oldEditions = $bookingData->editions()->get();
 
+            $editionsSelected = $request->edition;
+            if (count($editionsSelected) != count($oldEditions)) {
+                $sameEditions = false;
+            }
+            if ($sameEditions == true) {
+                for ($i = 0; $i < count($editionsSelected); $i++) {
+                    $sameEditions = in_array($oldEditions[$i]->id, $editionsSelected);
+                    if ($sameEditions == false) {
+                        break;
+                    }
+                }
+            }
+        }
+
+        if ($sameEditions == false) {
+            return back()->with('error', 'U heeft de gekozen edities aangepast')->withInput();
+        }
 
         $validation = $this->validate($request, $rules, $customMessages);
-
 
         $booking = null;
         if ($request->booking_id == null) {
             $booking  = BookingController::generateBooking($request, true);
+        } else {
+            $booking = Booking::find($request->booking_id);
         }
 
-        if (!$booking instanceof Booking) {
+        if (!$booking instanceof Booking && $request->booking_id == null) {
             return $booking;
         }
-
-        $publication = new Publication();
-        $publication->title = strtolower($validation['title']);
-        $publication->email = $validation['email'];
-        $publication->information = $validation['information'];
-        $publication->type = $validation['type'];
-        $publication->size = $validation['size'];
-        if ($request->booking_id !== null) {
-            $publication->booking_id = $request->booking_id;
-        } else if ($booking !== null) {
-            $publication->booking_id = $booking->id;
-        } else {
-            $publication->booking_id = null;
-        }
-        $publication->save();
 
         if ($request->hasFile('file')) {
             foreach ($request->file as $file) {
@@ -140,21 +147,21 @@ class PublicationController extends Controller
                 $link = $file->store('/public');
                 $fileData = new File();
                 $fileData->title = $fileName;
-                $fileData->publication_id = $publication->id;
+                $fileData->booking_id = $booking->id;
                 $fileData->location = $link;
                 $fileData->originalTitle = $file->getClientOriginalName();
-                $fileData->author = $publication->email;
+                $fileData->author = $booking->email;
                 $fileData->save();
             }
         }
 
         $text = '';
         if ($request->placeBooking == 0) {
-            $text = 'Uw publicatie en reservering is correct en in goed handen ontvangen';
+            $text = 'Uw publicatie en reservering zijn correct en in goed handen ontvangen';
         } else {
             $text = 'Uw publicatie is correct en in goed handen ontvangen';
         }
-        SendEmailJob::dispatch($publication->email, new PublicationCofirmation($text));
+        SendEmailJob::dispatch($booking->email, new PublicationCofirmation($text));
         return redirect('/successactionpublication');
     }
 

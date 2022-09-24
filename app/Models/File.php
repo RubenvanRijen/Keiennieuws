@@ -22,8 +22,8 @@ class File extends Model
     ];
 
 
-    public function publication()
+    public function booking()
     {
-        return $this->belongsTo(Publication::class);
+        return $this->belongsTo(Booking::class);
     }
 }

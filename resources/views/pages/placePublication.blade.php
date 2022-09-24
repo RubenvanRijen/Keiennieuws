@@ -44,7 +44,7 @@
                     </div>
                     <div class="custom-input">
                         <label for="title" class="form-label">Wat voor type publicatie is het? </label>
-                        <select name="type" id="type" required class="form-select @error('type') is-invalid @enderror">
+                        <select {{$booking->id != null  ? "readonly ":""}} name="type" id="type" required class="form-select @error('type') is-invalid @enderror">
                             @foreach ($types as $type => $name)
                             <option value="{{$type}}" {{ ((old() ? old("type") == $type : ($booking ? $booking->type : '') == $type) ? "selected":"") }}>{{$name}}</option>
                             @endforeach
@@ -57,7 +57,7 @@
                     </div>
                     <div class="custom-input" style="margin-top: -0.2rem;">
                         <label for="title" class="form-label">Titel van uw publicatie </label>
-                        <input required value="{{ old('title')?? $booking->title ??'' }}" class="form-control @error('title') is-invalid @enderror" type="text" name="title" class="form-control" id="title" aria-describedby="title">
+                        <input {{$booking->id != null  ? "readonly tabindex='-1' ":""}} required value="{{ old('title')?? $booking->title ??'' }}" class="form-control @error('title') is-invalid @enderror" type="text" name="title" class="form-control" id="title" aria-describedby="title">
                         @error('title')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -79,7 +79,7 @@
                     </div>
                     <div class="custom-input">
                         <label for="title" class="form-label">Wat is het formaat van uw publicatie? </label><br>
-                        <select name="size" id="size" required class="form-select @error('size') is-invalid @enderror">
+                        <select {{$booking->id != null  ? "readonly tabindex='-1' ":""}} name="size" id="size" required class="form-select @error('size') is-invalid @enderror">
                             @foreach ($sizes as $key =>$value)
                             <option value="{{$key}}" {{ ((old() ? old("size") == $key : ($booking ? $booking->size == $key : '')) ? "selected":"") }}>{{$value}}</option>
                             @endforeach
@@ -94,7 +94,7 @@
 
                     <div class="custom-input">
                         <label for="emailadres" class="form-label">Emailadres: </label>
-                        <input required value="{{ old('email')??$user->email?? '' }}" class="form-control @error('email') is-invalid @enderror" type="email" name="email" id="email" aria-describedby="email">
+                        <input {{$booking->id != null  ? "readonly ":""}} required value="{{ old('email')??$user->email?? '' }}" class="form-control @error('email') is-invalid @enderror" type="email" name="email" id="email" aria-describedby="email">
                         @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -112,7 +112,7 @@
                     </div>
 
                     <div class="form-group label-payment-check">
-                        <input required class="form-check-input @error('checkPayment') is-invalid @enderror" type="checkbox" value="" id="checkPayment">
+                        <input required type="checkbox" class="form-check-input @error('checkPayment') is-invalid @enderror" name="checkPayment" id="checkPayment" @if (old('checkPayment')) checked @endif />
                         <label class="form-check-label" for="checkPayment">
                             Door deze check box aan te klikken gaat u akkoord met de<br>
                             betalingsplicht voor het plaatsen van een artikel in het keiennieuws.<br>
@@ -126,6 +126,7 @@
                         </span>
                         @enderror
                     </div>
+
                     <input name="booking_id" value="{{$booking->id ?? null}}" style="visibility: hidden; display: none;">
                     <div class="custom-submit-right">
                         <button type="submit" class="btn btn-outline-success">Aanleveren</button>
