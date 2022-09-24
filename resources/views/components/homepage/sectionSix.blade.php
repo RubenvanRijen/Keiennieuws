@@ -46,7 +46,7 @@
                     @enderror
                 </div>
                 <div class="col-auto">
-                    <button type="submit" class="btn btn-outline-info">Versturen</button>
+                    <button type="submit" class="btn">Versturen</button>
                 </div>
             </form>
         </div>

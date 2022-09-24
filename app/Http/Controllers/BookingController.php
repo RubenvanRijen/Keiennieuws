@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Jobs\SendEmailJob;
 use App\Mail\BookingCreation;
+use App\Mail\NewReservationNotification;
+use App\Mail\PublicationUploadLink;
 use App\Models\Booking;
 use App\Models\Edition;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Mockery\Undefined;
 
 class BookingController extends Controller
 {
@@ -28,6 +31,15 @@ class BookingController extends Controller
     }
 
     public function createBooking(Request $request)
+    {
+        $result =  $this->generateBooking($request, false);
+        if ($result) {
+            return $result;
+        }
+        return redirect('/successactionbooking');
+    }
+
+    public static function generateBooking(Request $request, $acceptedReservation)
     {
         $validation =  $request->validate([
             'title' => ['required', 'min:3', 'max:255'],
@@ -57,6 +69,7 @@ class BookingController extends Controller
             }
         }
 
+
         if ($found != null) {
             return back()->with('error', 'U heeft al een reservering geplaats in de ' . $found->title . ' editie')->withInput();
         } else if ($fullEdition != null) {
@@ -70,36 +83,57 @@ class BookingController extends Controller
             $user->password = Hash::make('Test123?');
             $user->save();
         }
-        $url = URL::temporarySignedRoute('bookingsuccess', now()->addYear(2), [
-            'user' => $user->id,
-            'email' => $validation['email'],
-            'size' => $validation['size'],
-            'type' => $validation['type'],
-            'title' => $validation['title'],
-            'editions' => urlencode(serialize($validation['edition'])),
-        ]);
-        SendEmailJob::dispatch($user->email, new BookingCreation($url, $user));
-        return redirect('/successactionbooking');
+
+        if (!$acceptedReservation) {
+            $url = URL::temporarySignedRoute('bookingsuccess', now()->addYear(2), [
+                'user' => $user->id,
+                'email' => $validation['email'],
+                'size' => $validation['size'],
+                'type' => $validation['type'],
+                'title' => $validation['title'],
+                'edition' => urlencode(serialize($validation['edition'])),
+            ]);
+            SendEmailJob::dispatch($user->email, new BookingCreation($url, $user));
+            SendEmailJob::dispatch('knstadskrant@gmail.com', new NewReservationNotification());
+        } else {
+            $request->edition = serialize($validation['edition']);
+            $request->user = $user->id;
+            return BookingController::createBookingDB($request);
+        }
+    }
+
+    public static function createBookingDB(Request $request)
+    {
+        $editions = unserialize(urldecode($request->edition));
+        //TODO hier gaat nog iets fout als je geen booking hebt gemaakt. dus dan moeten we hier nog even naar kijken
+        $booking = new Booking();
+        $booking->size = $request->size;
+        $booking->type = $request->type;
+        $booking->email = $request->email;
+        $booking->title = $request->title;
+        $booking->user_id = $request->user;
+        $booking->save();
+        foreach ($editions  as $edition) {
+            $editionDB = Edition::find($edition);
+            $editionDB->bookings()->attach($booking);
+        }
+        return $booking;
     }
 
     public function checkTokenBooking(Request $request)
     {
         if ($request->hasValidSignature()) {
-            $editions = unserialize(urldecode($request->editions));
-            $booking = new Booking();
-            $booking->size = $request->size;
-            $booking->type = $request->type;
-            $booking->email = $request->email;
-            $booking->title = $request->title;
-            $booking->user_id = $request->user;
-            $booking->save();
-            foreach ($editions  as $edition) {
-                $editionDB = Edition::find($edition);
-                $editionDB->bookings()->attach($booking);
-            }
+            $booking = BookingController::createBookingDB($request);
             $user = User::find($request->user);
             $title = 'BEDANKT VOOR UW RESERVATIE!';
-            $text = 'Beste klant uw reservering is geplaatst en ontvangt zo spoedig mogelijk een link voor de publicatie';
+            $text = 'Beste klant uw reservering is geplaatst en ontvangt zo spoedig mogelijk een confirmatie link voor uw reservering';
+
+            // create the link for publication
+            $url = URL::temporarySignedRoute('publicationSigned', now()->addMonths(1.5), [
+                'user_id' => $user->id,
+                'booking_id' => $booking->id
+            ]);
+            SendEmailJob::dispatch($user->email, new PublicationUploadLink($url, $user));
             return view('/pages/successAction', ['title' => $title, 'text' => $text]);
         } else {
             $title = 'DE LINK IS VERLOPEN';
@@ -111,7 +145,7 @@ class BookingController extends Controller
     public function successBooking()
     {
         $title = 'BEDANKT VOOR UW RESERVATIE!';
-        $text = 'U zult binnen enkele minuten een bevestigingsmail ontvangen met de link om uw publicatie op een later tijdstip te uploaden';
+        $text = 'U zult binnen enkele minuten een mail ontvangen met de link om uw publicatie op een later tijdstip te uploaden';
         return view('/pages/successAction', ['title' => $title, 'text' => $text]);
     }
 }

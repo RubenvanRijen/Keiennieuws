@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\SubscriptionController;
 use App\Models\Subscription;
 use Illuminate\Support\Facades\Route;
@@ -52,23 +53,21 @@ Route::get('/subscription/editAdress/{user}/{email}/{city}/{street_name}/{postco
 Route::post('/subscription/editEmail/{user}/{email}')->name('editinfoEmail')->middleware('signed');
 Route::get('/subscription/editEmail/{user}/{email}', [SubscriptionController::class, 'checkTokenEditEmail']);
 
+//bookings
 Route::get('/placebooking', [BookingController::class, 'indexBooking']);
 Route::post('/placebooking', [BookingController::class, 'createBooking']);
 Route::get('/successactionbooking', [BookingController::class, 'successBooking']);
-Route::post('/placedbooking/success/{user}/{email}/{title}/{size}/{type}/{editions}')->name('bookingsuccess')->middleware('signed');
-Route::get('/placedbooking/success/{user}/{email}/{title}/{size}/{type}/{editions}', [BookingController::class, 'checkTokenBooking']);
+Route::post('/placedbooking/success/{user}/{email}/{title}/{size}/{type}/{edition}')->name('bookingsuccess')->middleware('signed');
+Route::get('/placedbooking/success/{user}/{email}/{title}/{size}/{type}/{edition}', [BookingController::class, 'checkTokenBooking']);
 
-Route::get('/placepublication', function () {
-    return view('/pages/placePublication');
-});
+//publications
+Route::post('/placepublicationSigned/{user_id}/{booking_id}')->name('publicationSigned')->middleware('signed');
+Route::get('/placepublicationSigned/{user_id?}/{booking_id?}', [PublicationController::class, 'indexSigned']);
+Route::get('/placepublication', [PublicationController::class, 'index']);
+Route::post('/placepublication', [PublicationController::class, 'store']);
+Route::get('/successactionpublication', [PublicationController::class, 'successPublication']);
 
-Route::post('/placepublication', function () {
-    return redirect('/successactionpublication');
-});
 
-Route::get('/successactionpublication', function () {
-    return view('/pages/successAction', ['title' => 'UW PUBLICATIE IS GEUPLOAD!', 'text' => 'Uw bestand word zo spoedig mogelijk verwerkt']);
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

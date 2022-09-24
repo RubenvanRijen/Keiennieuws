@@ -7,7 +7,7 @@
             <a href="/subscription"> <button type="button" class="btn rounded-0">Abonnement</button></a>
         </div>
         <div class="col mt-3">
-            <a href="/contact"> <button type="button" class="btn  rounded-0">Contact</button></a>
+            <a href="/home#contact-section-seven"> <button type="button" class="btn  rounded-0">Contact</button></a>
         </div>
         <div class="col mt-3">
             <a href="/information"> <button type="button" class="btn rounded-0">Informatie</button></a>

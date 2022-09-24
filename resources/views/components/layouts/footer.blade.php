@@ -20,9 +20,9 @@
                     <h5 class="text-white font-weight-bold">Links</h5>
                     <li class="nav-item"><a class="nav-link effect-5" href="{{ url('/') }}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/subscription') }}">Abonnementen</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/home#volunteer-carousel') }}">Contact</a>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/home#contact-section-seven') }}">Contact</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/home#count_down') }}">Aanleveren</a>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/placepublication') }}">Aanleveren</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/information') }}">Informatie</a></li>
                 </ul>

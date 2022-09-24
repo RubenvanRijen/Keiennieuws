@@ -199,6 +199,9 @@ function MultiselectDropdown(options){
     });
 
     div.addEventListener('click',()=>{
+		if (div.parentElement.childNodes[3].disabled == true){
+			return;
+        }
       div.listEl.style.display='block';
       search.focus();
       search.select();
