@@ -68,21 +68,27 @@
 
         <h1>Uw Reserveringen/Publicaties</h1>
         <hr>
-        <div class="row">
+        <div class="row booking_publications_overview">
             @foreach ($bookings as $booking )
             <div class="col">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">{{$booking->title}}</h5>
-                        <p class="card-subtitle mb-1">Type: {{$booking->type}}</p>
-                        <p class="card-subtitle mb-1">Groote: {{$booking->size}}</p>
-                        <p class="card-subtitle mb-1">Gemaakt op: {{$booking->created_at}}</p>
-
+                        <h5 class="card-title">#{{ $loop->index + 1 }} - {{$booking->title}}</h5>
+                        <hr>
+                        <p class="card-subtitle">Type: {{$booking->type}}</p>
+                        <p class="card-subtitle">Groote: {{$booking->size}}</p>
+                        <p class="card-subtitle">Gemaakt op: {{$booking->created_at}}</p>
                         <p class="card-subtitle mb-1">Edities:
                             @foreach ($booking->editions()->get() as $edition)
                             {{$edition->title}} ,
                             @endforeach
                         </p>
+                        <form action="{{ url('/dashboard/bookings/delete/'.$booking->id)}}" method="post" enctype="multipart/form-data">@method('DELETE') @csrf
+                            <button type="sumbit" class="btn btn-outline-danger">
+                                <i class="bi bi-trash"></i>
+                                Verwijderen
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

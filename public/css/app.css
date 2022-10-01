@@ -3605,6 +3605,12 @@ input[type=password]::placeholder {
   display: flex;
   justify-content: end;
 }
+.dashboard_users .booking_publications_overview .col .card-body {
+  text-align: center;
+}
+.dashboard_users .booking_publications_overview .col .card-body p {
+  margin-bottom: 0.5rem !important;
+}
 
 .notfound {
   display: flex;

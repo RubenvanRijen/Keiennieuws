@@ -71,5 +71,7 @@ Route::get('/successactionpublication', [PublicationController::class, 'successP
 
 // dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::post('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::delete('/dashboard/bookings/delete/{id}', [DashboardController::class, 'destroyBooking']);
 
 require __DIR__ . '/auth.php';

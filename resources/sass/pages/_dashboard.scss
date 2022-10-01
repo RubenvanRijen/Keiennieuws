@@ -15,4 +15,14 @@
             justify-content: end;
         }
     }
+    .booking_publications_overview {
+        .col {
+            .card-body {
+                p {
+                    margin-bottom: 0.5rem !important;
+                }
+                text-align: center;
+            }
+        }
+    }
 }
