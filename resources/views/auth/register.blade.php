@@ -95,10 +95,6 @@
                     </div>
                 </div>
             </div>
-
-
-
-
             <input type="submit" class="fadeIn sixth" value="Register">
         </form>
         <div id="formFooter">

@@ -57,6 +57,22 @@ class adminUserSeeder extends Seeder
         );
         $userTwo->assignRole('admin');
 
+        $userThree  = User::create(
+            [
+                'firstname' => 'ruben',
+                'lastname' => 'boss',
+                'postcode' => '5248LK',
+                'house_number' => 5,
+                'city' => 'oss',
+                'street_name' => 'beukenlaan',
+                'email' => 'ruben@gmail.com',
+                'email_verified_at' => now(),
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'remember_token' => Str::random(10),
+            ],
+        );
+        $userThree->assignRole('user');
+
         $subscriptionTwo =  new Subscription();
         $subscriptionTwo->user()->associate($userTwo);
         $subscriptionTwo->save();

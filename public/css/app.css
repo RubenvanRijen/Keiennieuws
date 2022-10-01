@@ -3588,6 +3588,24 @@ input[type=password]::placeholder {
     padding: 10px 60px;
   }
 }
+.dashboard_users {
+  margin-top: 3rem;
+}
+.dashboard_users form {
+  margin-bottom: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border-radius: 25px;
+}
+.dashboard_users form .field_input {
+  margin-top: 1.4rem;
+}
+.dashboard_users form .form_button {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: end;
+}
+
 .notfound {
   display: flex;
   justify-content: center;
