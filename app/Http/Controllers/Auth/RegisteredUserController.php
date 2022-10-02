@@ -45,7 +45,7 @@ class RegisteredUserController extends Controller
             'firstname' => ['required', 'string', 'max:255', 'min:3'],
             'lastname' => ['required', 'string', 'max:255', 'min:3'],
             'postcode' => 'required|postal_code:NL,DE,FR,BE',
-            'house_number' => 'required|regex:/[0-9][a-z]?/',
+            'house_number' => 'required',
             'city' => ['required', 'string', 'max:255', 'min:3'],
             'street_name' => ['required', 'string', 'max:255', 'min:3'],
             'email' => $rule,

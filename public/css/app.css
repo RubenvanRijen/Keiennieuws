@@ -3590,6 +3590,7 @@ input[type=password]::placeholder {
 }
 .dashboard_users {
   margin-top: 3rem;
+  padding-bottom: 5rem;
 }
 .dashboard_users form {
   margin-bottom: 2rem;
@@ -3605,13 +3606,55 @@ input[type=password]::placeholder {
   display: flex;
   justify-content: end;
 }
-.dashboard_users .booking_publications_overview .col .card-body {
+.dashboard_users .booking_publications_overview .row {
+  margin-right: unset !important;
+  margin-left: unset !important;
+}
+.dashboard_users .booking_publications_overview .col .card {
+  margin-bottom: 2rem;
+  width: 18rem;
+  height: 20rem;
+}
+.dashboard_users .booking_publications_overview .col .card .card-body {
+  display: flex;
+  flex-direction: column;
   text-align: center;
 }
-.dashboard_users .booking_publications_overview .col .card-body p {
+.dashboard_users .booking_publications_overview .col .card .card-body p {
   margin-bottom: 0.5rem !important;
 }
+.dashboard_users .booking_publications_overview .col .card form {
+  margin-top: auto;
+}
 
+@media screen and (max-width: 770px) {
+  .booking_publications_overview .col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 576px) {
+  .dashboard_users h1, .dashboard_users .h1 {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+}
+@media screen and (max-width: 350px) {
+  .dashboard_users h1, .dashboard_users .h1 {
+    text-align: center;
+    font-size: 1.25rem;
+  }
+}
+@media screen and (max-width: 290px) {
+  .booking_publications_overview .col .card form {
+    text-align: center;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+  }
+}
 .notfound {
   display: flex;
   justify-content: center;

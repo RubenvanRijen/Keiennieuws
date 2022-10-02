@@ -55,7 +55,7 @@
                         @enderror
                     </div>
                     <div>
-                        <input id="house_number" type="number" placeholder="huisnummer" class="fadeIn second @error('house_number') is-invalid @enderror" name="house_number" value="{{ old('house_number') }}" required autocomplete="house_number" autofocus>
+                        <input id="house_number" type="text" placeholder="huisnummer" class="fadeIn second @error('house_number') is-invalid @enderror" name="house_number" value="{{ old('house_number') }}" required autocomplete="house_number" autofocus>
                         @error('house_number')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\User;
-use Faker\Core\Number;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Mockery\Undefined;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -21,10 +19,43 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         $bookings = [];
+        $allowedBookings = [];
+        $bookingsToShow = [];
         if ($user instanceof User) {
-            $bookings = $user->bookings()->get();
+            $bookings = $user->bookings()->orderBy('id', 'desc')->take(30)->get();
         }
-        return view('/pages/dashboard', ['user' => $user,  'bookings' => $bookings]);
+
+        // get the bookings that are not over date
+        foreach ($bookings as $booking) {
+            $isStillValid = false;
+            $editions = $booking->editions()->get();
+            foreach ($editions as $edition) {
+                if (!(Carbon::createFromFormat('Y-m-d', $edition->endDate)->subDays(5)->isPast())) {
+                    $isStillValid = true;
+                }
+            }
+            if ($isStillValid) {
+                array_push($bookingsToShow, $booking);
+            }
+        }
+
+        // get all the bookings that are allowed to be deleted
+        foreach ($bookingsToShow as $booking) {
+            $isAllowd = true;
+            $editions = $booking->editions()->get();
+            foreach ($editions as $edition) {
+                if (Carbon::createFromFormat('Y-m-d', $edition->endDate)->subDays(5)->isPast()) {
+                    $isAllowd = false;
+                }
+            }
+            if (!$isAllowd) {
+                array_push($allowedBookings, $booking->id);
+            }
+        }
+        $bookingsToShow = array_reverse($bookingsToShow);
+        // dd($allowedBookings);
+
+        return view('/pages/dashboard', ['user' => $user,  'bookings' => $bookingsToShow, 'allowedBookings' => $allowedBookings]);
     }
 
 

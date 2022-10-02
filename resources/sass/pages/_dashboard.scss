@@ -1,28 +1,85 @@
-.dashboard_users {
-    margin-top: 3rem;
-    form {
-        margin-bottom: 2rem;
-        // border: solid black 2px;
-        .field_input {
-            margin-top: 1.4rem;
+    .dashboard_users {
+        margin-top: 3rem;
+        form {
+            margin-bottom: 2rem;
+            // border: solid black 2px;
+            .field_input {
+                margin-top: 1.4rem;
+            }
+            padding-left: 2rem;
+            padding-right: 2rem;
+            border-radius: 25px;
+            .form_button {
+                margin-top: 2rem;
+                display: flex;
+                justify-content: end;
+            }
         }
-        padding-left: 2rem;
-        padding-right: 2rem;
-        border-radius: 25px;
-        .form_button {
-            margin-top: 2rem;
-            display: flex;
-            justify-content: end;
-        }
-    }
-    .booking_publications_overview {
-        .col {
-            .card-body {
-                p {
-                    margin-bottom: 0.5rem !important;
+        .booking_publications_overview {
+            .row {
+                margin-right: unset !important;
+                margin-left: unset !important;
+            }
+            .col {
+                .card {
+                    margin-bottom: 2rem;
+                    width: 18rem;
+                    height: 20rem;
+                    .card-body {
+                        display: flex;
+                        flex-direction: column;
+                        p {
+                            margin-bottom: 0.5rem !important;
+                        }
+                        text-align: center;
+                    }
+                    form {
+                        margin-top: auto;
+                    }
                 }
+            }
+        }
+        padding-bottom: 5rem;
+    }
+    
+    @media screen and (max-width: 770px) {
+        .booking_publications_overview {
+            .col {
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 text-align: center;
             }
         }
     }
-}
+    
+    @media screen and (max-width: 576px) {
+        .dashboard_users {
+            h1 {
+                text-align: center;
+                font-size: 1.5rem;
+            }
+        }
+    }
+    
+    @media screen and (max-width: 350px) {
+        .dashboard_users {
+            h1 {
+                text-align: center;
+                font-size: 1.25rem;
+            }
+        }
+    }
+    
+    @media screen and (max-width: 290px) {
+        .booking_publications_overview {
+            .col {
+                .card {
+                    form {
+                        text-align: center;
+                        width: max-content;
+                    }
+                }
+            }
+        }
+    }
