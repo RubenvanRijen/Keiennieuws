@@ -28,6 +28,7 @@
         "@splidejs/splide": "^3.6.12",
         "bootstrap": "^5.2.1",
         "bootstrap-icons": "^1.9.1",
-        "jquery": "^3.6.0"
+        "jquery": "^3.6.0",
+        "sweetalert": "^2.1.2"
     }
 }

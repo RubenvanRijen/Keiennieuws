@@ -140,8 +140,8 @@
                                 {{$edition->title}} ,
                                 @endforeach
                             </p>
-                            <form action="{{ url('/dashboard/bookings/delete/'.$booking->id)}}" method="post" enctype="multipart/form-data">@method('DELETE') @csrf
-                                <button type="sumbit" @if (in_array($booking->id, $allowedBookings)) disabled @endif class="btn btn-outline-danger">
+                            <form action="{{ url('/dashboard/bookings/delete/'.$booking->id)}}" id="deleteBookingDashboard" method="post" enctype="multipart/form-data">@method('DELETE') @csrf
+                                <button onclick="deleteBooking();" type="sumbit" @if (in_array($booking->id, $allowedBookings)) disabled @endif class="btn btn-outline-danger show_confirm">
                                     <i class="bi bi-trash"></i>
                                     Verwijderen
                                 </button>
@@ -154,4 +154,7 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+
+</script>
 @endsection

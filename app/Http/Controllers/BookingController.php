@@ -37,20 +37,13 @@ class BookingController extends Controller
         return redirect('/successactionbooking');
     }
 
-    public static function generateBooking(Request $request, $acceptedReservation)
+    public static function validationForBooking(Request $request)
     {
-        $validation =  $request->validate([
-            'title' => ['required', 'min:3', 'max:255'],
-            'size' => ['required'],
-            'type' => ['required'],
-            'edition' => ['required', 'array', 'min:1'],
-            'email' => ['required', 'email', 'min:3', 'max:255'],
-        ]);
         $found = null;
         $fullEdition = null;
-        $bookingsize = Booking::SpaceCalculator($validation['size']);
+        $bookingsize = Booking::SpaceCalculator($request->size);
 
-        foreach ($validation['edition'] as $edition_id) {
+        foreach ($request->edition as $edition_id) {
             $size = 0;
             $edition = Edition::where('id', $edition_id)->first();
             $bookings = $edition->bookings()->get();
@@ -59,7 +52,7 @@ class BookingController extends Controller
             }
             foreach ($bookings as $booking) {
                 $size += Booking::SpaceCalculator($booking->size);
-                if ($booking->email == $validation['email']) {
+                if ($booking->email == $request->email) {
                     $found = $edition;
                 } else if (($size + $bookingsize) > $edition->space) {
                     $fullEdition = $edition;
@@ -72,6 +65,23 @@ class BookingController extends Controller
             return back()->with('error', 'U heeft al een reservering geplaats in de ' . $found->title . ' editie')->withInput();
         } else if ($fullEdition != null) {
             return back()->with('error', 'U heeft een reservering geplaats in de ' . $found->title . ' editie die helaas vol zit')->withInput();
+        }
+        return null;
+    }
+
+    public static function generateBooking(Request $request, $acceptedReservation)
+    {
+        $validation =  $request->validate([
+            'title' => ['required', 'min:3', 'max:255'],
+            'size' => ['required'],
+            'type' => ['required'],
+            'edition' => ['required', 'array', 'min:1'],
+            'email' => ['required', 'email', 'min:3', 'max:255'],
+        ]);
+
+        $validationBooking =  BookingController::validationForBooking($request);
+        if ($validationBooking !== null) {
+            return $validationBooking;
         }
 
         $user = User::where('email', $validation['email'])->first();
@@ -92,7 +102,6 @@ class BookingController extends Controller
                 'edition' => urlencode(serialize($validation['edition'])),
             ]);
             SendEmailJob::dispatch($user->email, new BookingCreation($url, $user));
-            SendEmailJob::dispatch('knstadskrant@gmail.com', new NewReservationNotification());
         } else {
             $request->edition = serialize($validation['edition']);
             $request->user = $user->id;
@@ -103,7 +112,11 @@ class BookingController extends Controller
     public static function createBookingDB(Request $request)
     {
         $editions = unserialize(urldecode($request->edition));
-        //TODO hier gaat nog iets fout als je geen booking hebt gemaakt. dus dan moeten we hier nog even naar kijken
+        $request->edition = $editions;
+        $validation = BookingController::validationForBooking($request);
+        if ($validation !== null) {
+            return null;
+        }
         $booking = new Booking();
         $booking->size = $request->size;
         $booking->type = $request->type;
@@ -115,6 +128,7 @@ class BookingController extends Controller
             $editionDB = Edition::find($edition);
             $editionDB->bookings()->attach($booking);
         }
+        SendEmailJob::dispatch('knstadskrant@gmail.com', new NewReservationNotification());
         return $booking;
     }
 
@@ -122,10 +136,14 @@ class BookingController extends Controller
     {
         if ($request->hasValidSignature()) {
             $booking = BookingController::createBookingDB($request);
+            if ($booking === null) {
+                $title = 'Duplicatie';
+                $text = 'Beste klant u hebt deze link al eerder gebruikt om een reservering the bevestigen';
+                return view('/pages/successAction', ['title' => $title, 'text' => $text]);
+            }
             $user = User::find($request->user);
             $title = 'BEDANKT VOOR UW RESERVATIE!';
             $text = 'Beste klant uw reservering is geplaatst en ontvangt zo spoedig mogelijk een confirmatie link voor uw reservering';
-
             // create the link for publication
             $url = URL::temporarySignedRoute('publicationSigned', now()->addMonths(1.5), [
                 'user_id' => $user->id,

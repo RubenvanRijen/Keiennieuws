@@ -1,5 +1,7 @@
 import Alpine from 'alpinejs';
 window.$ = require('jquery');
+//alert message
+import swal from 'sweetalert';
 
 require('./bootstrap/bootstrap.bundle');
 require('./main');
@@ -23,3 +25,21 @@ window.onload = () => {
 window.Alpine = Alpine;
 
 Alpine.start();
+
+$('.show_confirm').click(function(event) {
+    var form = $(this).closest("form");
+    var name = $(this).data("name");
+    event.preventDefault();
+    swal({
+            title: `Are you sure you want to delete this record?`,
+            text: "If you delete this, it will be gone forever.",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                form.submit();
+            }
+        });
+});
