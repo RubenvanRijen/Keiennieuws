@@ -125,6 +125,9 @@
         <h1 class="fadeIn first">Uw Reserveringen/Publicaties</h1>
         <hr class="fadeIn second">
         <div class="booking_publications_overview fadeIn third">
+            @if (count($bookings) === 0)
+            <h4>U heeft nog geen reserveringen geplaatst</h4>
+            @endif
             <div class="row ">
                 @foreach ($bookings as $booking )
                 <div class="col fadeIn fourth">
@@ -141,7 +144,7 @@
                                 @endforeach
                             </p>
                             <form action="{{ url('/dashboard/bookings/delete/'.$booking->id)}}" id="deleteBookingDashboard" method="post" enctype="multipart/form-data">@method('DELETE') @csrf
-                                <button onclick="deleteBooking();" type="sumbit" @if (in_array($booking->id, $allowedBookings)) disabled @endif class="btn btn-outline-danger show_confirm">
+                                <button onclick="deleteBooking();" type="sumbit" @if (in_array($booking->id, $allowedBookings)) disabled @endif class="btn btn-outline-danger show_confirm_delete_booking_dashboard">
                                     <i class="bi bi-trash"></i>
                                     Verwijderen
                                 </button>

@@ -8077,6 +8077,9 @@ __webpack_require__(/*! ./placePublication */ "./resources/js/placePublication.j
 
 __webpack_require__(/*! ./multiselect-dropdown */ "./resources/js/multiselect-dropdown.js");
 
+__webpack_require__(/*! ./deleteAlert */ "./resources/js/deleteAlert.js"); // foutje met de styling van de informatie pagina. moet nog een keer beter worden gemaakt maar voor nu werkt het prima
+
+
 window.onload = function () {
   if (window.location.pathname === '/information') {
     if (window.matchMedia("(max-width: 1200px)").matches || window.matchMedia("(max-height: 870px)").matches) {
@@ -8089,22 +8092,6 @@ window.onload = function () {
 
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
-$('.show_confirm').click(function (event) {
-  var form = $(this).closest("form");
-  var name = $(this).data("name");
-  event.preventDefault();
-  sweetalert__WEBPACK_IMPORTED_MODULE_1___default()({
-    title: "Are you sure you want to delete this record?",
-    text: "If you delete this, it will be gone forever.",
-    icon: "warning",
-    buttons: true,
-    dangerMode: true
-  }).then(function (willDelete) {
-    if (willDelete) {
-      form.submit();
-    }
-  });
-});
 
 /***/ }),
 
@@ -15472,6 +15459,31 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     Tooltip: Tooltip
   };
   return index_umd;
+});
+
+/***/ }),
+
+/***/ "./resources/js/deleteAlert.js":
+/*!*************************************!*\
+  !*** ./resources/js/deleteAlert.js ***!
+  \*************************************/
+/***/ (() => {
+
+$('.show_confirm_delete_booking_dashboard').click(function (event) {
+  var form = $(this).closest("form");
+  var name = $(this).data("name");
+  event.preventDefault();
+  swal({
+    title: "Weet u zeker dat u deze reservering wilt verwijderen",
+    text: "U kunt nog altijd een nieuwe reservering plaatsen als u dat wilt",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true
+  }).then(function (willDelete) {
+    if (willDelete) {
+      form.submit();
+    }
+  });
 });
 
 /***/ }),

@@ -11,7 +11,10 @@ require('./switchPage');
 require('./startStepTwo');
 require('./placePublication');
 require('./multiselect-dropdown');
+require('./deleteAlert');
 
+
+// foutje met de styling van de informatie pagina. moet nog een keer beter worden gemaakt maar voor nu werkt het prima
 window.onload = () => {
     if (window.location.pathname === '/information') {
         if (window.matchMedia("(max-width: 1200px)").matches || window.matchMedia("(max-height: 870px)").matches) {
@@ -25,21 +28,3 @@ window.onload = () => {
 window.Alpine = Alpine;
 
 Alpine.start();
-
-$('.show_confirm').click(function(event) {
-    var form = $(this).closest("form");
-    var name = $(this).data("name");
-    event.preventDefault();
-    swal({
-            title: `Are you sure you want to delete this record?`,
-            text: "If you delete this, it will be gone forever.",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-        .then((willDelete) => {
-            if (willDelete) {
-                form.submit();
-            }
-        });
-});
