@@ -70,8 +70,11 @@ Route::post('/placepublication', [PublicationController::class, 'store']);
 Route::get('/successactionpublication', [PublicationController::class, 'successPublication']);
 
 // dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::post('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::delete('/dashboard/bookings/delete/{id}', [DashboardController::class, 'destroyBooking']);
+Route::patch('/dashboard/user/edit/{id}', [DashboardController::class, 'updateUser']);
+Route::post('/dashboard/user/editEmail/{id}', [DashboardController::class, 'updateUserEmail']);
+
 
 require __DIR__ . '/auth.php';

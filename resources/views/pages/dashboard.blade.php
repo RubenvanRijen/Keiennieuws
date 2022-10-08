@@ -3,10 +3,23 @@
 @section('content')
 <div class="dashboard_users">
     <div class="container">
+        @if(session()->has('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session()->get('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+        @if(session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session()->get('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
         <h1 class="fadeIn first">Uw gegevens</h1>
         <hr class="fadeIn second">
-        <form>
-            @csrf
+        <form action="{{ url('/dashboard/user/edit/'.$user->id)}}" method="post">
+            @method('PATCH') @csrf
+
             <div class="field_input">
                 <label class="form-label fadeIn third">Voornaam</label>
                 <input id="firstname" type="text" placeholder="voornaam" class="form-control fadeIn fourth @error('firstname') is-invalid @enderror" name="firstname" value="{{ old('firstname') ?? $user->firstname ?? '' }}" required autocomplete="firstname" autofocus>
@@ -61,6 +74,14 @@
                 </span>
                 @enderror
             </div>
+            <div class="field_input">
+                <label class="form-label">Geslacht</label>
+                <select class="form-select" name="gender">
+                    <option @if ($user->gender === 'Dhr')selected @endif value="Dhr">Man</option>
+                    <option @if ($user-> gender === 'Mevr')selected @endif value="Mevr">Vrouw</option>
+                    <option @if ($user-> gender === 'Anders')selected @endif value="Anders">Anders</option>
+                </select>
+            </div>
             <div class="form_button fadeIn third">
                 <button type="submit" class="btn btn-primary">Aanpassen</button>
             </div>
@@ -97,12 +118,12 @@
 
         <h1 class="fadeIn first">Uw email</h1>
         <hr class="fadeIn second">
-        <form>
+        <form action="{{ url('/dashboard/user/editEmail/'.$user->id)}}" method="post">
             @csrf
             <div class="field_input">
                 <label class="form-label fadeIn third">Oude email</label>
-                <input type="text" placeholder="oude email" class="form-control fadeIn fourth @error('old-email') is-invalid @enderror" name="old-email" value="{{ old('old-email') ?? '' }}" required autocomplete="firstname" autofocus>
-                @error('old-email')
+                <input type="text" placeholder="oude email" class="form-control fadeIn fourth @error('old_email') is-invalid @enderror" name="old_email" value="{{ old('old_email') ?? $user->email??'' }}" required autocomplete="firstname" autofocus>
+                @error('old_email')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -110,8 +131,8 @@
             </div>
             <div class="field_input">
                 <label class="form-label fadeIn third">Nieuw email</label>
-                <input type="text" placeholder="nieuwe email" class="form-control fadeIn fourth @error('new-email') is-invalid @enderror" name="new-email" value="{{ old('new-email')?? '' }}" required autocomplete="lastname" autofocus>
-                @error('new-email')
+                <input type="text" placeholder="nieuwe email" class="form-control fadeIn fourth @error('email') is-invalid @enderror" name="email" value="{{ old('email')?? '' }}" required autocomplete="lastname" autofocus>
+                @error('email')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
