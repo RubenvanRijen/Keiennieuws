@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\SubscriptionController;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 //home
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index'])->name('homepage');
@@ -67,10 +69,16 @@ Route::get('/placepublication', [PublicationController::class, 'index']);
 Route::post('/placepublication', [PublicationController::class, 'store']);
 Route::get('/successactionpublication', [PublicationController::class, 'successPublication']);
 
+// dashboard
+Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::post('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::delete('/dashboard/bookings/delete/{id}', [DashboardController::class, 'destroyBooking']);
 
+Route::patch('/dashboard/user/edit/{id}', [DashboardController::class, 'updateUser']);
+Route::post('/dashboard/user/editEmail/{id}', [DashboardController::class, 'updateUserEmail']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::post('/dashboard/user/password/{id}', [DashboardController::class, 'updateUserPassword']);
+Route::get('/changedPasswordNotification', [DashboardController::class, 'changedPasswordNotification']);
+
 
 require __DIR__ . '/auth.php';

@@ -260,10 +260,10 @@ class SubscriptionController extends Controller
                 'user' => $user->id,
                 'email' => $validation['email'],
             ]);
-            SendEmailJob::dispatch($user->email, new EditEmail($url, $user, $validation['confirmation_email']));
+            SendEmailJob::dispatch($user->email, new EditEmail($url, $user, $validation['email']));
             SendEmailJob::dispatch('knstadskrant@gmail.com', new EditSubscriptionNotification());
         } else {
-            return back()->with('error', 'U heeft een verkeer e-mailadres opgegeven')->withInput();
+            return back()->with('error', 'U heeft een verkeerd e-mailadres opgegeven')->withInput();
         }
 
         return redirect('/subscription/editFinalEmail');
@@ -272,8 +272,8 @@ class SubscriptionController extends Controller
     public function editFinalEmail()
     {
         $title = 'UW EMAILADRES IS GEWIJZIGD';
-        $text = 'U ontvangt binnen enkele minute een automatische email die naar uw nieuwe emailadres wordt gestuurd.
-        Dit wordt gedaan om te controleren of de wijzigingen goed gelukt zijn.';
+        $text = 'U ontvangt binnen enkele minute een automatische email die naar uw oude emailadres wordt gestuurd.
+        Dit wordt gedaan om te controleren of u wel de wijziging wilde maken.';
         return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
     }
 

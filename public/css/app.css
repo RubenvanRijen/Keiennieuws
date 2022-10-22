@@ -3125,7 +3125,6 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?e559bf06bc84fd9525e61ead3
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
   width: auto;
@@ -3265,7 +3264,6 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?e559bf06bc84fd9525e61ead3
 }
 @media screen and (max-width: 1053px) {
   .place-publication-page {
-    height: -webkit-fit-content;
     height: -moz-fit-content;
     height: fit-content;
   }
@@ -3450,23 +3448,9 @@ input[type=password]::placeholder {
 /* ANIMATIONS */
 /* Simple CSS3 Fade-in-down Animation */
 .fadeInDown {
-  -webkit-animation-name: fadeInDown;
   animation-name: fadeInDown;
-  -webkit-animation-duration: 1s;
   animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
-}
-
-@-webkit-keyframes fadeInDown {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, -100%, 0);
-  }
-  100% {
-    opacity: 1;
-    transform: none;
-  }
 }
 @keyframes fadeInDown {
   0% {
@@ -3479,14 +3463,6 @@ input[type=password]::placeholder {
   }
 }
 /* Simple CSS3 Fade-in Animation */
-@-webkit-keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -3497,41 +3473,32 @@ input[type=password]::placeholder {
 }
 .fadeIn {
   opacity: 0;
-  -webkit-animation: fadeIn ease-in 1;
   animation: fadeIn ease-in 1;
-  -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
-  -webkit-animation-duration: 1s;
   animation-duration: 1s;
 }
 
 .fadeIn.first {
-  -webkit-animation-delay: 0.4s;
   animation-delay: 0.4s;
 }
 
 .fadeIn.second {
-  -webkit-animation-delay: 0.6s;
   animation-delay: 0.6s;
 }
 
 .fadeIn.third {
-  -webkit-animation-delay: 0.8s;
   animation-delay: 0.8s;
 }
 
 .fadeIn.fourth {
-  -webkit-animation-delay: 1s;
   animation-delay: 1s;
 }
 
 .fadeIn.fifth {
-  -webkit-animation-delay: 1.2s;
   animation-delay: 1.2s;
 }
 
 .fadeIn.sixth {
-  -webkit-animation-delay: 1.4s;
   animation-delay: 1.4s;
 }
 
@@ -3588,6 +3555,72 @@ input[type=password]::placeholder {
     padding: 10px 60px;
   }
 }
+.dashboard_users {
+  margin-top: 3rem;
+  padding-bottom: 5rem;
+}
+.dashboard_users form {
+  margin-bottom: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border-radius: 25px;
+}
+.dashboard_users form .field_input {
+  margin-top: 1.4rem;
+}
+.dashboard_users form .form_button {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: end;
+}
+.dashboard_users .booking_publications_overview .row {
+  margin-right: unset !important;
+  margin-left: unset !important;
+}
+.dashboard_users .booking_publications_overview .col .card {
+  margin-bottom: 2rem;
+  width: 18rem;
+  height: 20rem;
+}
+.dashboard_users .booking_publications_overview .col .card .card-body {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.dashboard_users .booking_publications_overview .col .card .card-body p {
+  margin-bottom: 0.5rem !important;
+}
+.dashboard_users .booking_publications_overview .col .card form {
+  margin-top: auto;
+}
+
+@media screen and (max-width: 770px) {
+  .booking_publications_overview .col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 576px) {
+  .dashboard_users h1, .dashboard_users .h1 {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+}
+@media screen and (max-width: 350px) {
+  .dashboard_users h1, .dashboard_users .h1 {
+    text-align: center;
+    font-size: 1.25rem;
+  }
+}
+@media screen and (max-width: 290px) {
+  .booking_publications_overview .col .card form {
+    text-align: center;
+    width: -moz-max-content;
+    width: max-content;
+  }
+}
 .notfound {
   display: flex;
   justify-content: center;
@@ -3640,7 +3673,7 @@ input[type=password]::placeholder {
 }
 
 /*!
- * Bootstrap  v5.2.1 (https://getbootstrap.com/)
+ * Bootstrap  v5.2.2 (https://getbootstrap.com/)
  * Copyright 2011-2022 The Bootstrap Authors
  * Copyright 2011-2022 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
@@ -6440,10 +6473,15 @@ textarea.form-control-lg {
     transition: none;
   }
 }
-:not(.btn-check) + .btn:hover, .btn:first-child:hover {
+.btn:hover {
   color: var(--bs-btn-hover-color);
   background-color: var(--bs-btn-hover-bg);
   border-color: var(--bs-btn-hover-border-color);
+}
+.btn-check + .btn:hover {
+  color: var(--bs-btn-color);
+  background-color: var(--bs-btn-bg);
+  border-color: var(--bs-btn-border-color);
 }
 .btn:focus-visible {
   color: var(--bs-btn-hover-color);
@@ -7961,7 +7999,7 @@ textarea.form-control-lg {
 }
 
 .accordion {
-  --bs-accordion-color: var(--bs-body-color);
+  --bs-accordion-color: #212529;
   --bs-accordion-bg: #fff;
   --bs-accordion-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-radius 0.15s ease;
   --bs-accordion-border-color: var(--bs-border-color);
@@ -7970,9 +8008,9 @@ textarea.form-control-lg {
   --bs-accordion-inner-border-radius: calc(0.375rem - 1px);
   --bs-accordion-btn-padding-x: 1.25rem;
   --bs-accordion-btn-padding-y: 1rem;
-  --bs-accordion-btn-color: var(--bs-body-color);
+  --bs-accordion-btn-color: #212529;
   --bs-accordion-btn-bg: var(--bs-accordion-bg);
-  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='var%28--bs-body-color%29'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
   --bs-accordion-btn-icon-width: 1.25rem;
   --bs-accordion-btn-icon-transform: rotate(-180deg);
   --bs-accordion-btn-icon-transition: transform 0.2s ease-in-out;
@@ -8357,12 +8395,6 @@ textarea.form-control-lg {
   color: #101214;
 }
 
-@-webkit-keyframes progress-bar-stripes {
-  0% {
-    background-position-x: 1rem;
-  }
-}
-
 @keyframes progress-bar-stripes {
   0% {
     background-position-x: 1rem;
@@ -8408,13 +8440,11 @@ textarea.form-control-lg {
 }
 
 .progress-bar-animated {
-  -webkit-animation: 1s linear infinite progress-bar-stripes;
-          animation: 1s linear infinite progress-bar-stripes;
+  animation: 1s linear infinite progress-bar-stripes;
 }
 @media (prefers-reduced-motion: reduce) {
   .progress-bar-animated {
-    -webkit-animation: none;
-            animation: none;
+    animation: none;
   }
 }
 
@@ -8837,9 +8867,9 @@ textarea.form-control-lg {
 }
 
 .toast-container {
+  --bs-toast-zindex: 1090;
   position: absolute;
   z-index: var(--bs-toast-zindex);
-  width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
   max-width: 100%;
@@ -9635,14 +9665,7 @@ textarea.form-control-lg {
   height: var(--bs-spinner-height);
   vertical-align: var(--bs-spinner-vertical-align);
   border-radius: 50%;
-  -webkit-animation: var(--bs-spinner-animation-speed) linear infinite var(--bs-spinner-animation-name);
-          animation: var(--bs-spinner-animation-speed) linear infinite var(--bs-spinner-animation-name);
-}
-
-@-webkit-keyframes spinner-border {
-  to {
-    transform: rotate(360deg) /* rtl:ignore */;
-  }
+  animation: var(--bs-spinner-animation-speed) linear infinite var(--bs-spinner-animation-name);
 }
 
 @keyframes spinner-border {
@@ -9665,16 +9688,6 @@ textarea.form-control-lg {
   --bs-spinner-width: 1rem;
   --bs-spinner-height: 1rem;
   --bs-spinner-border-width: 0.2em;
-}
-
-@-webkit-keyframes spinner-grow {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    opacity: 1;
-    transform: none;
-  }
 }
 
 @keyframes spinner-grow {
@@ -10283,14 +10296,7 @@ textarea.form-control-lg {
 }
 
 .placeholder-glow .placeholder {
-  -webkit-animation: placeholder-glow 2s ease-in-out infinite;
-          animation: placeholder-glow 2s ease-in-out infinite;
-}
-
-@-webkit-keyframes placeholder-glow {
-  50% {
-    opacity: 0.2;
-  }
+  animation: placeholder-glow 2s ease-in-out infinite;
 }
 
 @keyframes placeholder-glow {
@@ -10303,15 +10309,7 @@ textarea.form-control-lg {
           mask-image: linear-gradient(130deg, #000 55%, rgba(0, 0, 0, 0.8) 75%, #000 95%);
   -webkit-mask-size: 200% 100%;
           mask-size: 200% 100%;
-  -webkit-animation: placeholder-wave 2s linear infinite;
-          animation: placeholder-wave 2s linear infinite;
-}
-
-@-webkit-keyframes placeholder-wave {
-  100% {
-    -webkit-mask-position: -200% 0%;
-            mask-position: -200% 0%;
-  }
+  animation: placeholder-wave 2s linear infinite;
 }
 
 @keyframes placeholder-wave {

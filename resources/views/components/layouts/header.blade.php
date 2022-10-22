@@ -45,11 +45,12 @@
                             {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu text-center" aria-labelledby="navbarDarkDropdownMenuLink" style=" left: -3.8rem;">
-
+                            <a class="dropdown-item " href="{{ route('dashboard') }}">Dashboard</a>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
+
 
                             <form id="logout-form" action="{{ route('logout') }}" method="GET" style="display: none;">
                                 @csrf
