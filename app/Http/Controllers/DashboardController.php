@@ -5,20 +5,23 @@ namespace App\Http\Controllers;
 use App\Jobs\SendEmailJob;
 use App\Mail\EditEmail;
 use App\Mail\EditSubscriptionNotification;
+use App\Mail\PasswordChangeReminder;
 use App\Models\Booking;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\Rules;
 
 class DashboardController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware(['auth', 'verified', 'role:user'])->except([]);
+        $this->middleware(['auth', 'verified', 'role:user'])->except(['changedPasswordNotification']);
     }
 
     public function index()
@@ -95,7 +98,7 @@ class DashboardController extends Controller
         $user->gender = $valid['gender'];
 
         $user->save();
-
+        SendEmailJob::dispatch('knstadskrant@gmail.com', new EditSubscriptionNotification());
         return back()->with('success', 'Uw gegevens zijn successvol aangepast en opgeslagen');
     }
 
@@ -122,5 +125,35 @@ class DashboardController extends Controller
         Auth::logout();
 
         return redirect('/subscription/editFinalEmail');
+    }
+
+
+    public function updateUserPassword(Request $request)
+    {
+        $user = Auth::user();
+        $validation =  $request->validate([
+            'old_password' =>  ['required'],
+            'new_password' => ['required', 'max:40', 'min:4', 'different:old_password', Rules\Password::defaults()]
+        ]);
+
+        if (Hash::check($validation['old_password'], $user->password)) {
+
+            User::whereId(auth()->user()->id)->update([
+                'password' => Hash::make($request->new_password)
+            ]);
+            Session::flush();
+            Auth::logout();
+            SendEmailJob::dispatch($user->email, new PasswordChangeReminder());
+            return redirect('/changedPasswordNotification');
+        } else {
+            return back()->with('error', 'U heeft een verkeer wachtwoord opgegeven opgegeven')->withInput();
+        }
+    }
+
+    public function changedPasswordNotification()
+    {
+        $title = 'UW WACHTWOORD IS GEWIJZIGD';
+        $text = 'U ontvangt een email met confirmatie dat uw wachtwoord is aangepast. U kunt nu overnieuw inloggen met uw nieuwe wachtwoord';
+        return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
     }
 }

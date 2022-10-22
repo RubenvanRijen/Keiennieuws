@@ -73,8 +73,12 @@ Route::get('/successactionpublication', [PublicationController::class, 'successP
 Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::post('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::delete('/dashboard/bookings/delete/{id}', [DashboardController::class, 'destroyBooking']);
+
 Route::patch('/dashboard/user/edit/{id}', [DashboardController::class, 'updateUser']);
 Route::post('/dashboard/user/editEmail/{id}', [DashboardController::class, 'updateUserEmail']);
+
+Route::post('/dashboard/user/password/{id}', [DashboardController::class, 'updateUserPassword']);
+Route::get('/changedPasswordNotification', [DashboardController::class, 'changedPasswordNotification']);
 
 
 require __DIR__ . '/auth.php';

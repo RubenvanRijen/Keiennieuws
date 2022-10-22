@@ -90,12 +90,12 @@
 
         <h1 class="fadeIn first">Uw wachtwoord</h1>
         <hr class="fadeIn second">
-        <form>
+        <form action="{{ url('/dashboard/user/password/'.$user->id)}}" method="post">
             @csrf
             <div class="field_input">
                 <label class="form-label fadeIn third">Oud wachtwoord</label>
-                <input type="text" placeholder="oud wachtwoord" class="form-control fadeIn fourth @error('old-password') is-invalid @enderror" name="old-password" value="{{ old('old-password') ?? '' }}" required autocomplete="firstname" autofocus>
-                @error('old-password')
+                <input type="text" placeholder="oud wachtwoord" class="form-control fadeIn fourth @error('old_password') is-invalid @enderror" name="old_password" value="{{ old('old_password') ?? '' }}" required autocomplete="firstname" autofocus>
+                @error('old_password')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -103,8 +103,8 @@
             </div>
             <div class="field_input">
                 <label class="form-label fadeIn third">Nieuw wachtwoord</label>
-                <input type="text" placeholder="nieuw wachtwoord" class="form-control fadeIn fourth @error('new-password') is-invalid @enderror" name="new-password" value="{{ old('new-password')?? '' }}" required autocomplete="lastname" autofocus>
-                @error('new-password')
+                <input type="text" placeholder="nieuw wachtwoord" class="form-control fadeIn fourth @error('new_password') is-invalid @enderror" name="new_password" value="{{ old('new_password')?? '' }}" required autocomplete="lastname" autofocus>
+                @error('new_password')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
