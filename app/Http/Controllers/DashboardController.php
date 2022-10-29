@@ -21,10 +21,22 @@ class DashboardController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'verified', 'role:user'])->except(['changedPasswordNotification']);
+        $this->middleware(['auth', 'verified', 'role:user|admin'])->except(['changedPasswordNotification']);
     }
 
-    public function index()
+    public function personInformationIndex()
+    {
+        $user = Auth::user();
+        return view('/pages/dashboard/customer/dashboardPersonInformation', ['user' => $user]);
+    }
+
+    public function personSecurityIndex()
+    {
+        $user = Auth::user();
+        return view('/pages/dashboard/customer/dashboardSecurity', ['user' => $user]);
+    }
+
+    public function personReservationsIndex()
     {
         $user = Auth::user();
         $bookings = [];
@@ -62,9 +74,9 @@ class DashboardController extends Controller
             }
         }
         $bookingsToShow = array_reverse($bookingsToShow);
-
-        return view('/pages/dashboard', ['user' => $user,  'bookings' => $bookingsToShow, 'allowedBookings' => $allowedBookings]);
+        return view('/pages/dashboard/customer/dashboardReservations', ['user' => $user, 'bookings' => $bookingsToShow, 'allowedBookings' => $allowedBookings]);
     }
+
 
     public function destroyBooking($id = null)
     {

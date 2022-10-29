@@ -69,16 +69,17 @@ Route::get('/placepublication', [PublicationController::class, 'index']);
 Route::post('/placepublication', [PublicationController::class, 'store']);
 Route::get('/successactionpublication', [PublicationController::class, 'successPublication']);
 
-// dashboard
-Route::get('/dashboard', [DashboardController::class, 'index']);
-Route::post('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::delete('/dashboard/bookings/delete/{id}', [DashboardController::class, 'destroyBooking']);
-
-Route::patch('/dashboard/user/edit/{id}', [DashboardController::class, 'updateUser']);
-Route::post('/dashboard/user/editEmail/{id}', [DashboardController::class, 'updateUserEmail']);
-
-Route::post('/dashboard/user/password/{id}', [DashboardController::class, 'updateUserPassword']);
+//dashboard
+//person information
+Route::get('/dashboard/person-information', [DashboardController::class, 'personInformationIndex']);
+Route::patch('/dashboard/person-information/edit/{id}', [DashboardController::class, 'updateUser']);
+//security
+Route::get('/dashboard/person-security', [DashboardController::class, 'personSecurityIndex']);
+Route::post('/dashboard/person-security/editEmail/{id}', [DashboardController::class, 'updateUserEmail']);
+Route::post('/dashboard/person-security/password/{id}', [DashboardController::class, 'updateUserPassword']);
 Route::get('/changedPasswordNotification', [DashboardController::class, 'changedPasswordNotification']);
-
+//reservations
+Route::get('/dashboard/person-reservations', [DashboardController::class, 'personReservationsIndex']);
+Route::delete('/dashboard/person-reservations/delete/{id}', [DashboardController::class, 'destroyBooking']);
 
 require __DIR__ . '/auth.php';

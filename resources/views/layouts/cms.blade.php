@@ -6,11 +6,19 @@
 </head>
 
 <body>
-    <header>
+    <header class="custom-header">
         @include('components.layouts.header')
     </header>
-    @yield('content')
+    <div class="container-fluid">
+        <div class="row ">
+            @include('components.layouts.verticalSideBar')
+            <div class="col-sm min-vh-100">
+                @yield('content')
 
+                @yield('scripts')
+            </div>
+        </div>
+    </div>
 
 </body>
 
