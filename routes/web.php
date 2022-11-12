@@ -71,15 +71,27 @@ Route::get('/successactionpublication', [PublicationController::class, 'successP
 
 //dashboard
 //person information
-Route::get('/dashboard/person-information', [DashboardController::class, 'personInformationIndex']);
-Route::patch('/dashboard/person-information/edit/{id}', [DashboardController::class, 'updateUser']);
-//security
-Route::get('/dashboard/person-security', [DashboardController::class, 'personSecurityIndex']);
-Route::post('/dashboard/person-security/editEmail/{id}', [DashboardController::class, 'updateUserEmail']);
-Route::post('/dashboard/person-security/password/{id}', [DashboardController::class, 'updateUserPassword']);
+Route::middleware(['auth', 'verified', 'role:user|admin'])->group(
+    function () {
+        Route::get('/dashboard/person-information', [DashboardController::class, 'personInformationIndex']);
+        Route::patch('/dashboard/person-information/edit/{id}', [DashboardController::class, 'updateUser']);
+        //security
+        Route::get('/dashboard/person-security', [DashboardController::class, 'personSecurityIndex']);
+        Route::post('/dashboard/person-security/editEmail/{id}', [DashboardController::class, 'updateUserEmail']);
+        Route::post('/dashboard/person-security/password/{id}', [DashboardController::class, 'updateUserPassword']);
+        //reservations
+        Route::get('/dashboard/person-reservations', [DashboardController::class, 'personReservationsIndex']);
+        Route::delete('/dashboard/person-reservations/delete/{id}', [DashboardController::class, 'destroyBooking']);
+    }
+);
 Route::get('/changedPasswordNotification', [DashboardController::class, 'changedPasswordNotification']);
-//reservations
-Route::get('/dashboard/person-reservations', [DashboardController::class, 'personReservationsIndex']);
-Route::delete('/dashboard/person-reservations/delete/{id}', [DashboardController::class, 'destroyBooking']);
+
+//admin
+//users
+Route::middleware(['role:admin', 'auth', 'verified'])->group(
+    function () {
+        Route::get('/dashboard/admin/users', [DashboardController::class, 'indexUsers']);
+    }
+);
 
 require __DIR__ . '/auth.php';

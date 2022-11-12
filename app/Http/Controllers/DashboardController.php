@@ -21,7 +21,6 @@ class DashboardController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'verified', 'role:user|admin'])->except(['changedPasswordNotification']);
     }
 
     public function personInformationIndex()
@@ -167,5 +166,14 @@ class DashboardController extends Controller
         $title = 'UW WACHTWOORD IS GEWIJZIGD';
         $text = 'U ontvangt een email met confirmatie dat uw wachtwoord is aangepast. U kunt nu overnieuw inloggen met uw nieuwe wachtwoord';
         return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
+    }
+
+
+    public function indexUsers()
+    {
+        $users = User::orderBy('created_at', 'desc')->simplePaginate(10);
+
+
+        return view('/pages/dashboard/admin/usersIndex', ['users' => $users]);
     }
 }
