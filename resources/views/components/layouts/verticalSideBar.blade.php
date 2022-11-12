@@ -26,5 +26,14 @@
                  </a>
              </li>
          </ul>
+         @guest
+         <hr style="border: 1px #6c757d solid !important; opacity: 1; width: 100%; margin: auto; margin-top: 5%; margin-bottom: 5%;">
+
+         @else
+
+         @endguest
+
+
+
      </div>
  </div>
