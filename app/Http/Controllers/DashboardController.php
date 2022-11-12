@@ -169,7 +169,7 @@ class DashboardController extends Controller
         return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
     }
 
-
+    //TODO de juiste gegevens in de html table zetten en het verwijderen maken
     public function indexUsers()
     {
         $users = User::orderBy('created_at', 'desc')->simplePaginate(10);
@@ -178,6 +178,7 @@ class DashboardController extends Controller
         return view('/pages/dashboard/admin/usersIndex', ['users' => $users]);
     }
 
+    //TODO de juiste gegevens in de html table zetten en het create maken en verwijderen
     public function indexEditions()
     {
         $editions = Edition::orderBy('created_at', 'desc')->simplePaginate(10);
@@ -186,6 +187,7 @@ class DashboardController extends Controller
         return view('/pages/dashboard/admin/editionsIndex', ['editions' => $editions]);
     }
 
+    //TODO de juiste gegevens in de html table zetten en het verwijderen maken
     public function indexBookings()
     {
         $bookings = Booking::orderBy('created_at', 'desc')->simplePaginate(10);
