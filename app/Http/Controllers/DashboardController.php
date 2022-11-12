@@ -7,6 +7,7 @@ use App\Mail\EditEmail;
 use App\Mail\EditSubscriptionNotification;
 use App\Mail\PasswordChangeReminder;
 use App\Models\Booking;
+use App\Models\Edition;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -175,5 +176,21 @@ class DashboardController extends Controller
 
 
         return view('/pages/dashboard/admin/usersIndex', ['users' => $users]);
+    }
+
+    public function indexEditions()
+    {
+        $editions = Edition::orderBy('created_at', 'desc')->simplePaginate(10);
+
+
+        return view('/pages/dashboard/admin/editionsIndex', ['editions' => $editions]);
+    }
+
+    public function indexBookings()
+    {
+        $bookings = Booking::orderBy('created_at', 'desc')->simplePaginate(10);
+
+
+        return view('/pages/dashboard/admin/bookingsIndex', ['bookings' => $bookings]);
     }
 }

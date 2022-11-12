@@ -91,6 +91,8 @@ Route::get('/changedPasswordNotification', [DashboardController::class, 'changed
 Route::middleware(['role:admin', 'auth', 'verified'])->group(
     function () {
         Route::get('/dashboard/admin/users', [DashboardController::class, 'indexUsers']);
+        Route::get('/dashboard/admin/editions', [DashboardController::class, 'indexEditions']);
+        Route::get('/dashboard/admin/bookings', [DashboardController::class, 'indexBookings']);
     }
 );
 
