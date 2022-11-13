@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Jobs\SendEmailJob;
 use App\Mail\EditEmail;
-use App\Mail\EditSubscriptionNotification;
 use App\Mail\PasswordChangeReminder;
+use App\Mail\UserEditNotification;
 use App\Models\Booking;
 use App\Models\Edition;
 use App\Models\User;
@@ -110,7 +110,7 @@ class DashboardController extends Controller
         $user->gender = $valid['gender'];
 
         $user->save();
-        SendEmailJob::dispatch('knstadskrant@gmail.com', new EditSubscriptionNotification());
+        SendEmailJob::dispatch('knstadskrant@gmail.com', new UserEditNotification($user->id));
         return back()->with('success', 'Uw gegevens zijn successvol aangepast en opgeslagen');
     }
 
@@ -129,7 +129,6 @@ class DashboardController extends Controller
                 'email' => $validation['email'],
             ]);
             SendEmailJob::dispatch($user->email, new EditEmail($url, $user, $validation['email']));
-            SendEmailJob::dispatch('knstadskrant@gmail.com', new EditSubscriptionNotification());
         } else {
             return back()->with('error', 'U heeft een verkeer e-mailadres opgegeven')->withInput();
         }

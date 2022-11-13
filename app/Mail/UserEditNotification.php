@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class EditSubscriptionNotification extends Mailable
+class UserEditNotification extends Mailable
 {
     use Queueable, SerializesModels;
     public $url;
@@ -17,10 +17,10 @@ class EditSubscriptionNotification extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($id)
     {
         $this->template_message = $template_message = "Er is een gebruiker die zijn gegevens heeft aangepast";
-        $this->url =  $url = url('/cms');
+        $this->url =  $url = url('/dashboard/admin/user-info/' . $id);
     }
 
     /**

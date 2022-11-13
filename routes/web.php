@@ -91,10 +91,10 @@ Route::get('/changedPasswordNotification', [DashboardController::class, 'changed
 Route::middleware(['role:admin', 'auth', 'verified'])->group(
     function () {
         Route::get('/dashboard/admin/users', [DashboardController::class, 'indexUsers']);
+        Route::get('/dashboard/admin/user-info/{id}', [DashboardController::class, 'indexUser']);
         Route::get('/dashboard/admin/editions', [DashboardController::class, 'indexEditions']);
         Route::get('/dashboard/admin/bookings', [DashboardController::class, 'indexBookings']);
     }
 );
-Route::get('/dashboard/admin/user-info/{id}', [DashboardController::class, 'indexUser']);
 
 require __DIR__ . '/auth.php';
