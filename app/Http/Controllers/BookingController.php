@@ -128,7 +128,7 @@ class BookingController extends Controller
             $editionDB = Edition::find($edition);
             $editionDB->bookings()->attach($booking);
         }
-        SendEmailJob::dispatch('knstadskrant@gmail.com', new NewReservationNotification());
+        SendEmailJob::dispatch('knstadskrant@gmail.com', new NewReservationNotification($booking->id));
         return $booking;
     }
 

@@ -87,8 +87,14 @@
             </div>
         </form>
 
-
-
+        <h1 class="fadeIn first">Uw abonnement</h1>
+        <hr class="fadeIn second">
+        @if ($user->subscription()->exists())
+        U heeft op het moment een abonnement op het keiennieuws en het loopt tot infinity.<br>
+        Wilt u uw abonnement stop zeggen <a href="/subscription">klik op deze link</a>.
+        @else
+        U heeft op het moment nog geen abonnement, wilt u er toch een <a href="/subscription">klik op deze link</a>.
+        @endif
     </div>
     <script type="text/javascript">
 

@@ -19,8 +19,8 @@ class UserEditNotification extends Mailable
      */
     public function __construct($id)
     {
-        $this->template_message = $template_message = "Er is een gebruiker die zijn gegevens heeft aangepast";
-        $this->url =  $url = url('/dashboard/admin/user-info/' . $id);
+        $this->template_message =  "Er is een gebruiker die zijn gegevens heeft aangepast";
+        $this->url =   url('/dashboard/admin/user-info/' . $id);
     }
 
     /**

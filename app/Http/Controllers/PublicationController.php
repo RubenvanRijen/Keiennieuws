@@ -11,6 +11,7 @@ use App\Models\File;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Bus;
 
 class PublicationController extends Controller
 {
@@ -162,8 +163,11 @@ class PublicationController extends Controller
         } else {
             $text = 'Uw publicatie is correct en in goed handen ontvangen';
         }
-        SendEmailJob::dispatch($booking->email, new PublicationCofirmation($text));
-        SendEmailJob::dispatch('knstadskrant@gmail.com', new NewPublicationNotification());
+        Bus::chain([
+            new SendEmailJob($booking->email, new PublicationCofirmation($text)),
+            new SendEmailJob('knstadskrant@gmail.com', new NewPublicationNotification($booking->id)),
+        ])->dispatch();
+
         return redirect('/successactionpublication');
     }
 

@@ -11,9 +11,7 @@ use App\Mail\StartSubscription;
 use App\Mail\StartSubscriptionNotification;
 use App\Mail\UserEditNotification;
 use App\Models\Subscription;
-use App\Models\Token;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -41,6 +39,7 @@ class SubscriptionController extends Controller
                 $subscription->user()->associate($user);
                 $subscription->save();
             }
+            SendEmailJob::dispatch('knstadskrant@gmail.com', new StartSubscriptionNotification($user->id));
             return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
         } else {
             $this->standartResponse();
@@ -57,6 +56,7 @@ class SubscriptionController extends Controller
                 $subscription = Subscription::find($user->subscription()->first()->id);
                 $subscription->delete();
             }
+            SendEmailJob::dispatch('knstadskrant@gmail.com', new EndSubscriptionNotification($user->id));
             return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
         } else {
             $this->standartResponse();
@@ -148,7 +148,6 @@ class SubscriptionController extends Controller
 
         $url = URL::temporarySignedRoute('subscribe', now()->addDays(1), ['user' => $user->id]);
         SendEmailJob::dispatch($user->email, new StartSubscription($url, $user));
-        SendEmailJob::dispatch('knstadskrant@gmail.com', new StartSubscriptionNotification());
 
         return redirect('/subscription/startfinal');
     }
@@ -191,7 +190,6 @@ class SubscriptionController extends Controller
         } else {
             $url = URL::temporarySignedRoute('unsubscribe', now()->addDays(1), ['user' => $user->id]);
             SendEmailJob::dispatch($user->email, new EndSubscription($url, $user));
-            SendEmailJob::dispatch('knstadskrant@gmail.com', new EndSubscriptionNotification());
         }
 
         return redirect('/subscription/endfinal');
