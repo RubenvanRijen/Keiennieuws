@@ -95,5 +95,6 @@ Route::middleware(['role:admin', 'auth', 'verified'])->group(
         Route::get('/dashboard/admin/bookings', [DashboardController::class, 'indexBookings']);
     }
 );
+Route::get('/dashboard/admin/user-info/{id}', [DashboardController::class, 'indexUser']);
 
 require __DIR__ . '/auth.php';

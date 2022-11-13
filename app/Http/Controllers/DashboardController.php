@@ -173,9 +173,13 @@ class DashboardController extends Controller
     public function indexUsers()
     {
         $users = User::orderBy('created_at', 'desc')->simplePaginate(10);
+        return view('/pages/dashboard/admin/users/usersIndex', ['users' => $users]);
+    }
 
-
-        return view('/pages/dashboard/admin/usersIndex', ['users' => $users]);
+    public function indexUser($id)
+    {
+        $user = User::find($id);
+        return view('/pages/dashboard/admin/users/userIndex', ['user' => $user]);
     }
 
     //TODO de juiste gegevens in de html table zetten en het create maken en verwijderen

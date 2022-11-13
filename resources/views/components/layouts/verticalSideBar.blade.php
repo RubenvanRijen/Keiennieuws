@@ -1,6 +1,6 @@
- <div class="vertical-side-bar col-lg-auto bg-light sticky-top">
+ <div class="vertical-side-bar col-xl-auto bg-light sticky-top">
      <div class="d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center sticky-top">
-         <ul class="nav nav-pills nav-flush flex-lg-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
+         <ul class="nav nav-pills nav-flush flex-xl-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
              <li class="nav-item">
                  <a href="/dashboard/person-information" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
                      <div class="row">
@@ -28,7 +28,7 @@
          </ul>
          @hasrole('admin')
          <hr style="border: 1px #6c757d solid !important; opacity: 1; width: 100%; margin: auto; margin-top: 5%; margin-bottom: 5%;">
-         <ul class="nav nav-pills nav-flush flex-lg-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
+         <ul class="nav nav-pills nav-flush flex-xl-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
              <li class="nav-item">
                  <a href="/dashboard/admin/users" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
                      <div class="row">
