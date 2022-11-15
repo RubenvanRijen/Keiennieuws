@@ -187,7 +187,7 @@ class DashboardController extends Controller
         $editions = Edition::orderBy('created_at', 'desc')->simplePaginate(10);
 
 
-        return view('/pages/dashboard/admin/editionsIndex', ['editions' => $editions]);
+        return view('/pages/dashboard/admin/editions/editionsIndex', ['editions' => $editions]);
     }
 
     //TODO de juiste gegevens in de html table zetten en het verwijderen maken
@@ -196,6 +196,6 @@ class DashboardController extends Controller
         $bookings = Booking::orderBy('created_at', 'desc')->simplePaginate(10);
 
 
-        return view('/pages/dashboard/admin/bookingsIndex', ['bookings' => $bookings]);
+        return view('/pages/dashboard/admin/editions/bookingsIndex', ['bookings' => $bookings]);
     }
 }

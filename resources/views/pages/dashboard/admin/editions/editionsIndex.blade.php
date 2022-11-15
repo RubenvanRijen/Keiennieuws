@@ -6,7 +6,7 @@
         <div class="card-header bg-primary text-white px-4">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="me-4">
-                    <h2 class="card-title text-white mb-0">Gebruikers</h2>
+                    <h2 class="card-title text-white mb-0">Edities</h2>
                     <div class="card-subtitle">Details and geschiedenis</div>
                 </div>
                 <div class="d-flex gap-2">
@@ -24,31 +24,32 @@
         </div>
         <div class="card-body p-4">
             <div class="table-responsive-lg">
-                <table class="table table-bordered mb-5">
+                <table class="table  table-bordered mb-5">
                     <thead>
                         <tr class="table-primary">
                             <th scope="col">#</th>
-                            <th scope="col">Voornaam</th>
-                            <th scope="col">Achternaam</th>
-                            <th scope="col">Email </th>
-                            <th scope="col">geabonneerd</th>
+                            <th scope="col">Titel</th>
+                            <th scope="col">Totale ruimte</th>
+                            <th scope="col">Start datum </th>
+                            <th scope="col">Eind Datum</th>
+                            <th scope="col">Upload start</th>
+                            <th scope="col">Upload eind</th>
                             <th scope="col">Actions</th>
+
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($users as $data)
+                        @foreach($editions as $data)
                         <tr>
                             <th scope="row">{{ $loop->index + 1 }}</th>
-                            <td>{{ $data->firstname }}</td>
-                            <td>{{ $data->lastname }}</td>
-                            <td>{{ $data->email }}</td>
-                            @if ($data->subscription()->exists())
-                            <td> ja </td>
-                            @else
-                            <td>nee</td>
-                            @endif
+                            <td>{{ $data->title}}</td>
+                            <td>{{ $data->space}}</td>
+                            <td>{{date('d-m-Y', strtotime($data->beginDate))}}</td>
+                            <td>{{date('d-m-Y', strtotime($data->endDate))}}</td>
+                            <td>{{date('d-m-Y', strtotime($data->beginDateUpload))}}</td>
+                            <td>{{date('d-m-Y', strtotime($data->endDateUpload))}}</td>
                             <td>
-                                <a href="/dashboard/admin/user-info/{{$data->id}}">
+                                <a href="/dashboard/admin/edition-info/{{$data->id}}">
                                     <button value="view" name="action" type="submit" class="btn btn-primary ml-1 mr-1">
                                         <i class="bi bi-eye-fill"></i>
                                     </button>
@@ -61,10 +62,9 @@
             </div>
             {{-- Pagination --}}
             <div class="d-flex justify-content-center">
-                {!! $users->links() !!}
+                {!! $editions->links() !!}
             </div>
         </div>
     </div>
 </div>
-
 @endsection
