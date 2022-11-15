@@ -66,12 +66,7 @@ class HomeController extends Controller
 
         $validation = $validator->validated();
 
-        //TODO werk hier aan de cronjob voor het versturen van emails en stuff
-
         sendEmailJob::dispatch('knstadskrant@gmail.com', new VolunteerApplication($validation['nameVolunteer'], $validation['email'], $validation['explenation']));
-
-
-
         return view('/pages/successAction', ['title' => $title, 'text' => $text]);
     }
 

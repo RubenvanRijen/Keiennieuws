@@ -1101,16 +1101,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.39.0",
+            "version": "v9.40.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "67e674709e1e7db14f304a871481f310822d68c5"
+                "reference": "9611fdaf2db5759b8299802d7185bcdbee0340bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/67e674709e1e7db14f304a871481f310822d68c5",
-                "reference": "67e674709e1e7db14f304a871481f310822d68c5",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/9611fdaf2db5759b8299802d7185bcdbee0340bb",
+                "reference": "9611fdaf2db5759b8299802d7185bcdbee0340bb",
                 "shasum": ""
             },
             "require": {
@@ -1283,7 +1283,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-11-08T14:47:39+00:00"
+            "time": "2022-11-15T16:13:22+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -1668,16 +1668,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "3.10.2",
+            "version": "3.10.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "b9bd194b016114d6ff6765c09d40c7d427e4e3f6"
+                "reference": "8013fb046c6a244b2b1b75cc95d732ed6bcdeb8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/b9bd194b016114d6ff6765c09d40c7d427e4e3f6",
-                "reference": "b9bd194b016114d6ff6765c09d40c7d427e4e3f6",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/8013fb046c6a244b2b1b75cc95d732ed6bcdeb8a",
+                "reference": "8013fb046c6a244b2b1b75cc95d732ed6bcdeb8a",
                 "shasum": ""
             },
             "require": {
@@ -1739,7 +1739,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/3.10.2"
+                "source": "https://github.com/thephpleague/flysystem/tree/3.10.3"
             },
             "funding": [
                 {
@@ -1755,7 +1755,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-10-25T07:01:47+00:00"
+            "time": "2022-11-14T10:42:43+00:00"
         },
         {
             "name": "league/mime-type-detection",
@@ -6473,16 +6473,16 @@
         },
         {
             "name": "laravel/breeze",
-            "version": "v1.14.3",
+            "version": "v1.15.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/breeze.git",
-                "reference": "4bb8e353790b3d797dec4451262d2a389e9c7461"
+                "reference": "0d766ce7ada620586e6c27553d990f337df4af3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/breeze/zipball/4bb8e353790b3d797dec4451262d2a389e9c7461",
-                "reference": "4bb8e353790b3d797dec4451262d2a389e9c7461",
+                "url": "https://api.github.com/repos/laravel/breeze/zipball/0d766ce7ada620586e6c27553d990f337df4af3f",
+                "reference": "0d766ce7ada620586e6c27553d990f337df4af3f",
                 "shasum": ""
             },
             "require": {
@@ -6530,7 +6530,7 @@
                 "issues": "https://github.com/laravel/breeze/issues",
                 "source": "https://github.com/laravel/breeze"
             },
-            "time": "2022-11-06T16:31:46+00:00"
+            "time": "2022-11-15T16:43:30+00:00"
         },
         {
             "name": "laravel/sail",
