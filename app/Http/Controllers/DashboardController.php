@@ -181,13 +181,32 @@ class DashboardController extends Controller
         return view('/pages/dashboard/admin/users/userIndex', ['user' => $user]);
     }
 
+    function sortFunction($a, $b)
+    {
+        return strtotime($a[1]) - strtotime($b[1]);
+    }
+
     //TODO de juiste gegevens in de html table zetten en het create maken en verwijderen
     public function indexEditions()
     {
-        $editions = Edition::orderBy('created_at', 'desc')->simplePaginate(10);
+        $editions = Edition::orderBy('endDate', 'desc')->simplePaginate(10);
 
+        $date = Carbon::now();
+        $futureDate = Carbon::now()->addMonths(2);
+        $upcomingEditions =  Edition::whereBetween('endDate',  [$date, $futureDate])->get();
+        $dates = [];
+        foreach ($upcomingEditions as $edition) {
+            $dates[$edition->id] = $edition->beginDateUpload;
+        }
 
-        return view('/pages/dashboard/admin/editions/editionsIndex', ['editions' => $editions]);
+        $nearestDate = min($dates);
+        $currentEditionId = array_search($nearestDate, $dates);
+        unset($dates[$currentEditionId]);
+
+        $currentEdition = Edition::where('id', $currentEditionId)->first();
+        $upcomingEdition = Edition::where('id', array_key_first($dates))->first();
+
+        return view('/pages/dashboard/admin/editions/editionsIndex', ['editions' => $editions, 'currentEdition' => $currentEdition, 'upcomingEdition' => $upcomingEdition]);
     }
 
     //TODO de juiste gegevens in de html table zetten en het verwijderen maken
