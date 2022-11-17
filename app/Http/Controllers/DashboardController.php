@@ -209,12 +209,24 @@ class DashboardController extends Controller
         return view('/pages/dashboard/admin/editions/editionsIndex', ['editions' => $editions, 'currentEdition' => $currentEdition, 'upcomingEdition' => $upcomingEdition]);
     }
 
-    //TODO de juiste gegevens in de html table zetten en het verwijderen maken
+    public function indexEdition($id)
+    {
+        $edition = Edition::find($id);
+        $bookings = $edition->bookings()->paginate(10);
+        return view('/pages/dashboard/admin/editions/editionIndex', ['edition' => $edition, 'bookings' => $bookings]);
+    }
+
     public function indexBookings()
     {
         $bookings = Booking::orderBy('created_at', 'desc')->simplePaginate(10);
-
-
         return view('/pages/dashboard/admin/editions/bookingsIndex', ['bookings' => $bookings]);
+    }
+
+    public function indexBooking($id)
+    {
+
+        $booking = Booking::find($id);
+        $files = $booking->files()->get();
+        return view('/pages/dashboard/admin/editions/bookingIndex', ['booking' => $booking, 'files' => $files]);
     }
 }
