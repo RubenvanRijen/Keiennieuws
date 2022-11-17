@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules;
 
 class DashboardController extends Controller
@@ -226,7 +227,11 @@ class DashboardController extends Controller
     {
 
         $booking = Booking::find($id);
-        $files = $booking->files()->get();
-        return view('/pages/dashboard/admin/editions/bookingIndex', ['booking' => $booking, 'files' => $files]);
+        $files = $booking->files()->paginate(10);
+        $links = [];
+        foreach ($files as $file) {
+            array_push($links, Storage::url($file->location));
+        }
+        return view('/pages/dashboard/admin/editions/bookingIndex', ['booking' => $booking, 'files' => $files, 'links' => $links]);
     }
 }
