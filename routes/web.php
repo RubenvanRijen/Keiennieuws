@@ -98,6 +98,7 @@ Route::middleware(['role:admin', 'auth', 'verified'])->group(
         //bookings
         Route::get('/dashboard/admin/bookings', [DashboardController::class, 'indexBookings']);
         Route::get('/dashboard/admin/booking-info/{id}', [DashboardController::class, 'indexBooking']);
+        Route::get('/dashboard/admin/booking-info/{id}/download/public/{fileName}', [DashboardController::class, 'downloadFile']);
     }
 );
 

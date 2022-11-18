@@ -46,10 +46,10 @@
                  </a>
              </li>
              <li>
-                 <a href="/dashboard/admin/bookings" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
+                 <a href="/dashboard/admin/design-edit" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
                      <div class="row">
-                         <i class="fs-1 bi bi-book-fill text-dark"></i>
-                         <span class="ms-1 d-none d-sm-inline text-dark">Bookingen</span>
+                         <i class="fs-1 bi bi-pencil-fill text-dark"></i>
+                         <span class="ms-1 d-none d-sm-inline text-dark">Designen</span>
                      </div>
                  </a>
              </li>

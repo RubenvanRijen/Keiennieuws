@@ -234,4 +234,10 @@ class DashboardController extends Controller
         }
         return view('/pages/dashboard/admin/editions/bookingIndex', ['booking' => $booking, 'files' => $files, 'links' => $links]);
     }
+
+    public function downloadFile($bookingId, $fileName)
+    {
+        $path = (public_path("storage" . '\\' . "$fileName"));
+        return response()->download($path);
+    }
 }
