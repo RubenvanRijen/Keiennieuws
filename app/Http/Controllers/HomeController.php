@@ -38,7 +38,7 @@ class HomeController extends Controller
         $later = new DateTime($edition->endDateUpload);
         $diff = $later->diff($earlier)->format("%a");
 
-        return view('/pages/home', ['timeDiff' => $diff,]);
+        return view('/pages/home', ['timeDiff' => $diff, 'edition' => $edition]);
     }
 
     public function informationIndex()
