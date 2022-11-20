@@ -10,8 +10,6 @@ use App\Models\Edition;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Bus;
 
@@ -26,18 +24,20 @@ class HomeController extends Controller
         $editions =  Edition::whereBetween('endDateUpload',  [$date, $futureDate])->get();
         $dates = [];
         $diff = 0;
-        foreach ($editions as $edition) {
-            $dates[$edition->id] = $edition->beginDateUpload;
+        $edition = null;
+        if (count($editions) > 0) {
+            foreach ($editions as $edition) {
+                $dates[$edition->id] = $edition->beginDateUpload;
+            }
+            $nearestDate = min($dates);
+            $editionId = array_search($nearestDate, $dates);
+            $edition = Edition::where('id', $editionId)->first();
+
+            //calculate diff in days
+            $earlier = new DateTime(date('Y-m-d'));
+            $later = new DateTime($edition->endDateUpload);
+            $diff = $later->diff($earlier)->format("%a");
         }
-        $nearestDate = min($dates);
-        $editionId = array_search($nearestDate, $dates);
-        $edition = Edition::where('id', $editionId)->first();
-
-        //calculate diff in days
-        $earlier = new DateTime(date('Y-m-d'));
-        $later = new DateTime($edition->endDateUpload);
-        $diff = $later->diff($earlier)->format("%a");
-
         return view('/pages/home', ['timeDiff' => $diff, 'edition' => $edition]);
     }
 
