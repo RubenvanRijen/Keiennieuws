@@ -193,7 +193,7 @@ class DashboardController extends Controller
         $editions = Edition::orderBy('endDate', 'desc')->simplePaginate(10);
 
         $date = Carbon::now();
-        $futureDate = Carbon::now()->addMonths(2);
+        $futureDate = Carbon::now()->addMonths(3);
         $upcomingEditions =  Edition::whereBetween('endDate',  [$date, $futureDate])->get();
         $dates = [];
         foreach ($upcomingEditions as $edition) {

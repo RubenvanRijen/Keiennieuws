@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\DeleteFiles;
-use App\Jobs\sendEmailJob;
+use App\Jobs\SendEmailJob;
 use App\Mail\Uploadpicture;
 use App\Mail\VolunteerApplication;
 use App\Models\Edition;

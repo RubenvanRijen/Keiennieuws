@@ -40,6 +40,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if ($currentEdition !== null)
                         <tr>
                             <th scope="row">Huidige Editie</th>
                             <td>{{ $currentEdition->title}}</td>
@@ -56,6 +57,8 @@
                                 </a>
                             </td>
                         </tr>
+                        @endif
+                        @if ($upcomingEdition !== null)
                         <tr>
                             <th scope="row">Volgende Editie</th>
                             <td>{{ $upcomingEdition->title}}</td>
@@ -72,6 +75,7 @@
                                 </a>
                             </td>
                         </tr>
+                        @endif
                     </tbody>
                 </table>
 
@@ -95,7 +99,7 @@
                     </thead>
                     <tbody>
                         @foreach($editions as $data)
-                        <tr @if ( $currentEdition->id === $data->id) class="table-success" @elseif ($upcomingEdition->id === $data->id)class="table-info" @endif>
+                        <tr @if ($currentEdition !==null && $currentEdition->id === $data->id) class="table-success" @elseif ($upcomingEdition !== null && $upcomingEdition->id === $data->id)class="table-info" @endif>
                             <th scope="row">{{ $loop->index + 1 }}</th>
                             <td>{{ $data->title}}</td>
                             <td>{{ $data->space}}</td>
