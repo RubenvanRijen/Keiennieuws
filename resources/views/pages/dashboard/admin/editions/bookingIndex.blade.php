@@ -59,7 +59,7 @@
                         <td data-label="title">{{$file->title}}</td>
                         <td data-label="URL"><a href="/dashboard/admin/booking-info/{{$booking->id}}/download/{{$file->location}}">Bestand link</a></td>
                         <td class="actions text-right d-flex">
-                            <a href="{{$links[0]}}">
+                            <a href="{{$links[$loop->index]}}">
                                 <button value="view" name="action" type="submit" class="btn btn-info ml-1 mr-1 text-white">
                                     <i class="bi bi-cloud-arrow-down-fill"></i></button>
                             </a>
