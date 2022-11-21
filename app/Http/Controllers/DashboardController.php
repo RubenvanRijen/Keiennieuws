@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Jobs\SendEmailJob;
 use App\Mail\EditEmail;
-use App\Mail\EditSubscriptionNotification;
 use App\Mail\PasswordChangeReminder;
+use App\Mail\UserEditNotification;
 use App\Models\Booking;
+use App\Models\Edition;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -14,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules;
 
 class DashboardController extends Controller
@@ -21,10 +23,21 @@ class DashboardController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'verified', 'role:user'])->except(['changedPasswordNotification']);
     }
 
-    public function index()
+    public function personInformationIndex()
+    {
+        $user = Auth::user();
+        return view('/pages/dashboard/customer/dashboardPersonInformation', ['user' => $user]);
+    }
+
+    public function personSecurityIndex()
+    {
+        $user = Auth::user();
+        return view('/pages/dashboard/customer/dashboardSecurity', ['user' => $user]);
+    }
+
+    public function personReservationsIndex()
     {
         $user = Auth::user();
         $bookings = [];
@@ -62,9 +75,9 @@ class DashboardController extends Controller
             }
         }
         $bookingsToShow = array_reverse($bookingsToShow);
-
-        return view('/pages/dashboard', ['user' => $user,  'bookings' => $bookingsToShow, 'allowedBookings' => $allowedBookings]);
+        return view('/pages/dashboard/customer/dashboardReservations', ['user' => $user, 'bookings' => $bookingsToShow, 'allowedBookings' => $allowedBookings]);
     }
+
 
     public function destroyBooking($id = null)
     {
@@ -98,7 +111,7 @@ class DashboardController extends Controller
         $user->gender = $valid['gender'];
 
         $user->save();
-        SendEmailJob::dispatch('knstadskrant@gmail.com', new EditSubscriptionNotification());
+        SendEmailJob::dispatch('knstadskrant@gmail.com', new UserEditNotification($user->id));
         return back()->with('success', 'Uw gegevens zijn successvol aangepast en opgeslagen');
     }
 
@@ -117,7 +130,6 @@ class DashboardController extends Controller
                 'email' => $validation['email'],
             ]);
             SendEmailJob::dispatch($user->email, new EditEmail($url, $user, $validation['email']));
-            SendEmailJob::dispatch('knstadskrant@gmail.com', new EditSubscriptionNotification());
         } else {
             return back()->with('error', 'U heeft een verkeer e-mailadres opgegeven')->withInput();
         }
@@ -155,5 +167,77 @@ class DashboardController extends Controller
         $title = 'UW WACHTWOORD IS GEWIJZIGD';
         $text = 'U ontvangt een email met confirmatie dat uw wachtwoord is aangepast. U kunt nu overnieuw inloggen met uw nieuwe wachtwoord';
         return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
+    }
+
+    //TODO de juiste gegevens in de html table zetten en het verwijderen maken
+    public function indexUsers()
+    {
+        $users = User::orderBy('created_at', 'desc')->simplePaginate(10);
+        return view('/pages/dashboard/admin/users/usersIndex', ['users' => $users]);
+    }
+
+    public function indexUser($id)
+    {
+        $user = User::find($id);
+        return view('/pages/dashboard/admin/users/userIndex', ['user' => $user]);
+    }
+
+    function sortFunction($a, $b)
+    {
+        return strtotime($a[1]) - strtotime($b[1]);
+    }
+
+    //TODO de juiste gegevens in de html table zetten en het create maken en verwijderen
+    public function indexEditions()
+    {
+        $editions = Edition::orderBy('endDate', 'desc')->simplePaginate(10);
+
+        $date = Carbon::now();
+        $futureDate = Carbon::now()->addMonths(3);
+        $upcomingEditions =  Edition::whereBetween('endDate',  [$date, $futureDate])->get();
+        $dates = [];
+        foreach ($upcomingEditions as $edition) {
+            $dates[$edition->id] = $edition->beginDateUpload;
+        }
+
+        $nearestDate = min($dates);
+        $currentEditionId = array_search($nearestDate, $dates);
+        unset($dates[$currentEditionId]);
+
+        $currentEdition = Edition::where('id', $currentEditionId)->first();
+        $upcomingEdition = Edition::where('id', array_key_first($dates))->first();
+
+        return view('/pages/dashboard/admin/editions/editionsIndex', ['editions' => $editions, 'currentEdition' => $currentEdition, 'upcomingEdition' => $upcomingEdition]);
+    }
+
+    public function indexEdition($id)
+    {
+        $edition = Edition::find($id);
+        $bookings = $edition->bookings()->paginate(10);
+        return view('/pages/dashboard/admin/editions/editionIndex', ['edition' => $edition, 'bookings' => $bookings]);
+    }
+
+    public function indexBookings()
+    {
+        $bookings = Booking::orderBy('created_at', 'desc')->simplePaginate(10);
+        return view('/pages/dashboard/admin/editions/bookingsIndex', ['bookings' => $bookings]);
+    }
+
+    public function indexBooking($id)
+    {
+
+        $booking = Booking::find($id);
+        $files = $booking->files()->paginate(10);
+        $links = [];
+        foreach ($files as $file) {
+            array_push($links, Storage::url($file->location));
+        }
+        return view('/pages/dashboard/admin/editions/bookingIndex', ['booking' => $booking, 'files' => $files, 'links' => $links]);
+    }
+
+    public function downloadFile($bookingId, $fileName)
+    {
+        $path = (public_path("storage" . '\\' . "$fileName"));
+        return response()->download($path);
     }
 }

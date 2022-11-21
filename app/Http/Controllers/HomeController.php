@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\DeleteFiles;
-use App\Jobs\sendEmailJob;
+use App\Jobs\SendEmailJob;
 use App\Mail\Uploadpicture;
 use App\Mail\VolunteerApplication;
 use App\Models\Edition;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Bus;
 
@@ -26,19 +24,21 @@ class HomeController extends Controller
         $editions =  Edition::whereBetween('endDateUpload',  [$date, $futureDate])->get();
         $dates = [];
         $diff = 0;
-        foreach ($editions as $edition) {
-            $dates[$edition->id] = $edition->beginDateUpload;
+        $edition = null;
+        if (count($editions) > 0) {
+            foreach ($editions as $edition) {
+                $dates[$edition->id] = $edition->beginDateUpload;
+            }
+            $nearestDate = min($dates);
+            $editionId = array_search($nearestDate, $dates);
+            $edition = Edition::where('id', $editionId)->first();
+
+            //calculate diff in days
+            $earlier = new DateTime(date('Y-m-d'));
+            $later = new DateTime($edition->endDateUpload);
+            $diff = $later->diff($earlier)->format("%a");
         }
-        $nearestDate = min($dates);
-        $editionId = array_search($nearestDate, $dates);
-        $edition = Edition::where('id', $editionId)->first();
-
-        //calculate diff in days
-        $earlier = new DateTime(date('Y-m-d'));
-        $later = new DateTime($edition->endDateUpload);
-        $diff = $later->diff($earlier)->format("%a");
-
-        return view('/pages/home', ['timeDiff' => $diff,]);
+        return view('/pages/home', ['timeDiff' => $diff, 'edition' => $edition]);
     }
 
     public function informationIndex()
@@ -66,12 +66,7 @@ class HomeController extends Controller
 
         $validation = $validator->validated();
 
-        //TODO werk hier aan de cronjob voor het versturen van emails en stuff
-
         sendEmailJob::dispatch('knstadskrant@gmail.com', new VolunteerApplication($validation['nameVolunteer'], $validation['email'], $validation['explenation']));
-
-
-
         return view('/pages/successAction', ['title' => $title, 'text' => $text]);
     }
 

@@ -18,7 +18,7 @@ class EditionSeeder extends Seeder
     {
         $time = strtotime(date("Y/m/d"));
 
-        for ($k = 1; $k < 12; $k++) {
+        for ($k = 1; $k < 15; $k++) {
             $exception = date("m", strtotime("+" . $k . " month", $time));
             if ($exception == '01') {
                 $time = strtotime(date("Y/m/d", strtotime('+0 years')));

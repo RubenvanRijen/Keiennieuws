@@ -69,16 +69,37 @@ Route::get('/placepublication', [PublicationController::class, 'index']);
 Route::post('/placepublication', [PublicationController::class, 'store']);
 Route::get('/successactionpublication', [PublicationController::class, 'successPublication']);
 
-// dashboard
-Route::get('/dashboard', [DashboardController::class, 'index']);
-Route::post('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::delete('/dashboard/bookings/delete/{id}', [DashboardController::class, 'destroyBooking']);
-
-Route::patch('/dashboard/user/edit/{id}', [DashboardController::class, 'updateUser']);
-Route::post('/dashboard/user/editEmail/{id}', [DashboardController::class, 'updateUserEmail']);
-
-Route::post('/dashboard/user/password/{id}', [DashboardController::class, 'updateUserPassword']);
+//dashboard
+Route::middleware(['auth', 'verified', 'role:user|admin'])->group(
+    function () {
+        //person information
+        Route::get('/dashboard/person-information', [DashboardController::class, 'personInformationIndex']);
+        Route::patch('/dashboard/person-information/edit/{id}', [DashboardController::class, 'updateUser']);
+        //security
+        Route::get('/dashboard/person-security', [DashboardController::class, 'personSecurityIndex']);
+        Route::post('/dashboard/person-security/editEmail/{id}', [DashboardController::class, 'updateUserEmail']);
+        Route::post('/dashboard/person-security/password/{id}', [DashboardController::class, 'updateUserPassword']);
+        //reservations
+        Route::get('/dashboard/person-reservations', [DashboardController::class, 'personReservationsIndex']);
+        Route::delete('/dashboard/person-reservations/delete/{id}', [DashboardController::class, 'destroyBooking']);
+    }
+);
 Route::get('/changedPasswordNotification', [DashboardController::class, 'changedPasswordNotification']);
 
+//admin
+Route::middleware(['role:admin', 'auth', 'verified'])->group(
+    function () {
+        //users
+        Route::get('/dashboard/admin/users', [DashboardController::class, 'indexUsers']);
+        Route::get('/dashboard/admin/user-info/{id}', [DashboardController::class, 'indexUser']);
+        //editions
+        Route::get('/dashboard/admin/editions', [DashboardController::class, 'indexEditions']);
+        Route::get('/dashboard/admin/edition-info/{id}', [DashboardController::class, 'indexEdition']);
+        //bookings
+        Route::get('/dashboard/admin/bookings', [DashboardController::class, 'indexBookings']);
+        Route::get('/dashboard/admin/booking-info/{id}', [DashboardController::class, 'indexBooking']);
+        Route::get('/dashboard/admin/booking-info/{id}/download/public/{fileName}', [DashboardController::class, 'downloadFile']);
+    }
+);
 
 require __DIR__ . '/auth.php';

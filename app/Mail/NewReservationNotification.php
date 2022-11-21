@@ -18,10 +18,10 @@ class NewReservationNotification extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($id)
     {
         $this->template_message = $template_message = "Er is een nieuwe reservering geplaatsts";
-        $this->url = $url = url('/cms');
+        $this->url =  $url = url('/dashboard/admin/booking-info/' . $id);
     }
 
     /**

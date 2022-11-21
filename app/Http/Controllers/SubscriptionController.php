@@ -5,19 +5,16 @@ namespace App\Http\Controllers;
 use App\Jobs\SendEmailJob;
 use App\Mail\EditEmail;
 use App\Mail\EditResidence;
-use App\Mail\EditSubscriptionNotification;
 use App\Mail\EndSubscription;
 use App\Mail\EndSubscriptionNotification;
 use App\Mail\StartSubscription;
 use App\Mail\StartSubscriptionNotification;
+use App\Mail\UserEditNotification;
 use App\Models\Subscription;
-use App\Models\Token;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 
 class SubscriptionController extends Controller
@@ -42,6 +39,7 @@ class SubscriptionController extends Controller
                 $subscription->user()->associate($user);
                 $subscription->save();
             }
+            SendEmailJob::dispatch('knstadskrant@gmail.com', new StartSubscriptionNotification($user->id));
             return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
         } else {
             $this->standartResponse();
@@ -58,6 +56,7 @@ class SubscriptionController extends Controller
                 $subscription = Subscription::find($user->subscription()->first()->id);
                 $subscription->delete();
             }
+            SendEmailJob::dispatch('knstadskrant@gmail.com', new EndSubscriptionNotification($user->id));
             return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
         } else {
             $this->standartResponse();
@@ -75,6 +74,7 @@ class SubscriptionController extends Controller
             $user->save();
             $title = 'VOLTOOID!';
             $text = 'Uw woonadres is geverifieerd en aangepast';
+            SendEmailJob::dispatch('knstadskrant@gmail.com', new UserEditNotification($user->id));
             return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
         } else {
             $this->standartResponse();
@@ -89,6 +89,7 @@ class SubscriptionController extends Controller
             $user->save();
             $title = 'VOLTOOID!';
             $text = 'Uw email is geverifieerd en aangepast';
+            SendEmailJob::dispatch('knstadskrant@gmail.com', new UserEditNotification($user->id));
             return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
         } else {
             $this->standartResponse();
@@ -147,7 +148,6 @@ class SubscriptionController extends Controller
 
         $url = URL::temporarySignedRoute('subscribe', now()->addDays(1), ['user' => $user->id]);
         SendEmailJob::dispatch($user->email, new StartSubscription($url, $user));
-        SendEmailJob::dispatch('knstadskrant@gmail.com', new StartSubscriptionNotification());
 
         return redirect('/subscription/startfinal');
     }
@@ -190,7 +190,6 @@ class SubscriptionController extends Controller
         } else {
             $url = URL::temporarySignedRoute('unsubscribe', now()->addDays(1), ['user' => $user->id]);
             SendEmailJob::dispatch($user->email, new EndSubscription($url, $user));
-            SendEmailJob::dispatch('knstadskrant@gmail.com', new EndSubscriptionNotification());
         }
 
         return redirect('/subscription/endfinal');
@@ -234,7 +233,6 @@ class SubscriptionController extends Controller
                 'email' => $user->email
             ]);
             SendEmailJob::dispatch($user->email, new EditResidence($url, $user, $request->city, $request->house_number, $request->postcode, $request->street_name));
-            SendEmailJob::dispatch('knstadskrant@gmail.com', new EditSubscriptionNotification());
         } else {
             return back()->with('error', 'U heeft een verkeer e-mailadres opgegeven')->withInput();
         }
@@ -261,7 +259,6 @@ class SubscriptionController extends Controller
                 'email' => $validation['email'],
             ]);
             SendEmailJob::dispatch($user->email, new EditEmail($url, $user, $validation['email']));
-            SendEmailJob::dispatch('knstadskrant@gmail.com', new EditSubscriptionNotification());
         } else {
             return back()->with('error', 'U heeft een verkeerd e-mailadres opgegeven')->withInput();
         }
@@ -280,7 +277,7 @@ class SubscriptionController extends Controller
     public function editFinalAdress()
     {
         $title = 'UW BEZORGADRES IS GEWIJZIGD.';
-        $text = 'U ontvangt binnen enkele dagen een bevestigingsmail van uw wijziging.';
+        $text = 'U ontvangt binnen enkele minuten een bevestigingsmail van uw wijziging.';
         return view('/pages/subscription/endingSubscription', ['title' => $title, 'text' => $text]);
     }
 }

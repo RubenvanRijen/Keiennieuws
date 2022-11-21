@@ -17,10 +17,10 @@ class StartSubscriptionNotification extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($id)
     {
-        $this->template_message =  $template_message = "Er is een nieuwe gebruiker bij gekomen";
-        $this->url =  $url = url('/cms');
+        $this->template_message  = "Er is een nieuwe gebruiker bij gekomen";
+        $this->url =   url('/dashboard/admin/user-info/' . $id);
     }
 
     /**

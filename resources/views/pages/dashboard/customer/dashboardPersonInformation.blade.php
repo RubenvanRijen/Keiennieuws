@@ -17,7 +17,7 @@
         @endif
         <h1 class="fadeIn first">Uw gegevens</h1>
         <hr class="fadeIn second">
-        <form action="{{ url('/dashboard/user/edit/'.$user->id)}}" method="post">
+        <form action="{{ url('/dashboard/person-information/edit/'.$user->id)}}" method="post">
             @method('PATCH') @csrf
 
             <div class="field_input">
@@ -87,98 +87,16 @@
             </div>
         </form>
 
-
-        <h1 class="fadeIn first">Uw wachtwoord</h1>
+        <h1 class="fadeIn first">Uw abonnement</h1>
         <hr class="fadeIn second">
-        <form action="{{ url('/dashboard/user/password/'.$user->id)}}" method="post">
-            @csrf
-            <div class="field_input">
-                <label class="form-label fadeIn third">Oud wachtwoord</label>
-                <input type="text" placeholder="oud wachtwoord" class="form-control fadeIn fourth @error('old_password') is-invalid @enderror" name="old_password" value="{{ old('old_password') ?? '' }}" required autocomplete="firstname" autofocus>
-                @error('old_password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-            <div class="field_input">
-                <label class="form-label fadeIn third">Nieuw wachtwoord</label>
-                <input type="text" placeholder="nieuw wachtwoord" class="form-control fadeIn fourth @error('new_password') is-invalid @enderror" name="new_password" value="{{ old('new_password')?? '' }}" required autocomplete="lastname" autofocus>
-                @error('new_password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-            <div class="form_button fadeIn third">
-                <button type="submit" class="btn btn-primary">Aanpassen</button>
-            </div>
-        </form>
-
-
-        <h1 class="fadeIn first">Uw email</h1>
-        <hr class="fadeIn second">
-        <form action="{{ url('/dashboard/user/editEmail/'.$user->id)}}" method="post">
-            @csrf
-            <div class="field_input">
-                <label class="form-label fadeIn third">Oude email</label>
-                <input type="text" placeholder="oude email" class="form-control fadeIn fourth @error('old_email') is-invalid @enderror" name="old_email" value="{{ old('old_email') ?? $user->email??'' }}" required autocomplete="firstname" autofocus>
-                @error('old_email')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-            <div class="field_input">
-                <label class="form-label fadeIn third">Nieuw email</label>
-                <input type="text" placeholder="nieuwe email" class="form-control fadeIn fourth @error('email') is-invalid @enderror" name="email" value="{{ old('email')?? '' }}" required autocomplete="lastname" autofocus>
-                @error('email')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-            <div class="form_button fadeIn third">
-                <button type="submit" class="btn btn-primary">Aanpassen</button>
-            </div>
-        </form>
-
-        <h1 class="fadeIn first">Uw Reserveringen/Publicaties</h1>
-        <hr class="fadeIn second">
-        <div class="booking_publications_overview fadeIn third">
-            @if (count($bookings) === 0)
-            <h4>U heeft nog geen reserveringen geplaatst</h4>
-            @endif
-            <div class="row ">
-                @foreach ($bookings as $booking )
-                <div class="col fadeIn fourth">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">#{{ $loop->index + 1 }} - {{$booking->title}}</h5>
-                            <hr>
-                            <p class="card-subtitle">Type: {{$booking->type}}</p>
-                            <p class="card-subtitle">Groote: {{$booking->size}}</p>
-                            <p class="card-subtitle">Gemaakt op: {{$booking->created_at}}</p>
-                            <p class="card-subtitle mb-1">Edities:
-                                @foreach ($booking->editions()->get() as $edition)
-                                {{$edition->title}} ,
-                                @endforeach
-                            </p>
-                            <form action="{{ url('/dashboard/bookings/delete/'.$booking->id)}}" id="deleteBookingDashboard" method="post" enctype="multipart/form-data">@method('DELETE') @csrf
-                                <button onclick="deleteBooking();" type="sumbit" @if (in_array($booking->id, $allowedBookings)) disabled @endif class="btn btn-outline-danger show_confirm_delete_booking_dashboard">
-                                    <i class="bi bi-trash"></i>
-                                    Verwijderen
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
+        @if ($user->subscription()->exists())
+        U heeft op het moment een abonnement op het keiennieuws en het loopt tot infinity.<br>
+        Wilt u uw abonnement stop zeggen <a href="/subscription">klik op deze link</a>.
+        @else
+        U heeft op het moment nog geen abonnement, wilt u er toch een <a href="/subscription">klik op deze link</a>.
+        @endif
     </div>
-</div>
-<script type="text/javascript">
+    <script type="text/javascript">
 
-</script>
-@endsection
+    </script>
+    @endsection

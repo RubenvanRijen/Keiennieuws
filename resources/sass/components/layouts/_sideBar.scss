@@ -1,0 +1,10 @@
+.vertical-side-bar {
+    border-right: 2px #6c757d solid !important;
+}
+
+@media screen and (max-width: 767px) {
+    .vertical-side-bar {
+        border-right: none !important;
+        border-bottom: 2px #6c757d solid !important;
+    }
+}
