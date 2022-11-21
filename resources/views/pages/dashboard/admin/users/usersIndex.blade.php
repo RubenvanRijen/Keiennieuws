@@ -48,11 +48,25 @@
                             <td>nee</td>
                             @endif
                             <td>
-                                <a href="/dashboard/admin/user-info/{{$data->id}}">
-                                    <button value="view" name="action" type="submit" class="btn btn-primary ml-1 mr-1">
-                                        <i class="bi bi-eye-fill"></i>
-                                    </button>
-                                </a>
+                                <div class="row">
+                                    <div class="col">
+                                        <a style="text-decoration: none; color: inherit;" href="/dashboard/admin/user-info/{{$data->id}}">
+                                            <button value="view" name="action" type="submit" class="btn btn-primary ml-1 mr-1">
+                                                <i class="bi bi-eye-fill"></i>
+                                            </button>
+                                        </a>
+                                        <a style="text-decoration: none; color: inherit;" href="/dashboard/admin/user-info/{{$data->id}}">
+                                            <button value="view" name="action" type="submit" class="btn btn-danger ml-1 mr-1">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </button>
+                                        </a>
+                                        <a style="text-decoration: none; color: inherit;" href="/dashboard/admin/user-info/{{$data->id}}">
+                                            <button value="view" name="action" type="submit" class="btn btn-success ml-1 mr-1">
+                                                <i class="bi bi-pencil-fill"></i>
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         @endforeach
