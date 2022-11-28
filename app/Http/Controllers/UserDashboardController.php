@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Edition;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
 
 class UserDashboardController extends Controller
 {
@@ -25,12 +27,50 @@ class UserDashboardController extends Controller
         return strtotime($a[1]) - strtotime($b[1]);
     }
 
-    public function editUser()
+    public function editUser($id)
     {
+        $user = User::find($id);
+        return view('/pages/dashboard/admin/users/userEdit', ['user' => $user]);
     }
 
     public function updateUser(Request $request,  $id)
     {
+        if ($id === null) {
+            return back()->with('error', "Oeps er ging iets miss");
+        }
+        $rule = ['required', 'string', 'email', 'max:255'];
+        $email = $request->input('email');
+        $user = User::where('email', $email)->first();
+        if ($user === null) {
+            $rule = ['required', 'string', 'email', 'max:255', 'unique:users'];
+            $user = User::find($id);
+        }
+
+        $request->validate([
+            'firstname' => ['required', 'string', 'max:255', 'min:3'],
+            'lastname' => ['required', 'string', 'max:255', 'min:3'],
+            'postcode' => 'required|postal_code:NL,DE,FR,BE',
+            'house_number' => 'required',
+            'city' => ['required', 'string', 'max:255', 'min:3'],
+            'street_name' => ['required', 'string', 'max:255', 'min:3'],
+            'email' => $rule,
+        ]);
+
+        $user->update(
+            [
+                'firstname' => $request->firstname,
+                'lastname' => $request->lastname,
+                'postcode' => $request->postcode,
+                'house_number' => $request->house_number,
+                'city' => $request->city,
+                'gender' => $request->gender,
+                'street_name' => $request->street_name,
+                'email' => $request->email,
+            ]
+        );
+
+        $message = "U heeft succesvol de gebruiker " . $user->firstname . " " . $user->lastname . " aangepast";
+        return back()->with('success', $message);
     }
 
     public function deleteUser($id)
