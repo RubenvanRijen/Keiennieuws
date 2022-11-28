@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EditionsDashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\UserDashboardController;
 use App\Models\Subscription;
 use Illuminate\Support\Facades\Route;
 
@@ -90,15 +92,23 @@ Route::get('/changedPasswordNotification', [DashboardController::class, 'changed
 Route::middleware(['role:admin', 'auth', 'verified'])->group(
     function () {
         //users
-        Route::get('/dashboard/admin/users', [DashboardController::class, 'indexUsers']);
-        Route::get('/dashboard/admin/user-info/{id}', [DashboardController::class, 'indexUser']);
+        Route::get('/dashboard/admin/users', [UserDashboardController::class, 'indexUsers']);
+        Route::get('/dashboard/admin/user-info/{id}', [UserDashboardController::class, 'indexUser']);
+        Route::get('/dashboard/admin/user-edit/{id}', [UserDashboardController::class, 'editUser']);
+        Route::patch('/dashboard/admin/user-edit/{id}', [UserDashboardController::class, 'updateUser']);
+        Route::delete('/dashboard/admin/user-delete/{id}', [UserDashboardController::class, 'deleteUser']);
+
         //editions
-        Route::get('/dashboard/admin/editions', [DashboardController::class, 'indexEditions']);
-        Route::get('/dashboard/admin/edition-info/{id}', [DashboardController::class, 'indexEdition']);
+        Route::get('/dashboard/admin/editions', [EditionsDashboardController::class, 'indexEditions']);
+        Route::get('/dashboard/admin/edition-info/{id}', [EditionsDashboardController::class, 'indexEdition']);
+        Route::get('/dashboard/admin/edition-edit/{id}', [EditionsDashboardController::class, 'editEdition']);
+        Route::patch('/dashboard/admin/edition-edit/{id}', [EditionsDashboardController::class, 'updateEdition']);
+        Route::delete('/dashboard/admin/edition-delete/{id}', [EditionsDashboardController::class, 'deleteEdition']);
+
         //bookings
-        Route::get('/dashboard/admin/bookings', [DashboardController::class, 'indexBookings']);
-        Route::get('/dashboard/admin/booking-info/{id}', [DashboardController::class, 'indexBooking']);
-        Route::get('/dashboard/admin/booking-info/{id}/download/public/{fileName}', [DashboardController::class, 'downloadFile']);
+        Route::get('/dashboard/admin/bookings', [EditionsDashboardController::class, 'indexBookings']);
+        Route::get('/dashboard/admin/booking-info/{id}', [EditionsDashboardController::class, 'indexBooking']);
+        Route::get('/dashboard/admin/booking-info/{id}/download/public/{fileName}', [EditionsDashboardController::class, 'downloadFile']);
     }
 );
 
