@@ -62,6 +62,10 @@ class EditionsDashboardController extends Controller
     {
         $path = (public_path("storage" . '\\' . "$fileName"));
         return response()->download($path);
+
+        // TODO uncomment this for the server
+        // $path = '/home/rozenjq425/domains/keiennieuws.nl/public_html/storage/' + $fileName;
+        // return response()->download($path);
     }
 
     public function editEdition($id)
