@@ -139,6 +139,10 @@ class PublicationController extends Controller
             $booking = Booking::find($request->booking_id);
         }
 
+        //set then information for a booking
+        $booking->information = $request->information;
+        $booking->save();
+
         if (!$booking instanceof Booking && $request->booking_id == null) {
             return $booking;
         }

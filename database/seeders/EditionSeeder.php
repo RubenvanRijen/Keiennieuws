@@ -18,7 +18,7 @@ class EditionSeeder extends Seeder
     {
         $time = strtotime(date("Y/m/d"));
 
-        for ($k = 1; $k < 15; $k++) {
+        for ($k = 0; $k < 15; $k++) {
             $exception = date("m", strtotime("+" . $k . " month", $time));
             if ($exception == '01') {
                 $time = strtotime(date("Y/m/d", strtotime('+0 years')));
@@ -31,13 +31,10 @@ class EditionSeeder extends Seeder
             $edition = new Edition();
             $edition->title = $monthName . '-' . date("Y", strtotime("+" . $k . " month", $time));
             $edition->beginDate = date("Y-m-d", strtotime("+" . $k . " month", $time));
-            $edition->endDate = date("Y-m-d", strtotime(
-                "+" . ($k) . " month",
-                $time
-            ));
+            $edition->endDate = date("Y-m-d", strtotime("+" . ($k + 1) . " month", $time));
 
             $edition->space = 20;
-            $edition->beginDateUpload = date("Y-m-d", strtotime("+" . $k . " month", $time));
+            $edition->beginDateUpload = date("Y-m-d", strtotime("+" . $k - 1 . " month", $time));
             $edition->endDateUpload = date("Y-m-d", strtotime("+" . ($k) . " month", $time));
 
             $edition->save();

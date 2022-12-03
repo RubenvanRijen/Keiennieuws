@@ -138,7 +138,7 @@
                                             <i class="bi bi-eye-fill"></i>
                                         </button>
                                     </a>
-                                    <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/edition-info/{{$data->id}}">
+                                    <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/edition-edit/{{$data->id}}">
                                         <button value="view" name="action" type="submit" class="btn btn-success ml-1 mr-1">
                                             <i class="bi bi-pencil-fill"></i>
                                         </button>

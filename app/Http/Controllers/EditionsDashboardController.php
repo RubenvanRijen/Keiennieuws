@@ -67,11 +67,14 @@ class EditionsDashboardController extends Controller
     public function editEdition($id)
     {
         $edition = Edition::find($id);
+        $bookings = $edition->bookings()->paginate(10);
+        return view('/pages/dashboard/admin/editions/editionEdit', ['edition' => $edition, 'bookings' => $bookings]);
     }
 
     public function updateEdition(Request $request, $id)
     {
         $edition = Edition::find($id);
+        dd($request->input());
     }
 
     public function deleteEdition($id)
