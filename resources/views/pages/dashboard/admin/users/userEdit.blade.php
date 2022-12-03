@@ -114,6 +114,13 @@
                     <option @if ($user-> gender === 'Anders')selected @endif value="Anders">Anders</option>
                 </select>
             </div>
+            <div class="field_input">
+                <label class="form-label">Rechten</label>
+                <select class="form-select" name="role">
+                    <option @if ($role==='admin' )selected @endif value="admin">Admin</option>
+                    <option @if ($role==='user' )selected @endif value="user">Gebruiker</option>
+                </select>
+            </div>
             <div class="text-end">
                 <div class="form_button mt-3">
                     <button type="submit" class="btn btn-primary">Aanpassen</button>

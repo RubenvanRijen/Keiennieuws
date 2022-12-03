@@ -6,6 +6,7 @@ use App\Models\Edition;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
+use Spatie\Permission\Models\Role;
 
 class UserDashboardController extends Controller
 {
@@ -29,8 +30,10 @@ class UserDashboardController extends Controller
 
     public function editUser($id)
     {
+
         $user = User::find($id);
-        return view('/pages/dashboard/admin/users/userEdit', ['user' => $user]);
+        $role = $user->getRoleNames()[0];
+        return view('/pages/dashboard/admin/users/userEdit', ['user' => $user, 'role' => $role]);
     }
 
     public function updateUser(Request $request,  $id)
@@ -54,6 +57,7 @@ class UserDashboardController extends Controller
             'city' => ['required', 'string', 'max:255', 'min:3'],
             'street_name' => ['required', 'string', 'max:255', 'min:3'],
             'email' => $rule,
+            'role' => ['required']
         ]);
 
         $user->update(
@@ -68,6 +72,10 @@ class UserDashboardController extends Controller
                 'email' => $request->email,
             ]
         );
+        //remove the current role and add a new one
+        $currentRole = $user->getRoleNames()[0];
+        $user->removeRole($currentRole);
+        $user->assignRole($request->role);
 
         $message = "U heeft succesvol de gebruiker " . $user->firstname . " " . $user->lastname . " aangepast";
         return back()->with('success', $message);
