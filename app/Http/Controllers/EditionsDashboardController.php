@@ -74,7 +74,7 @@ class EditionsDashboardController extends Controller
     public function updateEdition(Request $request, $id)
     {
         $edition = Edition::find($id);
-        dd($request->input());
+        // dd($request->input());
     }
 
     public function deleteEdition($id)

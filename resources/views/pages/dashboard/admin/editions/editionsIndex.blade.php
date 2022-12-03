@@ -56,7 +56,7 @@
                                             <i class="bi bi-eye-fill"></i>
                                         </button>
                                     </a>
-                                    <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/edition-info/{{$currentEdition->id}}">
+                                    <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/edition-edit/{{$currentEdition->id}}">
                                         <button value="view" name="action" type="submit" class="btn btn-success ml-1 mr-1">
                                             <i class="bi bi-pencil-fill"></i>
                                         </button>
@@ -86,7 +86,7 @@
                                             <i class="bi bi-eye-fill"></i>
                                         </button>
                                     </a>
-                                    <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/edition-info/{{$upcomingEdition->id}}">
+                                    <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/edition-edit/{{$upcomingEdition->id}}">
                                         <button value="view" name="action" type="submit" class="btn btn-success ml-1 mr-1">
                                             <i class="bi bi-pencil-fill"></i>
                                         </button>
