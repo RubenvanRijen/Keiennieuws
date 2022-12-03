@@ -37,7 +37,6 @@
             <li class="list-group-item">Gemaakt op op: {{date('d-m-Y', strtotime($booking->created_at))}}</li>
             <li class="list-group-item">Verandert op: {{date('d-m-Y', strtotime($booking->updated_at))}}</li>
             <li class="list-group-item">Bestanden: @foreach ($files as $file)
-
                 @endforeach </li>
 
         </ul>
