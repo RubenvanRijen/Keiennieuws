@@ -78,7 +78,10 @@ class EditionsDashboardController extends Controller
     public function updateEdition(Request $request, $id)
     {
         $edition = Edition::find($id);
-        // dd($request->input());
+        $edition->fill($request->input());
+        $edition->save();
+        $message = "U heeft succesvol de editie " . $edition->title . " gewijzigd";
+        return back()->with('success', $message);
     }
 
     public function deleteEdition($id)

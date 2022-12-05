@@ -104,7 +104,7 @@
 
             <div class="text-end">
                 <div class="form_button mt-3">
-                    <button disabled type="submit" class="btn btn-primary">Aanpassen</button>
+                    <button type="submit" class="btn btn-primary">Aanpassen</button>
                 </div>
             </div>
         </form>
