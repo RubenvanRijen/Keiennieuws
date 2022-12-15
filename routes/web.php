@@ -93,6 +93,8 @@ Route::middleware(['role:admin', 'auth', 'verified'])->group(
     function () {
         //users
         Route::get('/dashboard/admin/users', [UserDashboardController::class, 'indexUsers']);
+        Route::get('/dashboard/admin/user-add', [UserDashboardController::class, 'addUser']);
+        Route::post('/dashboard/admin/user-add', [UserDashboardController::class, 'postUser']);
         Route::get('/dashboard/admin/user-info/{id}', [UserDashboardController::class, 'indexUser']);
         Route::get('/dashboard/admin/user-edit/{id}', [UserDashboardController::class, 'editUser']);
         Route::patch('/dashboard/admin/user-edit/{id}', [UserDashboardController::class, 'updateUser']);

@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
 
 class UserDashboardController extends Controller
 {
@@ -86,6 +87,34 @@ class UserDashboardController extends Controller
         $user = User::find($id);
         $message = "U heeft succesvol de gebruiker " . $user->firstname . " " . $user->lastname . " verwijdert";
         $user->delete();
+        return back()->with('success', $message);
+    }
+
+    public function addUser()
+    {
+        $roles = Role::all()->pluck('name');
+        return view('/pages/dashboard/admin/users/userAdd', ['roles' => $roles]);
+    }
+
+    public function postUser(Request $request)
+    {
+
+        $validation =  $request->validate([
+            'firstname' => ['required', 'string', 'max:255', 'min:3'],
+            'lastname' => ['required', 'string', 'max:255', 'min:3'],
+            'postcode' => 'required|postal_code:NL,DE,FR,BE',
+            'house_number' => 'required',
+            'city' => ['required', 'string', 'max:255', 'min:3'],
+            'street_name' => ['required', 'string', 'max:255', 'min:3'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'role' => ['required']
+        ]);
+
+        $user = new User();
+        $user->fill($validation);
+        $user->password = Hash::make('Test123?');
+        $user->save();
+        $message = "U heeft succesvol de gebruiker " . $user->firstname . " " . $user->lastname . " aangemaakt";
         return back()->with('success', $message);
     }
 }
