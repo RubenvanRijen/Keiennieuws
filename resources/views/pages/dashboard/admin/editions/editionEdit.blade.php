@@ -43,8 +43,8 @@
         <form class="p-3 ms-2" action="{{ url('/dashboard/admin/edition-edit/'.$edition->id)}}" method="post">
             @method('PATCH') @csrf
             <div class="field_input">
-                <label class="form-label ">Voornaam</label>
-                <input id="firstname" type="text" placeholder="voornaam" class="form-control  fourth @error('title') is-invalid @enderror" name="title" value="{{ old('title') ?? $edition->title ?? '' }}" required autocomplete="title" autofocus>
+                <label class="form-label ">Titel</label>
+                <input id="firstname" type="text" placeholder="Titel" class="form-control  fourth @error('title') is-invalid @enderror" name="title" value="{{ old('title') ?? $edition->title ?? '' }}" required autocomplete="title" autofocus>
                 @error('title')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

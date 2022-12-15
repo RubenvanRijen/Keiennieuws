@@ -102,6 +102,8 @@ Route::middleware(['role:admin', 'auth', 'verified'])->group(
 
         //editions
         Route::get('/dashboard/admin/editions', [EditionsDashboardController::class, 'indexEditions']);
+        Route::get('/dashboard/admin/edition-add', [EditionsDashboardController::class, 'addEdition']);
+        Route::post('/dashboard/admin/edition-add', [EditionsDashboardController::class, 'postEdition']);
         Route::get('/dashboard/admin/edition-info/{id}', [EditionsDashboardController::class, 'indexEdition']);
         Route::get('/dashboard/admin/edition-edit/{id}', [EditionsDashboardController::class, 'editEdition']);
         Route::patch('/dashboard/admin/edition-edit/{id}', [EditionsDashboardController::class, 'updateEdition']);

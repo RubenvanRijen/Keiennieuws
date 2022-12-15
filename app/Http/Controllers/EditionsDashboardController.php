@@ -79,6 +79,14 @@ class EditionsDashboardController extends Controller
     public function updateEdition(Request $request, $id)
     {
         $edition = Edition::find($id);
+        $request->validate([
+            'title' => 'required',
+            'space' => 'required|numeric|between:0,999.999',
+            'beginDate' => 'required|date|',
+            'endDate' => 'required|date|after_or_equal:beginDate',
+            'beginDateUpload' => 'required|date|',
+            'endDateUpload' => 'required|date|after_or_equal:beginDateUpload',
+        ]);
         $edition->fill($request->input());
         $edition->save();
         $message = "U heeft succesvol de editie " . $edition->title . " gewijzigd";
@@ -111,6 +119,29 @@ class EditionsDashboardController extends Controller
             Storage::disk('local')->delete($filePath);
         }
         $booking->delete();
+        return back()->with('success', $message);
+    }
+
+    public function addEdition()
+    {
+        return view('/pages/dashboard/admin/editions/editionAdd');
+    }
+
+    public function postEdition(Request $request)
+    {
+        $validation = $request->validate([
+            'title' => 'required',
+            'space' => 'required|numeric|between:0,999.999',
+            'beginDate' => 'required|date|',
+            'endDate' => 'required|date|after_or_equal:beginDate',
+            'beginDateUpload' => 'required|date|',
+            'endDateUpload' => 'required|date|after_or_equal:beginDateUpload',
+        ]);
+
+        $edition = new Edition();
+        $edition->fill($validation);
+        $edition->save();
+        $message = "U heeft succesvol de edition " . $edition->title . " aangemaakt";
         return back()->with('success', $message);
     }
 }
