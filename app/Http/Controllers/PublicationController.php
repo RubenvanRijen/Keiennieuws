@@ -75,6 +75,7 @@ class PublicationController extends Controller
     public function store(Request $request)
     {
 
+        //bot test
         if ($request->botTest) {
             return view('/pages/successAction', ['title' => 'UW PUBLICATIE IS GEUPLOAD!', 'text' => 'Uw bestand word zo spoedig mogelijk verwerkt']);
         }

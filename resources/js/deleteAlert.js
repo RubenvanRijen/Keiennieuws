@@ -51,3 +51,20 @@ $('.show_confirm_delete_edition_dashboard_admin').click(function(event) {
             }
         });
 });
+
+$('.show_confirm_delete_edition_booking_admin').click(function(event) {
+    var form = $(this).closest("form");
+    var name = $(this).data("name");
+    event.preventDefault();
+    swal({
+            title: `Weet u zeker dat u deze booking wilt verwijderen`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                form.submit();
+            }
+        });
+});

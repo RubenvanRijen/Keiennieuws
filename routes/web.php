@@ -109,6 +109,7 @@ Route::middleware(['role:admin', 'auth', 'verified'])->group(
         Route::get('/dashboard/admin/bookings', [EditionsDashboardController::class, 'indexBookings']);
         Route::get('/dashboard/admin/booking-info/{id}', [EditionsDashboardController::class, 'indexBooking']);
         Route::get('/dashboard/admin/booking-info/{id}/download/public/{fileName}', [EditionsDashboardController::class, 'downloadFile']);
+        Route::delete('/dashboard/admin/booking-delete/{id}', [EditionsDashboardController::class, 'deleteBooking']);
     }
 );
 

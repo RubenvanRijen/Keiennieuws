@@ -56,9 +56,9 @@
                     <tr>
                         <th data-label="#" scope="row">{{$file->id}}</th>
                         <td data-label="title">{{$file->title}}</td>
-                        <td data-label="URL"><a href="/dashboard/admin/booking-info/{{$booking->id}}/download/{{$file->location}}">Bestand link</a></td>
+                        <td data-label="URL"><a href="{{$links[$loop->index]}} ">Bestand link</a></td>
                         <td class="actions text-right d-flex">
-                            <a href="{{$links[$loop->index]}}">
+                            <a href="/dashboard/admin/booking-info/{{$booking->id}}/download/{{$file->location}}">
                                 <button value="view" name="action" type="submit" class="btn btn-info ml-1 mr-1 text-white">
                                     <i class="bi bi-cloud-arrow-down-fill"></i></button>
                             </a>

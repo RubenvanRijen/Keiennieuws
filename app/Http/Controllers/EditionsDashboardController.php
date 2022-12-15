@@ -7,6 +7,7 @@ use App\Models\Edition;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Mockery\Undefined;
 
 class EditionsDashboardController extends Controller
 {
@@ -60,12 +61,12 @@ class EditionsDashboardController extends Controller
 
     public function downloadFile($bookingId, $fileName)
     {
-        $path = (public_path("storage" . '\\' . "$fileName"));
+        if (app()->environment('local')) {
+            $path = (public_path("storage" . '\\' . "$fileName"));
+        } else {
+            $path = '/home/rozenjq425/domains/keiennieuws.nl/public_html/storage/' . $fileName;
+        }
         return response()->download($path);
-
-        // TODO uncomment this for the server
-        // $path = '/home/rozenjq425/domains/keiennieuws.nl/public_html/storage/' + $fileName;
-        // return response()->download($path);
     }
 
     public function editEdition($id)
@@ -93,6 +94,23 @@ class EditionsDashboardController extends Controller
             $booking->delete();
         }
         $edition->delete();
+        return back()->with('success', $message);
+    }
+
+    public function deleteBooking($id)
+    {
+        $booking = Booking::find($id);
+        $message = "U heeft succesvol de booking " . $booking->title . " verwijdert";
+        foreach ($booking->files()->get() as $file) {
+            $filePath = null;
+            if (app()->environment('local')) {
+                $filePath = (public_path("storage" . '\\' . "$file->location"));
+            } else {
+                $filePath = '/home/rozenjq425/domains/keiennieuws.nl/public_html/storage/' . $file->location;
+            }
+            Storage::disk('local')->delete($filePath);
+        }
+        $booking->delete();
         return back()->with('success', $message);
     }
 }
