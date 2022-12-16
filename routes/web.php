@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DesignController;
 use App\Http\Controllers\EditionsDashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PublicationController;
@@ -114,6 +115,10 @@ Route::middleware(['role:admin', 'auth', 'verified'])->group(
         Route::get('/dashboard/admin/booking-info/{id}', [EditionsDashboardController::class, 'indexBooking']);
         Route::get('/dashboard/admin/booking-info/{id}/download/public/{fileName}', [EditionsDashboardController::class, 'downloadFile']);
         Route::delete('/dashboard/admin/booking-delete/{id}', [EditionsDashboardController::class, 'deleteBooking']);
+
+
+        //design
+        Route::get('/dashboard/admin/design-edit', [DesignController::class, 'index']);
     }
 );
 
