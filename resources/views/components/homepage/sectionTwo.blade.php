@@ -6,7 +6,7 @@
                 <p class="card-text">Wilt u iets in het Keiennieuws plaatsen? @if ($edition !== null)Dan heeft u tot<br>
                     {{date('d-m-Y', strtotime($edition->endDateUpload))}}
                     de tijd om uw materiaal bij ons aan te leveren voor in de editie van
-                    {{$edition->title}} @else er is op het moment nog geen edite beschikbaar @endif . <br> Heeft u uw bestanden al klaar liggen kies dan aanleveren, hebt u dat nog niet kies dan reseveren om dit later te kunnen doen.
+                    {{$edition->title}}@else er is op het moment nog geen edite beschikbaar @endif. Heeft u uw bestanden al klaar, kies dan voor aanleveren. Heeft u dat nog niet, kies dan voor reseveren.
                 </p>
                 <div class="row">
                     <div class="col mt-2">
