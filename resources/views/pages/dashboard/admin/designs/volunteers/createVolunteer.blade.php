@@ -21,6 +21,13 @@
                     <h2 class="card-title text-white mb-0">Vrijwiliger</h2>
                     <div class="card-subtitle">Details and aanmaken</div>
                 </div>
+                <div class="d-flex gap-2">
+                    <a href="{{ url()->previous() }}">
+                        <button value="view" name="action" type="submit" class="btn btn-primary ml-1 mr-1">
+                            <i class="fs-3 bi bi-skip-backward-circle-fill"></i>
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
         <form class="p-3 ms-2" action="{{ url('/dashboard/admin/volunteer-add')}}" method="post" enctype="multipart/form-data">

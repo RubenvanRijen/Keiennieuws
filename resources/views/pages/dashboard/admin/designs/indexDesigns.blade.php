@@ -21,10 +21,14 @@
                     <h2 class="card-title text-white mb-0">Designs</h2>
                     <div class="card-subtitle">Details and geschiedenis</div>
                 </div>
+                <div class="d-flex gap-2">
+                    <a href="/dashboard/admin/volunteers">
+                        <button value="view" name="action" type="submit" title="Terug" class="btn btn-primary ml-1 mr-1">
+                            <i class="fs-3 bi bi-file-richtext"></i>
+                        </button>
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class="card-body p-4">
-            <a href="/dashboard/admin/volunteers">Vrijwiligers</a>
         </div>
     </div>
 </div>
