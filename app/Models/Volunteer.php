@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Volunteer extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name', 'email', 'image', 'phoneNumber', 'top', 'information', 'localUrl'
+    ];
 }

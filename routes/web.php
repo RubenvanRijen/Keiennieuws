@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserDashboardController;
+use App\Http\Controllers\VolunteerController;
 use App\Models\Subscription;
 use Illuminate\Support\Facades\Route;
 
@@ -119,6 +120,18 @@ Route::middleware(['role:admin', 'auth', 'verified'])->group(
 
         //design
         Route::get('/dashboard/admin/design-edit', [DesignController::class, 'index']);
+
+        //volunteers
+        Route::get('/dashboard/admin/volunteers', [VolunteerController::class, 'index']);
+        Route::get('/dashboard/admin/volunteer-info/{id}', [VolunteerController::class, 'show']);
+        //create
+        Route::get('/dashboard/admin/volunteer-add', [VolunteerController::class, 'create']);
+        Route::post('/dashboard/admin/volunteer-add', [VolunteerController::class, 'store']);
+        //update
+        Route::get('/dashboard/admin/volunteer-edit/{id}', [VolunteerController::class, 'edit']);
+        Route::patch('/dashboard/admin/volunteer-edit/{id}', [VolunteerController::class, 'update']);
+        //delete
+        Route::delete('/dashboard/admin/volunteer-delete/{id}', [VolunteerController::class, 'destroy']);
     }
 );
 

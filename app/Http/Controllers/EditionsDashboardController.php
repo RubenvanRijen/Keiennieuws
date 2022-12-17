@@ -49,7 +49,6 @@ class EditionsDashboardController extends Controller
 
     public function indexBooking($id)
     {
-
         $booking = Booking::find($id);
         $files = $booking->files()->paginate(10);
         $links = [];

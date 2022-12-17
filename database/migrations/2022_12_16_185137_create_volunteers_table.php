@@ -14,7 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('volunteers', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->string('name')->unique();
+            $table->string('email');
+            $table->string('phoneNumber');
+            $table->string('path')->nullable();
+            $table->boolean('top');
+            $table->longText('information');
             $table->timestamps();
         });
     }

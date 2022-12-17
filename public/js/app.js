@@ -14444,6 +14444,21 @@ $('.show_confirm_delete_edition_booking_admin').click(function (event) {
     }
   });
 });
+$('.show_confirm_delete_volunteer_dashboard_admin').click(function (event) {
+  var form = $(this).closest("form");
+  var name = $(this).data("name");
+  event.preventDefault();
+  swal({
+    title: "Weet u zeker dat u deze vrijwiliger wilt verwijderen",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true
+  }).then(function (willDelete) {
+    if (willDelete) {
+      form.submit();
+    }
+  });
+});
 
 /***/ }),
 
