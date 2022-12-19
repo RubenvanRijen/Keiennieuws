@@ -7,11 +7,13 @@ use App\Jobs\SendEmailJob;
 use App\Mail\Uploadpicture;
 use App\Mail\VolunteerApplication;
 use App\Models\Edition;
+use App\Models\Volunteer;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\Storage;
 
 
 class HomeController extends Controller
@@ -38,7 +40,13 @@ class HomeController extends Controller
             $later = new DateTime($edition->endDateUpload);
             $diff = $later->diff($earlier)->format("%a");
         }
-        return view('/pages/home', ['timeDiff' => $diff, 'edition' => $edition]);
+
+        $volunteers = Volunteer::where('top', '1')->get();
+        $volunteerImages = [];
+        foreach ($volunteers as $volunteer) {
+            array_push($volunteerImages, Storage::url($volunteer->path));
+        }
+        return view('/pages/home', ['timeDiff' => $diff, 'edition' => $edition, 'volunteers' => $volunteers, 'volunteerImages' => $volunteerImages]);
     }
 
     public function informationIndex()

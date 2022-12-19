@@ -8105,7 +8105,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _get(
 function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
@@ -8114,11 +8114,13 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) { ; } } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -14397,6 +14399,66 @@ $('.show_confirm_delete_booking_dashboard').click(function (event) {
     }
   });
 });
+$('.show_confirm_delete_user_dashboard_admin').click(function (event) {
+  var form = $(this).closest("form");
+  var name = $(this).data("name");
+  event.preventDefault();
+  swal({
+    title: "Weet u zeker dat u deze gebruiker wilt verwijderen",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true
+  }).then(function (willDelete) {
+    if (willDelete) {
+      form.submit();
+    }
+  });
+});
+$('.show_confirm_delete_edition_dashboard_admin').click(function (event) {
+  var form = $(this).closest("form");
+  var name = $(this).data("name");
+  event.preventDefault();
+  swal({
+    title: "Weet u zeker dat u deze editie wilt verwijderen",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true
+  }).then(function (willDelete) {
+    if (willDelete) {
+      form.submit();
+    }
+  });
+});
+$('.show_confirm_delete_edition_booking_admin').click(function (event) {
+  var form = $(this).closest("form");
+  var name = $(this).data("name");
+  event.preventDefault();
+  swal({
+    title: "Weet u zeker dat u deze booking wilt verwijderen",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true
+  }).then(function (willDelete) {
+    if (willDelete) {
+      form.submit();
+    }
+  });
+});
+$('.show_confirm_delete_volunteer_dashboard_admin').click(function (event) {
+  var form = $(this).closest("form");
+  var name = $(this).data("name");
+  event.preventDefault();
+  swal({
+    title: "Weet u zeker dat u deze vrijwiliger wilt verwijderen",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true
+  }).then(function (willDelete) {
+    if (willDelete) {
+      form.submit();
+    }
+  });
+});
 
 /***/ }),
 
@@ -14442,9 +14504,12 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
   \**********************************************/
 /***/ (() => {
 
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 var style = document.createElement('style');
 style.setAttribute("id", "multiselect_dropdown_styles");
 style.innerHTML = "\n.multiselect-dropdown{\n  display: inline-block;\n  padding: 2px 5px 0px 5px;\n  border-radius: 4px;\n  border: solid 1px #ced4da;\n  background-color: white;\n  position: relative;\n  background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e\");\n  background-repeat: no-repeat;\n  background-position: right .75rem center;\n  background-size: 16px 12px;\n}\n.multiselect-dropdown span.optext, .multiselect-dropdown span.placeholder{\n  margin-right:0.5em; \n  margin-bottom:2px;\n  padding:1px 0; \n  border-radius: 4px; \n  display:inline-block;\n}\n.multiselect-dropdown span.optext{\n  background-color:lightgray;\n  padding:1px 0.75em; \n}\n.multiselect-dropdown span.optext .optdel {\n  float: right;\n  margin: 0 -6px 1px 5px;\n  font-size: 0.7em;\n  margin-top: 2px;\n  cursor: pointer;\n  color: #666;\n}\n.multiselect-dropdown span.optext .optdel:hover { color: #c66;}\n.multiselect-dropdown span.placeholder{\n  color:#ced4da;\n}\n.multiselect-dropdown-list-wrapper{\n  box-shadow: gray 0 3px 8px;\n  z-index: 100;\n  padding:2px;\n  border-radius: 4px;\n  border: solid 1px #ced4da;\n  display: none;\n  margin: -1px;\n  position: absolute;\n  top:0;\n  left: 0;\n  right: 0;\n  background: white;\n}\n.multiselect-dropdown-list-wrapper .multiselect-dropdown-search{\n  margin-bottom:5px;\n}\n.multiselect-dropdown-list{\n  padding:2px;\n  height: 15rem;\n  overflow-y:auto;\n  overflow-x: hidden;\n}\n.multiselect-dropdown-list::-webkit-scrollbar {\n  width: 6px;\n}\n.multiselect-dropdown-list::-webkit-scrollbar-thumb {\n  background-color: #bec4ca;\n  border-radius:3px;\n}\n\n.multiselect-dropdown-list div{\n  padding: 5px;\n}\n.multiselect-dropdown-list input{\n  height: 1.15em;\n  width: 1.15em;\n  margin-right: 0.35em;  \n}\n.multiselect-dropdown-list div.checked{\n}\n.multiselect-dropdown-list div:hover{\n  background-color: #ced4da;\n}\n.multiselect-dropdown span.maxselected {width:100%;}\n.multiselect-dropdown-all-selector {border-bottom:solid 1px #999;}\n";
@@ -14826,7 +14891,7 @@ $(document).ready(function () {
 /***/ (function(module, exports) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * jQuery JavaScript Library v3.6.1
+ * jQuery JavaScript Library v3.6.2
  * https://jquery.com/
  *
  * Includes Sizzle.js
@@ -14836,7 +14901,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2022-08-26T17:52Z
+ * Date: 2022-12-13T14:56Z
  */
 ( function( global, factory ) {
 
@@ -14978,7 +15043,7 @@ function toType( obj ) {
 
 
 var
-	version = "3.6.1",
+	version = "3.6.2",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -15349,14 +15414,14 @@ function isArrayLike( obj ) {
 }
 var Sizzle =
 /*!
- * Sizzle CSS Selector Engine v2.3.6
+ * Sizzle CSS Selector Engine v2.3.8
  * https://sizzlejs.com/
  *
  * Copyright JS Foundation and other contributors
  * Released under the MIT license
  * https://js.foundation/
  *
- * Date: 2021-02-16
+ * Date: 2022-11-16
  */
 ( function( window ) {
 var i,
@@ -15706,6 +15771,27 @@ function Sizzle( selector, context, results, seed ) {
 				}
 
 				try {
+
+					// `qSA` may not throw for unrecognized parts using forgiving parsing:
+					// https://drafts.csswg.org/selectors/#forgiving-selector
+					// like the `:has()` pseudo-class:
+					// https://drafts.csswg.org/selectors/#relational
+					// `CSS.supports` is still expected to return `false` then:
+					// https://drafts.csswg.org/css-conditional-4/#typedef-supports-selector-fn
+					// https://drafts.csswg.org/css-conditional-4/#dfn-support-selector
+					if ( support.cssSupportsSelector &&
+
+						// eslint-disable-next-line no-undef
+						!CSS.supports( "selector(" + newSelector + ")" ) ) {
+
+						// Support: IE 11+
+						// Throw to get to the same code path as an error directly in qSA.
+						// Note: once we only support browser supporting
+						// `CSS.supports('selector(...)')`, we can most likely drop
+						// the `try-catch`. IE doesn't implement the API.
+						throw new Error();
+					}
+
 					push.apply( results,
 						newContext.querySelectorAll( newSelector )
 					);
@@ -16001,6 +16087,31 @@ setDocument = Sizzle.setDocument = function( node ) {
 			!el.querySelectorAll( ":scope fieldset div" ).length;
 	} );
 
+	// Support: Chrome 105+, Firefox 104+, Safari 15.4+
+	// Make sure forgiving mode is not used in `CSS.supports( "selector(...)" )`.
+	//
+	// `:is()` uses a forgiving selector list as an argument and is widely
+	// implemented, so it's a good one to test against.
+	support.cssSupportsSelector = assert( function() {
+		/* eslint-disable no-undef */
+
+		return CSS.supports( "selector(*)" ) &&
+
+			// Support: Firefox 78-81 only
+			// In old Firefox, `:is()` didn't use forgiving parsing. In that case,
+			// fail this test as there's no selector to test against that.
+			// `CSS.supports` uses unforgiving parsing
+			document.querySelectorAll( ":is(:jqfake)" ) &&
+
+			// `*` is needed as Safari & newer Chrome implemented something in between
+			// for `:has()` - it throws in `qSA` if it only contains an unsupported
+			// argument but multiple ones, one of which is supported, are fine.
+			// We want to play safe in case `:is()` gets the same treatment.
+			!CSS.supports( "selector(:is(*,:jqfake))" );
+
+		/* eslint-enable */
+	} );
+
 	/* Attributes
 	---------------------------------------------------------------------- */
 
@@ -16267,6 +16378,18 @@ setDocument = Sizzle.setDocument = function( node ) {
 		} );
 	}
 
+	if ( !support.cssSupportsSelector ) {
+
+		// Support: Chrome 105+, Safari 15.4+
+		// `:has()` uses a forgiving selector list as an argument so our regular
+		// `try-catch` mechanism fails to catch `:has()` with arguments not supported
+		// natively like `:has(:contains("Foo"))`. Where supported & spec-compliant,
+		// we now use `CSS.supports("selector(SELECTOR_TO_BE_TESTED)")` but outside
+		// that, let's mark `:has` as buggy to always use jQuery traversal for
+		// `:has()`.
+		rbuggyQSA.push( ":has" );
+	}
+
 	rbuggyQSA = rbuggyQSA.length && new RegExp( rbuggyQSA.join( "|" ) );
 	rbuggyMatches = rbuggyMatches.length && new RegExp( rbuggyMatches.join( "|" ) );
 
@@ -16279,7 +16402,14 @@ setDocument = Sizzle.setDocument = function( node ) {
 	// As in, an element does not contain itself
 	contains = hasCompare || rnative.test( docElem.contains ) ?
 		function( a, b ) {
-			var adown = a.nodeType === 9 ? a.documentElement : a,
+
+			// Support: IE <9 only
+			// IE doesn't have `contains` on `document` so we need to check for
+			// `documentElement` presence.
+			// We need to fall back to `a` when `documentElement` is missing
+			// as `ownerDocument` of elements within `<template/>` may have
+			// a null one - a default behavior of all modern browsers.
+			var adown = a.nodeType === 9 && a.documentElement || a,
 				bup = b && b.parentNode;
 			return a === bup || !!( bup && bup.nodeType === 1 && (
 				adown.contains ?
@@ -17069,7 +17199,7 @@ Expr = Sizzle.selectors = {
 			return elem.nodeName.toLowerCase() === "input" &&
 				elem.type === "text" &&
 
-				// Support: IE<8
+				// Support: IE <10 only
 				// New HTML5 attribute values (e.g., "search") appear with elem.type === "text"
 				( ( attr = elem.getAttribute( "type" ) ) == null ||
 					attr.toLowerCase() === "text" );
@@ -21435,17 +21565,37 @@ function curCSS( elem, name, computed ) {
 	//   .css('filter') (IE 9 only, trac-12537)
 	//   .css('--customProperty) (gh-3144)
 	if ( computed ) {
+
+		// Support: IE <=9 - 11+
+		// IE only supports `"float"` in `getPropertyValue`; in computed styles
+		// it's only available as `"cssFloat"`. We no longer modify properties
+		// sent to `.css()` apart from camelCasing, so we need to check both.
+		// Normally, this would create difference in behavior: if
+		// `getPropertyValue` returns an empty string, the value returned
+		// by `.css()` would be `undefined`. This is usually the case for
+		// disconnected elements. However, in IE even disconnected elements
+		// with no styles return `"none"` for `getPropertyValue( "float" )`
 		ret = computed.getPropertyValue( name ) || computed[ name ];
 
-		// trim whitespace for custom property (issue gh-4926)
-		if ( isCustomProp ) {
+		if ( isCustomProp && ret ) {
 
-			// rtrim treats U+000D CARRIAGE RETURN and U+000C FORM FEED
+			// Support: Firefox 105+, Chrome <=105+
+			// Spec requires trimming whitespace for custom properties (gh-4926).
+			// Firefox only trims leading whitespace. Chrome just collapses
+			// both leading & trailing whitespace to a single space.
+			//
+			// Fall back to `undefined` if empty string returned.
+			// This collapses a missing definition with property defined
+			// and set to an empty string but there's no standard API
+			// allowing us to differentiate them without a performance penalty
+			// and returning `undefined` aligns with older jQuery.
+			//
+			// rtrimCSS treats U+000D CARRIAGE RETURN and U+000C FORM FEED
 			// as whitespace while CSS does not, but this is not a problem
 			// because CSS preprocessing replaces them with U+000A LINE FEED
 			// (which *is* CSS whitespace)
 			// https://www.w3.org/TR/css-syntax-3/#input-preprocessing
-			ret = ret.replace( rtrimCSS, "$1" );
+			ret = ret.replace( rtrimCSS, "$1" ) || undefined;
 		}
 
 		if ( ret === "" && !isAttached( elem ) ) {

@@ -40,16 +40,74 @@
                 </div>
             </div>
         </div>
-        <ul class="list-group list-group-flush text-center">
-            <li class="list-group-item">Title: {{$edition->title}}</li>
-            <li class="list-group-item">Start datum: {{date('d-m-Y', strtotime($edition->beginDate))}}</li>
-            <li class="list-group-item">Eind datum: {{date('d-m-Y', strtotime($edition->endDate))}}</li>
-            <li class="list-group-item">Start upload datum: {{date('d-m-Y', strtotime($edition->beginDate))}}</li>
-            <li class="list-group-item">Eind upload datum: {{date('d-m-Y', strtotime($edition->endDate))}}</li>
-            <li class="list-group-item">Gemaakt op: {{date('d-m-Y', strtotime($edition->created_at))}}</li>
-            <li class="list-group-item">Verandert op: {{date('d-m-Y', strtotime($edition->updated_at))}}</li>
+        <form class="p-3 ms-2" action="{{ url('/dashboard/admin/edition-edit/'.$edition->id)}}" method="post">
+            @method('PATCH') @csrf
+            <div class="field_input">
+                <label class="form-label ">Titel</label>
+                <input id="firstname" type="text" placeholder="Titel" class="form-control  fourth @error('title') is-invalid @enderror" name="title" value="{{ old('title') ?? $edition->title ?? '' }}" required autocomplete="title" autofocus>
+                @error('title')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
 
-        </ul>
+            <div class="field_input">
+                <label class="form-label">Start Datum</label>
+                <input id="beginDate" type="date" placeholder="beginDate" class="form-control  fourth @error('beginDate') is-invalid @enderror" name="beginDate" value="{{ old('beginDate') ?? $edition->beginDate ?? '' }}" required autocomplete="beginDate" autofocus>
+                @error('beginDate')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+
+            <div class="field_input">
+                <label class="form-label">Eind Datum</label>
+                <input id="endDate" type="date" placeholder="endDate" class="form-control  fourth @error('endDate') is-invalid @enderror" name="endDate" value="{{ old('endDate') ?? $edition->endDate ?? '' }}" required autocomplete="endDate" autofocus>
+                @error('endDate')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+
+            <div class="field_input">
+                <label class="form-label">Start Datum aanleveren/reserveren</label>
+                <input id="beginDateUpload" type="date" placeholder="beginDateUpload" class="form-control  fourth @error('beginDateUpload') is-invalid @enderror" name="beginDateUpload" value="{{ old('beginDateUpload') ?? $edition->beginDateUpload ?? '' }}" required autocomplete="beginDateUpload" autofocus>
+                @error('beginDateUpload')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+
+            <div class="field_input">
+                <label class="form-label">Eind Datum aanleveren/reserveren</label>
+                <input id="endDateUpload" type="date" placeholder="endDateUpload" class="form-control  fourth @error('endDateUpload') is-invalid @enderror" name="endDateUpload" value="{{ old('endDateUpload') ?? $edition->endDateUpload ?? '' }}" required autocomplete="endDateUpload" autofocus>
+                @error('endDateUpload')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+
+            <div class="field_input">
+                <label class="form-label">Plaats</label>
+                <input id="space" type="numer" step="0.001" placeholder="space" class="form-control  fourth @error('space') is-invalid @enderror" name="space" value="{{ old('space') ?? $edition->space ?? '' }}" required autocomplete="space" autofocus>
+                @error('space')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+
+            <div class="text-end">
+                <div class="form_button mt-3">
+                    <button type="submit" class="btn btn-primary">Aanpassen</button>
+                </div>
+            </div>
+        </form>
     </div>
 
     <div class="card card-raised mt-5">
@@ -97,24 +155,11 @@
                             <td>{{$data->size}}</td>
                             <td>{{date('d-m-Y', strtotime($data->created_at))}}</td>
                             <td>
-                                <div class="d-flex">
-                                    <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/booking-info/{{$data->id}}">
-                                        <button value="view" name="action" type="submit" class="btn btn-primary ml-1 mr-1">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </button>
-                                    </a>
-                                    <!-- you cant't edit an booking because someone else made that booking -->
-                                    <!-- <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/booking-edit/{{$data->id}}">
-                                        <button value="view" name="action" type="submit" class="btn btn-success ml-1 mr-1">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </button>
-                                    </a> -->
-                                    <form class="ms-1 me-1" action="/dashboard/admin/booking-delete/{{$data->id}}" method="post" enctype="multipart/form-data">@method('DELETE') @csrf
-                                        <button value="view" name="action" type="submit" class="btn btn-danger ml-1 mr-1 show_confirm_delete_booking_dashboard_admin">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </button>
-                                    </form>
-                                </div>
+                                <a href="/dashboard/admin/booking-info/{{$data->id}}">
+                                    <button value="view" name="action" type="submit" class="btn btn-primary ml-1 mr-1">
+                                        <i class="bi bi-eye-fill"></i>
+                                    </button>
+                                </a>
                             </td>
                         </tr>
                         @endforeach

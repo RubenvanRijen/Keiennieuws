@@ -103,7 +103,8 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Waar moet het keiennieuws rekening mee houden met uw publicatie?</label>
-                        <textarea class="form-control @error('information') is-invalid @enderror" name="information" id="information" rows="3">{{ old('information')?? '' }}</textarea>
+                        <textarea class="form-control @error('information') is-invalid @enderror" name="information" id="information" rows="3">@if ($booking->id != null) {{old('information')??$booking->information?? '' }} @else{{old('information')?? '' }}  @endif</textarea>
+
                         @error('information')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

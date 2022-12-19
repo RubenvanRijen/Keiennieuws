@@ -75,8 +75,8 @@
                 @enderror
             </div>
             <div class="field_input">
-                <label class="form-label">Geslacht</label>
-                <select class="form-select" name="gender">
+                <label class="form-label fadeIn fourth">Geslacht</label>
+                <select class="form-select fadeIn fourth" name="gender">
                     <option @if ($user->gender === 'Dhr')selected @endif value="Dhr">Man</option>
                     <option @if ($user-> gender === 'Mevr')selected @endif value="Mevr">Vrouw</option>
                     <option @if ($user-> gender === 'Anders')selected @endif value="Anders">Anders</option>

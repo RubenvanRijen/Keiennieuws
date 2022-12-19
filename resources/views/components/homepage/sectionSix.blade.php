@@ -28,7 +28,7 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Uw emailadres: </label>
+                    <label for="exampleInputEmail1" class="form-label">Uw e-mailadres: </label>
                     <input required type="email" name="email" value="{{ old('email')?? '' }}" class="form-control @error('email') is-invalid @enderror" id="email" aria-describedby="emailHelp">
                     @error('email')
                     <span class="invalid-feedback" role="alert">

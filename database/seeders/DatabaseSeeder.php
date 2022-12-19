@@ -17,11 +17,12 @@ class DatabaseSeeder extends Seeder
         $this->call([
             rolesSeeder::class,
             adminUserSeeder::class,
-            // EditionSeeder::class
+            EditionSeeder::class,
+            VolunteerSeeder::class
         ]);
-        // for ($k = 0; $k < 10; $k++) {
-        //     $user =  \App\Models\User::factory()->create();
-        //     $user->assignRole('user');
-        // }
+        for ($k = 0; $k < 10; $k++) {
+            $user =  \App\Models\User::factory()->create();
+            $user->assignRole('user');
+        }
     }
 }

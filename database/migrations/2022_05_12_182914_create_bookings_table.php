@@ -20,6 +20,7 @@ return new class extends Migration
             $table->enum('type', ['advertisement', 'column', 'newsFeed', 'eventPoster', 'knowledge', 'article', 'sponsorship']);
             $table->enum('size', ['A4', 'A5', 'A6', 'A7']);
             $table->string('email');
+            $table->string('information')->nullable(true);
             $table->timestamps();
         });
     }

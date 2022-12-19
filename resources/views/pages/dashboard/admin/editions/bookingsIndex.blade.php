@@ -2,6 +2,18 @@
 
 @section('content')
 <div class="container mt-5">
+    @if(session()->has('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session()->get('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+    @if(session()->has('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session()->get('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
     <div class="card card-raised">
         <div class="card-header bg-primary text-white px-4">
             <div class="d-flex justify-content-between align-items-center">
@@ -10,13 +22,9 @@
                     <div class="card-subtitle">Details and geschiedenis</div>
                 </div>
                 <div class="d-flex gap-2">
-                    <a href="#">
+                    <a href="{{ url()->previous() }}">
                         <button value="view" name="action" type="submit" class="btn btn-primary ml-1 mr-1">
-                            <i class="fs-3 bi bi-cloud-download-fill"></i>
-                        </button>
-                    </a> <a href="#">
-                        <button value="view" name="action" type="submit" title="Terug" class="btn btn-primary ml-1 mr-1">
-                            <i class="fs-3 bi bi-printer-fill"></i>
+                            <i class="fs-3 bi bi-skip-backward-circle-fill"></i>
                         </button>
                     </a>
                 </div>
@@ -47,11 +55,24 @@
                             <td>{{$data->size}}</td>
                             <td>{{date('d-m-Y', strtotime($data->created_at))}}</td>
                             <td>
-                                <a href="/dashboard/admin/booking-info/{{$data->id}}">
-                                    <button value="view" name="action" type="submit" class="btn btn-primary ml-1 mr-1">
-                                        <i class="bi bi-eye-fill"></i>
-                                    </button>
-                                </a>
+                                <div class="d-flex">
+                                    <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/booking-info/{{$data->id}}">
+                                        <button value="view" name="action" type="submit" class="btn btn-primary ml-1 mr-1">
+                                            <i class="bi bi-eye-fill"></i>
+                                        </button>
+                                    </a>
+                                    <!-- you cant't edit an booking because someone else made that booking -->
+                                    <!-- <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/booking-edit/{{$data->id}}">
+                                        <button value="view" name="action" type="submit" class="btn btn-success ml-1 mr-1">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </button>
+                                    </a> -->
+                                    <form class="ms-1 me-1" action="/dashboard/admin/booking-delete/{{$data->id}}" method="post" enctype="multipart/form-data">@method('DELETE') @csrf
+                                        <button value="view" name="action" type="submit" class="btn btn-danger ml-1 mr-1 show_confirm_delete_booking_dashboard_admin">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                         @endforeach

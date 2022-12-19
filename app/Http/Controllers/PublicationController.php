@@ -75,6 +75,7 @@ class PublicationController extends Controller
     public function store(Request $request)
     {
 
+        //bot test
         if ($request->botTest) {
             return view('/pages/successAction', ['title' => 'UW PUBLICATIE IS GEUPLOAD!', 'text' => 'Uw bestand word zo spoedig mogelijk verwerkt']);
         }
@@ -138,6 +139,10 @@ class PublicationController extends Controller
         } else {
             $booking = Booking::find($request->booking_id);
         }
+
+        //set then information for a booking
+        $booking->information = $request->information;
+        $booking->save();
 
         if (!$booking instanceof Booking && $request->booking_id == null) {
             return $booking;

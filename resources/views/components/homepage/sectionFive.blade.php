@@ -30,7 +30,7 @@
                      @enderror
                  </div>
 
-                 <p>Wilt u dat uw naam bij de foto vermeldt wordt?</p>
+                 <p>Wilt u dat uw naam bij de foto vermeld wordt?</p>
                  <div class="form-check showNameButton">
                      <input class="form-check-input" name="showName" type="checkbox" value="1" {{ old('showName') == '1' ? 'checked' : '' }} id="showName">
                      <label class="form-check-label" for="showName">Ja</label>

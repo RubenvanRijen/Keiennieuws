@@ -2,6 +2,18 @@
 
 @section('content')
 <div class="container mt-5">
+    @if(session()->has('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session()->get('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+    @if(session()->has('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session()->get('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
     <div class="card card-raised">
         <div class="card-header bg-primary text-white px-4">
             <div class="d-flex justify-content-between align-items-center">
@@ -33,10 +45,10 @@
             <li class="list-group-item">Type: {{$booking->type}}</li>
             <li class="list-group-item">Maat: {{$booking->size}}</li>
             <li class="list-group-item">Email: {{$booking->email}}</li>
+            <li class="list-group-item">Informatie: {{$booking->information}}</li>
             <li class="list-group-item">Gemaakt op op: {{date('d-m-Y', strtotime($booking->created_at))}}</li>
             <li class="list-group-item">Verandert op: {{date('d-m-Y', strtotime($booking->updated_at))}}</li>
             <li class="list-group-item">Bestanden: @foreach ($files as $file)
-
                 @endforeach </li>
 
         </ul>
@@ -56,9 +68,9 @@
                     <tr>
                         <th data-label="#" scope="row">{{$file->id}}</th>
                         <td data-label="title">{{$file->title}}</td>
-                        <td data-label="URL"><a href="/dashboard/admin/booking-info/{{$booking->id}}/download/{{$file->location}}">Bestand link</a></td>
+                        <td data-label="URL"><a href="{{$links[$loop->index]}} ">Bestand link</a></td>
                         <td class="actions text-right d-flex">
-                            <a href="{{$links[0]}}">
+                            <a href="/dashboard/admin/booking-info/{{$booking->id}}/download/{{$file->location}}">
                                 <button value="view" name="action" type="submit" class="btn btn-info ml-1 mr-1 text-white">
                                     <i class="bi bi-cloud-arrow-down-fill"></i></button>
                             </a>
