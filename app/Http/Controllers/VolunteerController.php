@@ -46,7 +46,7 @@ class VolunteerController extends Controller
             'name' => 'required|string|unique:volunteers',
             'email' => 'email|required',
             'phoneNumber' => 'required',
-            'file' => 'required|max:4096',
+            'file' => 'required|max:8096',
             'top' => 'required|boolean',
             'information' => 'required|max:300'
         ]);
@@ -117,7 +117,7 @@ class VolunteerController extends Controller
             'name' => 'required|string|unique:volunteers,name,' . $volunteer->id,
             'email' => 'email|required',
             'phoneNumber' => 'required',
-            'file' => 'max:4096',
+            'file' => 'max:8096',
             'top' => 'required|boolean',
             'information' => 'required|max:300'
         ]);
