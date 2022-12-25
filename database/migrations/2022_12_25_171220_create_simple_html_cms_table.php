@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('simple_html_cms', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->longText('information');
+            $table->string('link');
+            $table->string('page');
+            $table->string('type');
             $table->timestamps();
         });
     }
