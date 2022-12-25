@@ -12,4 +12,9 @@ class DesignController extends Controller
     {
         return view('pages.dashboard.admin.designs.indexDesigns');
     }
+
+    public function indexHomePageEdit()
+    {
+        return view('pages.dashboard.admin.designs.HomePageEditing');
+    }
 }

@@ -121,6 +121,10 @@ Route::middleware(['role:admin', 'auth', 'verified'])->group(
         //design
         Route::get('/dashboard/admin/design-edit', [DesignController::class, 'index']);
 
+        //Homepage designs
+        Route::get('/dashboard/admin/design-edit/home-page', [DesignController::class, 'indexHomePageEdit']);
+
+
         //volunteers
         Route::get('/dashboard/admin/volunteers', [VolunteerController::class, 'index']);
         Route::get('/dashboard/admin/volunteer-info/{id}', [VolunteerController::class, 'show']);
