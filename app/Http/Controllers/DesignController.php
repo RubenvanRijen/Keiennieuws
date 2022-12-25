@@ -22,6 +22,6 @@ class DesignController extends Controller
         $simpleStatements = SimpleHtmlCms::where('page', HomePageCmsEnum::homePage)->where('type', HomePageTypeCmsEnum::statement)->get();
 
 
-        return view('pages.dashboard.admin.designs.HomePageEditing', ['simpleArticles' => $simpleArticles, 'simpleStatements' => $simpleStatements]);
+        return view('pages.dashboard.admin.designs.homepage.homePageEditing', ['simpleArticles' => $simpleArticles, 'simpleStatements' => $simpleStatements]);
     }
 }

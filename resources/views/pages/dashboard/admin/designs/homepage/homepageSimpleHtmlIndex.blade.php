@@ -7,7 +7,7 @@
 
             <div class="d-flex justify-content-between align-items-center">
                 <div class="me-4">
-                    <h2 class="card-title text-white mb-0">Gebruiker #{{$user->id}}</h2>
+                    <h2 class="card-title text-white mb-0">Hoofdpagina Blokje #{{$simpleHtml->id}}</h2>
                     <div class="card-subtitle">Details and geschiedenis</div>
                 </div>
                 <div class="d-flex gap-2">

@@ -27,16 +27,6 @@
                             <i class="fs-3 bi bi-skip-backward-circle-fill"></i>
                         </button>
                     </a>
-                    <a href="#">
-                        <button value="view" name="action" type="submit" class="btn btn-primary ml-1 mr-1">
-                            <i class="fs-3 bi bi-cloud-download-fill"></i>
-                        </button>
-                    </a>
-                    <a href="#">
-                        <button value="view" name="action" type="submit" title="Terug" class="btn btn-primary ml-1 mr-1">
-                            <i class="fs-3 bi bi-printer-fill"></i>
-                        </button>
-                    </a>
                 </div>
             </div>
         </div>

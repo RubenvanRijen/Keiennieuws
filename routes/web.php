@@ -124,8 +124,8 @@ Route::middleware(['role:admin', 'auth', 'verified'])->group(
 
         //Homepage designs
         Route::get('/dashboard/admin/design-edit/home-page', [DesignController::class, 'indexHomePageEdit']);
-        Route::get('/dashboard/admin/design-edit/home-page/simple-info/{id}', [DesignController::class, 'indexHomePageEdit']);
-
+        Route::get('/dashboard/admin/design-edit/home-page/simple-info/{id}', [SimpleHtmlCmsController::class, 'show']);
+        //update
         Route::get('/dashboard/admin/design-edit/home-page/simple-edit/{id}', [SimpleHtmlCmsController::class, 'edit']);
         Route::patch('/dashboard/admin/design-edit/home-page/simple-edit/{id}', [SimpleHtmlCmsController::class, 'update']);
 

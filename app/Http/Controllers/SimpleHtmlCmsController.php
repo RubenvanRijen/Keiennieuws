@@ -44,9 +44,11 @@ class SimpleHtmlCmsController extends Controller
      * @param  \App\Models\SimpleHtmlCms  $simpleHtmlCms
      * @return \Illuminate\Http\Response
      */
-    public function show(SimpleHtmlCms $simpleHtmlCms)
+    public function show($id)
     {
-        //
+        $simpleHtml = SimpleHtmlCms::find($id);
+
+        return view('pages.dashboard.admin.designs.homepage.homepageSimpleHtmlIndex', ['simpleHtml' => $simpleHtml]);
     }
 
     /**
