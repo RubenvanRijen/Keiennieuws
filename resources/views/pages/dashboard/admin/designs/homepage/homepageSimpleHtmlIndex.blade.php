@@ -20,15 +20,11 @@
             </div>
         </div>
         <ul class="list-group list-group-flush text-center">
-            <li class="list-group-item">Naam: {{$user->firstname}} {{$user->lastname}}</li>
-            <li class="list-group-item">Postcode: {{$user->postcode}}</li>
-            <li class="list-group-item">Adres: {{$user->city}} - {{$user->street_name}} {{$user->house_number}} </li>
-            <li class="list-group-item">Email: {{$user->email}}</li>
-            <li class="list-group-item">Geslacht: {{$user->gender}}</li>
-            <li class="list-group-item">Geabonneerd: @if ($user->subscription()->exists()) ja @else nee @endif </li>
-            <li class="list-group-item">Gemaakt op: {{date('d-m-Y', strtotime($user->created_at))}}</li>
-            <li class="list-group-item">Verandert op: {{date('d-m-Y', strtotime($user->updated_at))}}</li>
-
+            <li class="list-group-item">Titel: {{$simpleHtml->title}} </li>
+            <li class="list-group-item">Text: {{$simpleHtml->information}}</li>
+            <li class="list-group-item">Link: {{$simpleHtml->link}}</li>
+            <li class="list-group-item">Pagina: {{$simpleHtml->page}}</li>
+            <li class="list-group-item">Type: {{$simpleHtml->type}}</li>
         </ul>
     </div>
 </div>
