@@ -87,6 +87,34 @@
                     @endforeach
                 </div>
             </div>
+            <h1>Vrijwiligers</h1>
+            <div class="d-flex gap-2">
+                <div class="row d-flex justify-content-center">
+                    @foreach ($simpleVolunteers as $simpleVolunteer)
+                    <div class="card m-2 text-center" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{$simpleArticles->title}}</h5>
+                            <h6 class="card-subtitle mb-4 text-muted">{{$simpleVolunteer->page}} - {{$simpleVolunteer->type}}</h6>
+                            <p class="card-text">{{$simpleVolunteer->information}}</p>
+                            <a href="#" class="card-link">{{$simpleVolunteer->link}}</a>
+
+                        </div>
+                        <div class="d-flex mb-3 justify-content-center">
+                            <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/design-edit/home-page/simple-info/{{$simpleArticles->id}}">
+                                <button value="view" name="action" type="submit" class="btn btn-primary ml-1 mr-1">
+                                    <i class="bi bi-eye-fill"></i>
+                                </button>
+                            </a>
+                            <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/design-edit/home-page/simple-edit/{{$simpleArticles->id}}">
+                                <button value="view" name="action" type="submit" class="btn btn-success ml-1 mr-1">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
     @endsection

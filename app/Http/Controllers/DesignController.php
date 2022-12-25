@@ -20,8 +20,9 @@ class DesignController extends Controller
     {
         $simpleArticles = SimpleHtmlCms::where('page', HomePageCmsEnum::homePage)->where('type', HomePageTypeCmsEnum::acticles)->get();
         $simpleStatements = SimpleHtmlCms::where('page', HomePageCmsEnum::homePage)->where('type', HomePageTypeCmsEnum::statement)->get();
+        $simpleVolunteers = SimpleHtmlCms::where('page', HomePageCmsEnum::homePage)->where('type', HomePageTypeCmsEnum::volunteers)->get();
 
 
-        return view('pages.dashboard.admin.designs.homepage.homePageEditing', ['simpleArticles' => $simpleArticles, 'simpleStatements' => $simpleStatements]);
+        return view('pages.dashboard.admin.designs.homepage.homePageEditing', ['simpleArticles' => $simpleArticles, 'simpleStatements' => $simpleStatements, 'simpleVolunteers' => $simpleVolunteers]);
     }
 }
