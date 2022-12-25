@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\HomePageCmsEnum;
+use App\Enums\HomePageTypeCmsEnum;
 use App\Jobs\DeleteFiles;
 use App\Jobs\SendEmailJob;
 use App\Mail\Uploadpicture;
 use App\Mail\VolunteerApplication;
 use App\Models\Edition;
+use App\Models\SimpleHtmlCms;
 use App\Models\Volunteer;
 use Carbon\Carbon;
 use DateTime;
@@ -46,7 +49,10 @@ class HomeController extends Controller
         foreach ($volunteers as $volunteer) {
             array_push($volunteerImages, Storage::url($volunteer->path));
         }
-        return view('/pages/home', ['timeDiff' => $diff, 'edition' => $edition, 'volunteers' => $volunteers, 'volunteerImages' => $volunteerImages]);
+        $simpleArticles = SimpleHtmlCms::where('page', HomePageCmsEnum::homePage)->where('type', HomePageTypeCmsEnum::acticles)->get();
+        $simpleStatements = SimpleHtmlCms::where('page', HomePageCmsEnum::homePage)->where('type', HomePageTypeCmsEnum::statement)->get();
+        $simpleVolunteers = SimpleHtmlCms::where('page', HomePageCmsEnum::homePage)->where('type', HomePageTypeCmsEnum::volunteers)->get();
+        return view('/pages/home', ['timeDiff' => $diff, 'edition' => $edition, 'volunteers' => $volunteers, 'volunteerImages' => $volunteerImages, 'simpleArticles' => $simpleArticles, 'simpleStatements' => $simpleStatements, 'simpleVolunteers' => $simpleVolunteers]);
     }
 
     public function informationIndex()

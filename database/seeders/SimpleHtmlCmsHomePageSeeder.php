@@ -66,11 +66,11 @@ class SimpleHtmlCmsHomePageSeeder extends Seeder
         $simpleSix->save();
 
         $simpleSeven = new SimpleHtmlCms();
-        $simpleSix->title = "HET KN IS OPZOEK NAAR MEER HANDEN";
-        $simpleSix->information = "3 uurtjes per maand de tijd? interesse in lokale nieuwstje? zin om te schrijven? een enthousiaste persoonlijkheid?";
-        $simpleSix->link = null;
-        $simpleSix->page = HomePageCmsEnum::homePage;
-        $simpleSix->type = HomePageTypeCmsEnum::volunteers;
-        $simpleSix->save();
+        $simpleSeven->title = "HET KN IS OPZOEK NAAR MEER HANDEN";
+        $simpleSeven->information = "3 uurtjes per maand de tijd? interesse in lokale nieuwstje? zin om te schrijven? een enthousiaste persoonlijkheid?";
+        $simpleSeven->link = null;
+        $simpleSeven->page = HomePageCmsEnum::homePage;
+        $simpleSeven->type = HomePageTypeCmsEnum::volunteers;
+        $simpleSeven->save();
     }
 }
