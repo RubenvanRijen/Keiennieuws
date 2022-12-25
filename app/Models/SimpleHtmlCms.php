@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\HomePageCmsEnum;
+use App\Enums\HomePageTypeCmsEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,6 +16,10 @@ class SimpleHtmlCms extends Model
     ];
 
     protected $homepagecmsenum = [
-        'type' => HomePageCmsEnum::class
+        'page' => HomePageCmsEnum::class
+    ];
+
+    protected $homepagetypecmsenum = [
+        'type' => HomePageTypeCmsEnum::class
     ];
 }

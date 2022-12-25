@@ -31,8 +31,61 @@
             </div>
         </div>
         <div class="card-body p-4">
+            <h1>Artikelen</h1>
             <div class="d-flex gap-2">
+                <div class="row d-flex justify-content-center">
+                    @foreach ($simpleArticles as $simpleArticles)
+                    <div class="card m-2 text-center" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{$simpleArticles->title}}</h5>
+                            <h6 class="card-subtitle mb-4 text-muted">{{$simpleArticles->page}} - {{$simpleArticles->type}}</h6>
+                            <p class="card-text">{{$simpleArticles->information}}</p>
+                            <a href="#" class="card-link">{{$simpleArticles->link}}</a>
 
+                        </div>
+                        <div class="d-flex mb-3 justify-content-center">
+                            <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/design-edit/home-page/simple-info/{{$simpleArticles->id}}">
+                                <button value="view" name="action" type="submit" class="btn btn-primary ml-1 mr-1">
+                                    <i class="bi bi-eye-fill"></i>
+                                </button>
+                            </a>
+                            <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/design-edit/home-page/simple-edit/{{$simpleArticles->id}}">
+                                <button value="view" name="action" type="submit" class="btn btn-success ml-1 mr-1">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            <hr>
+            <h1>Mededelingen</h1>
+            <div class="d-flex gap-2">
+                <div class="row justify-content-md-center">
+                    @foreach ($simpleStatements as $simpleStatement)
+                    <div class="card m-2 text-center" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{$simpleStatement->title}}</h5>
+                            <h6 class="card-subtitle mb-4 text-muted">{{$simpleStatement->page}} - {{$simpleStatement->type}}</h6>
+                            <p class="card-text">{{$simpleStatement->information}}</p>
+                            <a href="#" class="card-link">{{$simpleStatement->link}}</a>
+                        </div>
+                        <div class="d-flex mb-3 justify-content-center">
+                            <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/design-edit/home-page/simple-info/{{$simpleStatement->id}}">
+                                <button value="view" name="action" type="submit" class="btn btn-primary ml-1 mr-1">
+                                    <i class="bi bi-eye-fill"></i>
+                                </button>
+                            </a>
+                            <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/design-edit/home-page/simple-edit/{{$simpleStatement->id}}">
+                                <button value="view" name="action" type="submit" class="btn btn-success ml-1 mr-1">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>

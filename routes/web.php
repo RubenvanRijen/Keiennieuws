@@ -6,6 +6,7 @@ use App\Http\Controllers\DesignController;
 use App\Http\Controllers\EditionsDashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\SimpleHtmlCmsController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\VolunteerController;
@@ -123,7 +124,10 @@ Route::middleware(['role:admin', 'auth', 'verified'])->group(
 
         //Homepage designs
         Route::get('/dashboard/admin/design-edit/home-page', [DesignController::class, 'indexHomePageEdit']);
+        Route::get('/dashboard/admin/design-edit/home-page/simple-info/{id}', [DesignController::class, 'indexHomePageEdit']);
 
+        Route::get('/dashboard/admin/design-edit/home-page/simple-edit/{id}', [SimpleHtmlCmsController::class, 'edit']);
+        Route::patch('/dashboard/admin/design-edit/home-page/simple-edit/{id}', [SimpleHtmlCmsController::class, 'update']);
 
         //volunteers
         Route::get('/dashboard/admin/volunteers', [VolunteerController::class, 'index']);
