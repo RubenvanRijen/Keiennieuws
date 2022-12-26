@@ -57,9 +57,11 @@ class SimpleHtmlCmsController extends Controller
      * @param  \App\Models\SimpleHtmlCms  $simpleHtmlCms
      * @return \Illuminate\Http\Response
      */
-    public function edit(SimpleHtmlCms $simpleHtmlCms)
+    public function edit($id)
     {
-        //
+        $simpleHtml = SimpleHtmlCms::find($id);
+
+        return view('pages.dashboard.admin.designs.homepage.homepageSimpleHtmlEdit', ['simpleHtml' => $simpleHtml]);
     }
 
     /**

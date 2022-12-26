@@ -13,7 +13,6 @@ require('./placePublication');
 require('./multiselect-dropdown');
 require('./deleteAlert');
 
-
 // foutje met de styling van de informatie pagina. moet nog een keer beter worden gemaakt maar voor nu werkt het prima
 window.onload = () => {
     if (window.location.pathname === '/information') {
