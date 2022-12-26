@@ -78,11 +78,11 @@ class SimpleHtmlCmsController extends Controller
 
         $simpleHtmlInformation = $request->information;
 
-        $body_content = trim($simpleHtmlInformation);
-        $body_content = stripslashes($body_content);
-        $body_content = htmlspecialchars($body_content);
+        $simpleHtmlInformation = trim($simpleHtmlInformation);
+        $simpleHtmlInformation = stripslashes($simpleHtmlInformation);
+        $simpleHtmlInformation = htmlspecialchars($simpleHtmlInformation);
 
-        $request->information = $body_content;
+        $request->information = $simpleHtmlInformation;
 
         $simpleHtml->fill($request->input());
         $simpleHtml->save();
