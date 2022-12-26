@@ -24,3 +24,7 @@
 </div>
 @include('components.layouts.footer')
 @endsection
+
+@section('scripts')
+
+@endsection

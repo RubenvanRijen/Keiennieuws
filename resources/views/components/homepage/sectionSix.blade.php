@@ -3,7 +3,7 @@
         <div class="col left-side">
             <h1>{{$simpleVolunteers[0]->title}}</h1>
             <div>
-                <p>{{$simpleVolunteers[0]->information}}</p>
+                {!! $simpleVolunteers[0]->information !!}
             </div>
         </div>
 

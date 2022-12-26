@@ -6,7 +6,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{$simpleArticle->title}}</h5>
                     <div class="middle-text">
-                        <p class="card-text">{{$simpleArticle->information}}</p>
+                        <p class="card-text"> {!! $simpleArticle->information !!}</p>
                     </div>
                     <div class="bottom-button">
                         <a href="{{$simpleArticle->link}}"> <button class="btn btn-outline-dark">Download pdf</button></a>
@@ -25,7 +25,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{$simpleArticle->title}}</h5>
                         <div class="middle-text">
-                            <p class="card-text">{{$simpleArticle->information}}</p>
+                            <p class="card-text"> {!! $simpleArticle->information !!}</p>
                         </div>
                         <div class="bottom-button">
                             <a href="{{$simpleArticle->link}}"> <button class="btn btn-outline-dark">Download pdf</button></a>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SimpleHtmlCms;
+use Faker\Core\Number;
 use Illuminate\Http\Request;
 
 class SimpleHtmlCmsController extends Controller
@@ -71,9 +72,22 @@ class SimpleHtmlCmsController extends Controller
      * @param  \App\Models\SimpleHtmlCms  $simpleHtmlCms
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SimpleHtmlCms $simpleHtmlCms)
+    public function update(Request $request,  $id)
     {
-        //
+        $simpleHtml = SimpleHtmlCms::find($id);
+
+        $simpleHtmlInformation = $request->information;
+
+        $body_content = trim($simpleHtmlInformation);
+        $body_content = stripslashes($body_content);
+        $body_content = htmlspecialchars($body_content);
+
+        $request->information = $body_content;
+
+        $simpleHtml->fill($request->input());
+        $simpleHtml->save();
+
+        return back()->with('success', 'De gegevens zijn correct aanegepast');
     }
 
     /**

@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">{{$simpleStatement->title}}</h5>
-                    <p class="card-text">{{$simpleStatement->information}} </p>
+                    <p class="card-text"> {!! $simpleStatement->information !!}</p>
                 </div>
             </div>
         </div>
@@ -19,7 +19,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">{{$simpleStatement->title}}</h5>
-                        <p class="card-text">{{$simpleStatement->information}} </p>
+                        <p class="card-text"> {!! $simpleStatement->information !!}</p>
                     </div>
                 </div>
             </div>

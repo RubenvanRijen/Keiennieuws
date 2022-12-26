@@ -39,7 +39,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{$simpleArticles->title}}</h5>
                             <h6 class="card-subtitle mb-4 text-muted">{{$simpleArticles->page}} - {{$simpleArticles->type}}</h6>
-                            <p class="card-text">{{$simpleArticles->information}}</p>
+                            <p class="card-text">{!! $simpleArticles->information !!}</p>
                             <a href="#" class="card-link">{{$simpleArticles->link}}</a>
 
                         </div>
@@ -68,7 +68,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{$simpleStatement->title}}</h5>
                             <h6 class="card-subtitle mb-4 text-muted">{{$simpleStatement->page}} - {{$simpleStatement->type}}</h6>
-                            <p class="card-text">{{$simpleStatement->information}}</p>
+                            <p class="card-text">{!! $simpleStatement->information !!}</p>
                             <a href="#" class="card-link">{{$simpleStatement->link}}</a>
                         </div>
                         <div class="d-flex mb-3 justify-content-center">
@@ -95,17 +95,17 @@
                         <div class="card-body">
                             <h5 class="card-title">{{$simpleArticles->title}}</h5>
                             <h6 class="card-subtitle mb-4 text-muted">{{$simpleVolunteer->page}} - {{$simpleVolunteer->type}}</h6>
-                            <p class="card-text">{{$simpleVolunteer->information}}</p>
+                            <p class="card-text">{!! $simpleVolunteer->information !!}</p>
                             <a href="#" class="card-link">{{$simpleVolunteer->link}}</a>
 
                         </div>
                         <div class="d-flex mb-3 justify-content-center">
-                            <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/design-edit/home-page/simple-info/{{$simpleArticles->id}}">
+                            <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/design-edit/home-page/simple-info/{{$simpleVolunteer->id}}">
                                 <button value="view" name="action" type="submit" class="btn btn-primary ml-1 mr-1">
                                     <i class="bi bi-eye-fill"></i>
                                 </button>
                             </a>
-                            <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/design-edit/home-page/simple-edit/{{$simpleArticles->id}}">
+                            <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/design-edit/home-page/simple-edit/{{$simpleVolunteer->id}}">
                                 <button value="view" name="action" type="submit" class="btn btn-success ml-1 mr-1">
                                     <i class="bi bi-pencil-fill"></i>
                                 </button>
