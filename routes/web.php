@@ -128,6 +128,10 @@ Route::middleware(['role:admin', 'auth', 'verified'])->group(
         //update
         Route::get('/dashboard/admin/design-edit/home-page/simple-edit/{id}', [SimpleHtmlCmsController::class, 'edit']);
         Route::patch('/dashboard/admin/design-edit/home-page/simple-edit/{id}', [SimpleHtmlCmsController::class, 'update']);
+        // change images
+        Route::post('/dashboard/admin/design-edit/home-page/image-edit-one', [DesignController::class, 'changePictureOneHomePage']);
+        Route::post('/dashboard/admin/design-edit/home-page/image-edit-two', [DesignController::class, 'changePictureTwoHomePage']);
+
 
         //volunteers
         Route::get('/dashboard/admin/volunteers', [VolunteerController::class, 'index']);

@@ -62,7 +62,7 @@
             <hr>
             <h1>Mededelingen</h1>
             <div class="d-flex gap-2">
-                <div class="row justify-content-md-center">
+                <div class="row justify-content-center">
                     @foreach ($simpleStatements as $simpleStatement)
                     <div class="card m-2 text-center" style="width: 18rem;">
                         <div class="card-body">
@@ -93,7 +93,7 @@
                     @foreach ($simpleVolunteers as $simpleVolunteer)
                     <div class="card m-2 text-center" style="width: 18rem;">
                         <div class="card-body">
-                            <h5 class="card-title">{{$simpleArticles->title}}</h5>
+                            <h5 class="card-title">{{$simpleVolunteer->title}}</h5>
                             <h6 class="card-subtitle mb-4 text-muted">{{$simpleVolunteer->page}} - {{$simpleVolunteer->type}}</h6>
                             <p class="card-text">{!! $simpleVolunteer->information !!}</p>
                             <a href="#" class="card-link">{{$simpleVolunteer->link}}</a>
@@ -114,6 +114,66 @@
                     </div>
                     @endforeach
                 </div>
+            </div>
+            <hr>
+
+            <!-- homepage images editing -->
+            <h1>Hoofd afbeelding</h1>
+            <div class="">
+                <form id="start-subscription" action="{{ url('/dashboard/admin/design-edit/home-page/image-edit-one') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="custom-input custom-file-input">
+                        <label>Kies de nieuwe foto die onderstaande foto moet vervangen?</label>
+                        <input required class="form-control custom-file-input @error('file') is-invalid @enderror @error('file') is-invalid @enderror" name="file" type="file">
+                        <div id="fileList"></div>
+                        @error('file')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                        @error('file.*')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="text-end">
+                        <div class="form_button mt-3">
+                            <button type="submit" class="btn btn-primary">Aanpassen</button>
+                        </div>
+                    </div>
+                </form>
+                <img class="img-fluid" style="width: 400px; height: auto;" loading="lazy" src="{{url('/storage/homepageContent/homepageOne.jpeg')}}" alt="Afbeelding een">
+            </div>
+
+            <hr>
+            <h1>secundaire afbeelding</h1>
+            <div class="">
+                <form id="start-subscription" action="{{ url('/dashboard/admin/design-edit/home-page/image-edit-two') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="custom-input custom-file-input">
+                        <label>Kies de nieuwe foto die onderstaande foto moet vervangen?</label>
+                        <input required class="form-control custom-file-input @error('file') is-invalid @enderror @error('file') is-invalid @enderror" name="file" type="file">
+                        <div id="fileList"></div>
+                        @error('file')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                        @error('file.*')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="text-end">
+                        <div class="form_button mt-3">
+                            <button type="submit" class="btn btn-primary">Aanpassen</button>
+                        </div>
+                    </div>
+                </form>
+                <img class="img-fluid " style="width: 400px; height: auto;" loading="lazy" src="{{url('/storage/homepageContent/sectionFive.jpeg')}}" alt="Megense toren">
+
             </div>
         </div>
     </div>
