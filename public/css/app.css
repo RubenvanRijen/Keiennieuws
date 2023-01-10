@@ -2170,7 +2170,7 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?6959d0d983ee318f88804e407
   display: flex;
   align-items: center;
   position: relative;
-  background-image: url("/images/homepageOne.JPG");
+  background-image: url("/storage/homepageContent/homepageOne.jpeg");
   padding: 3.8rem;
 }
 
@@ -2364,7 +2364,6 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?6959d0d983ee318f88804e407
 }
 .section-three .card .middle-text {
   text-align: center;
-  line-height: 15rem;
 }
 .section-three .card .card-title {
   font-size: 2rem;
@@ -2562,7 +2561,7 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?6959d0d983ee318f88804e407
   }
   .section-five .left-side::before {
     content: "";
-    background-image: url("/images/sectionFive.jpeg");
+    background-image: url("/storage/homepageContent/sectionFive.jpeg");
     background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;

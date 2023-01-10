@@ -6,6 +6,7 @@ use App\Http\Controllers\DesignController;
 use App\Http\Controllers\EditionsDashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\SimpleHtmlCmsController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\VolunteerController;
@@ -120,6 +121,17 @@ Route::middleware(['role:admin', 'auth', 'verified'])->group(
 
         //design
         Route::get('/dashboard/admin/design-edit', [DesignController::class, 'index']);
+
+        //Homepage designs
+        Route::get('/dashboard/admin/design-edit/home-page', [DesignController::class, 'indexHomePageEdit']);
+        Route::get('/dashboard/admin/design-edit/home-page/simple-info/{id}', [SimpleHtmlCmsController::class, 'show']);
+        //update
+        Route::get('/dashboard/admin/design-edit/home-page/simple-edit/{id}', [SimpleHtmlCmsController::class, 'edit']);
+        Route::patch('/dashboard/admin/design-edit/home-page/simple-edit/{id}', [SimpleHtmlCmsController::class, 'update']);
+        // change images
+        Route::post('/dashboard/admin/design-edit/home-page/image-edit-one', [DesignController::class, 'changePictureOneHomePage']);
+        Route::post('/dashboard/admin/design-edit/home-page/image-edit-two', [DesignController::class, 'changePictureTwoHomePage']);
+
 
         //volunteers
         Route::get('/dashboard/admin/volunteers', [VolunteerController::class, 'index']);

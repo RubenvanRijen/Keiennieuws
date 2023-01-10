@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             rolesSeeder::class,
             adminUserSeeder::class,
             EditionSeeder::class,
-            VolunteerSeeder::class
+            VolunteerSeeder::class,
+            SimpleHtmlCmsHomePageSeeder::class
         ]);
         for ($k = 0; $k < 10; $k++) {
             $user =  \App\Models\User::factory()->create();

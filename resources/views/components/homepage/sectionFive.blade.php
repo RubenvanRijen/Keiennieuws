@@ -59,10 +59,9 @@
                      <button type="submit" class="btn btn-outline-warning">Uploaden</button>
                  </div>
              </form>
-
          </div>
          <div class="col right-side">
-             <img class="img-fluid " loading="lazy" src="{{url('/images/sectionFive.jpeg')}}" alt="Megense toren">
+             <img class="img-fluid " loading="lazy" src="{{url('/storage/homepageContent/sectionFive.jpeg')}}" alt="Megense toren">
          </div>
      </div>
  </div>
