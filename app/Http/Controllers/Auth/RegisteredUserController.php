@@ -42,12 +42,12 @@ class RegisteredUserController extends Controller
         }
 
         $request->validate([
-            'firstname' => ['required', 'string', 'max:255', 'min:3'],
-            'lastname' => ['required', 'string', 'max:255', 'min:3'],
+            'firstname' => ['required', 'string', 'max:20', 'min:3'],
+            'lastname' => ['required', 'string', 'max:20', 'min:3'],
             'postcode' => 'required|postal_code:NL,DE,FR,BE',
             'house_number' => 'required',
-            'city' => ['required', 'string', 'max:255', 'min:3'],
-            'street_name' => ['required', 'string', 'max:255', 'min:3'],
+            'city' => ['required', 'string', 'max:25', 'min:3'],
+            'street_name' => ['required', 'string', 'max:25', 'min:3'],
             'email' => $rule,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
