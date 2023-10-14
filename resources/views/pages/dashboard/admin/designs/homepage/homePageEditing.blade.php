@@ -117,6 +117,36 @@
             </div>
             <hr>
 
+            <h1>Prijzen</h1>
+            <div class="d-flex gap-2">
+                <div class="row d-flex justify-content-center">
+                    @foreach ($simplePrices as $simplePrice)
+                    <div class="card m-2 text-center" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{$simplePrice->title}}</h5>
+                            <h6 class="card-subtitle mb-4 text-muted">{{$simplePrice->page}} - {{$simplePrice->type}}</h6>
+                            <p class="card-text">{!! $simplePrice->information !!}</p>
+                            <a href="#" class="card-link">{{$simplePrice->link}}</a>
+
+                        </div>
+                        <div class="d-flex mb-3 justify-content-center">
+                            <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/design-edit/home-page/simple-info/{{$simplePrice->id}}">
+                                <button value="view" name="action" type="submit" class="btn btn-primary ml-1 mr-1">
+                                    <i class="bi bi-eye-fill"></i>
+                                </button>
+                            </a>
+                            <a class="ms-1 me-1" style="text-decoration: none; color: inherit;" href="/dashboard/admin/design-edit/home-page/simple-edit/{{$simplePrice->id}}">
+                                <button value="view" name="action" type="submit" class="btn btn-success ml-1 mr-1">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            <hr>
+
             <!-- homepage images editing -->
             <h1>Hoofd afbeelding</h1>
             <div class="">

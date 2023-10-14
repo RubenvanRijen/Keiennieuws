@@ -21,9 +21,10 @@ class DesignController extends Controller
         $simpleArticles = SimpleHtmlCms::where('page', HomePageCmsEnum::homePage)->where('type', HomePageTypeCmsEnum::acticles)->get();
         $simpleStatements = SimpleHtmlCms::where('page', HomePageCmsEnum::homePage)->where('type', HomePageTypeCmsEnum::statement)->get();
         $simpleVolunteers = SimpleHtmlCms::where('page', HomePageCmsEnum::homePage)->where('type', HomePageTypeCmsEnum::volunteers)->get();
+        $simpleprices = SimpleHtmlCms::where('page', HomePageCmsEnum::informationPage)->where('type', HomePageTypeCmsEnum::prices)->get();
 
 
-        return view('pages.dashboard.admin.designs.homepage.homePageEditing', ['simpleArticles' => $simpleArticles, 'simpleStatements' => $simpleStatements, 'simpleVolunteers' => $simpleVolunteers]);
+        return view('pages.dashboard.admin.designs.homepage.homePageEditing', ['simpleArticles' => $simpleArticles, 'simpleStatements' => $simpleStatements, 'simpleVolunteers' => $simpleVolunteers, 'simplePrices' => $simpleprices]);
     }
 
     public function changePictureOneHomePage(Request $request)

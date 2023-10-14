@@ -32,8 +32,18 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @if ($simpleprices != null && count($simpleprices) > 4)
+
+                            @foreach ($simpleprices as $simplePrice)
                             <tr>
-                                <th>A4</th>
+                                <th scope="row">{{$simplePrice->title}}</th>
+                                <td>{{$simplePrice->information}}</td>
+                                <td>{{$simplePrice->link}},-</td>
+                            </tr>
+                            @endforeach
+                            @else
+                            <tr>
+                                <th scope="row">A4</th>
                                 <td>21 x 29,70 cm</td>
                                 <td>19,-</td>
                             </tr>
@@ -52,6 +62,8 @@
                                 <td>7,40 x 10,50 cm</td>
                                 <td>5,-</td>
                             </tr>
+                            @endif
+
                         </tbody>
                     </table>
                     <p>Dit zijn de maandelijkse advertentie kosten</p>

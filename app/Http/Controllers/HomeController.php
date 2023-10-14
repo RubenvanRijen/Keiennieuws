@@ -57,7 +57,9 @@ class HomeController extends Controller
 
     public function informationIndex()
     {
-        return view('/pages/information');
+        $simpleprices = SimpleHtmlCms::where('page', HomePageCmsEnum::informationPage)->where('type', HomePageTypeCmsEnum::prices)->get();
+
+        return view('/pages/information', ['simpleprices' => $simpleprices]);
     }
 
     public function volunteerApplication(Request $request)
