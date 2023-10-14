@@ -11,3 +11,6 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+
+    <!-- website icon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{{url('/images/favicon.JPEG')}}">
