@@ -23,7 +23,9 @@ class EditionsDashboardController extends Controller
         foreach ($upcomingEditions as $edition) {
             $dates[$edition->id] = $edition->beginDateUpload;
         }
-
+        if (count($dates) == 0) {
+            return view('/pages/dashboard/admin/editions/editionsIndex', ['editions' => $editions, 'currentEdition' => null, 'upcomingEdition' => null]);
+        }
         $nearestDate = min($dates);
         $currentEditionId = array_search($nearestDate, $dates);
         unset($dates[$currentEditionId]);
